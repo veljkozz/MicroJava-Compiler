@@ -1,0 +1,8 @@
+program MJProgram
+	const char x = "a";
+{
+	int main()
+	{
+		return 1;
+	}
+}

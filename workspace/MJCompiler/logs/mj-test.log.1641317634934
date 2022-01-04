@@ -1,0 +1,80 @@
+INFO  18:31:15,312 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  18:31:15,480 - #2 program
+INFO  18:31:15,480 - #22 MJProgram
+INFO  18:31:15,480 - #35 const
+INFO  18:31:15,483 - #22 int
+INFO  18:31:15,483 - #22 y
+INFO  18:31:15,484 - #11 =
+INFO  18:31:15,485 - #19 1
+INFO  18:31:15,485 - #5 ;
+INFO  18:31:15,485 - #3 {
+INFO  18:31:15,485 - #22 int
+INFO  18:31:15,486 - #22 main
+INFO  18:31:15,486 - #7 (
+INFO  18:31:15,488 - #8 )
+INFO  18:31:15,489 - #3 {
+INFO  18:31:15,490 - #12 return
+INFO  18:31:15,490 - #19 1
+INFO  18:31:15,491 - #5 ;
+INFO  18:31:15,491 - #4 }
+INFO  18:31:15,491 - #4 }
+INFO  18:31:15,493 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_ConstDecl(
+      Const_Declarations(
+        Type(
+         int
+        ) [Type]
+        ConstDecl_Single(
+         y
+          Val_Num(
+           1
+          ) [Val_Num]
+        ) [ConstDecl_Single]
+      ) [Const_Declarations]
+    ) [Declarations_ConstDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          Method_Type(
+            Type(
+             int
+            ) [Type]
+          ) [Method_Type]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnExprStmt(
+                ExprDerived1(
+                  TermListDerived1(
+                    TermDerived2(
+                      FactorDerived2(
+                       1
+                      ) [FactorDerived2]
+                    ) [TermDerived2]
+                  ) [TermListDerived1]
+                ) [ExprDerived1]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  18:31:15,525 - Deklarisana konstanta y sa tipom 1 na liniji 2

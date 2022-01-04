@@ -1,0 +1,79 @@
+INFO  17:21:04,214 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  17:21:04,441 - #2 program
+INFO  17:21:04,442 - #22 MJProgram
+INFO  17:21:04,442 - #35 const
+INFO  17:21:04,444 - #22 int
+INFO  17:21:04,444 - #22 y
+INFO  17:21:04,445 - #11 =
+INFO  17:21:04,445 - #20 true
+INFO  17:21:04,445 - #5 ;
+INFO  17:21:04,446 - #3 {
+INFO  17:21:04,446 - #22 int
+INFO  17:21:04,446 - #22 main
+INFO  17:21:04,446 - #7 (
+INFO  17:21:04,448 - #8 )
+INFO  17:21:04,449 - #3 {
+INFO  17:21:04,450 - #12 return
+INFO  17:21:04,452 - #19 1
+INFO  17:21:04,452 - #5 ;
+INFO  17:21:04,453 - #4 }
+INFO  17:21:04,453 - #4 }
+INFO  17:21:04,456 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_ConstDecl(
+      Const_Declarations(
+        Type(
+         int
+        ) [Type]
+        ConstVarListDerived1(
+         y
+          Val_Bool(
+           true
+          ) [Val_Bool]
+        ) [ConstVarListDerived1]
+      ) [Const_Declarations]
+    ) [Declarations_ConstDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          Method_Type(
+            Type(
+             int
+            ) [Type]
+          ) [Method_Type]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnExprStmt(
+                ExprDerived1(
+                  TermListDerived1(
+                    TermDerived2(
+                      FactorDerived2(
+                       1
+                      ) [FactorDerived2]
+                    ) [TermDerived2]
+                  ) [TermListDerived1]
+                ) [ExprDerived1]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
