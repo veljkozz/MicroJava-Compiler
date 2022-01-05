@@ -13,6 +13,7 @@ parser code {:
    	{
    		public SimpleType(Struct s) {this.s = s;}
    		public Struct s;
+   		public rs.etf.pp1.symboltable.concepts.Obj obj;
    		public Integer num; Character character; Boolean bool;
    	}
    
@@ -24,11 +25,11 @@ parser code {:
     }
   
     public void syntax_error(Symbol cur_token) {
-        //report_error("\nSintaksna greska", cur_token);
+        //report_error("\nSyntax error", cur_token);
     }
   
     public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
-        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+        report_fatal_error("Fatal error, can't continue parsing", cur_token);
     }
 
     public void report_error(String message, Object info) {
@@ -85,8 +86,7 @@ nonterminal ClassVarDeclarations ClassVarDeclarations;
 nonterminal ClassVarDeclarationsList ClassVarDeclarationsList;
 nonterminal ClassVar ClassVar;
 nonterminal ClassVarList ClassVarList;
-nonterminal Extends Extends;
-nonterminal String ClassName;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, MethodType;
 
@@ -162,16 +162,16 @@ VarList ::= (Var_List) Var:V1 COMMA VarList:V2 {: RESULT=new Var_List(V1, V2); R
 		| (OneVar) Var:V1 {: RESULT=new OneVar(V1); RESULT.setLine(V1left); :}
 		;
 
-ClassName ::= (Class_Name) IDENT:name;
+ClassName ::= (ClassName) IDENT:name {: RESULT=new ClassName(name); RESULT.setLine(nameleft); :};
 
-ClassDeclaration ::= (Class_NoParent_Declaration) CLASS ClassName:name LBRACE ClassContent:C1 RBRACE {: RESULT=new Class_NoParent_Declaration(name, C1); RESULT.setLine(nameleft); :}
-	| (Class_Parent_Declaration) CLASS ClassName:name Extends:E1 LBRACE ClassContent:C2 RBRACE {: RESULT=new Class_Parent_Declaration(name, E1, C2); RESULT.setLine(nameleft); :}
+ClassDeclaration ::= (Class_NoParent_Declaration) CLASS ClassName:C1 LBRACE ClassContent:C2 RBRACE {: RESULT=new Class_NoParent_Declaration(C1, C2); RESULT.setLine(C1left); :}
+	| (Class_Parent_Declaration) CLASS ClassName:C1 Extends:parentObj LBRACE ClassContent:C2 RBRACE {: RESULT=new Class_Parent_Declaration(C1, parentObj, C2); RESULT.setLine(C1left); :}
 		;
 
 
-Extends ::= EXTENDS IDENT:I1 {: RESULT=new ExtendsDerived1(I1); RESULT.setLine(I1left); :}
+Extends ::= (Extends_Parent) EXTENDS IDENT:parentName {: RESULT=new Extends_Parent(parentName); RESULT.setLine(parentNameleft); :}
 	| error:l
-	{: parser.report_error("Error: invalid extends declaration at line " + lleft, null); :} {: RESULT=new ExtendsDerived2(); :}
+	{: parser.report_error("Error: invalid extends declaration at line " + lleft, null); :} {: RESULT=new ExtendsDerived1(); :}
 	;
 
 ClassContent ::= ClassMethods:C1 {: RESULT=new ClassContentDerived1(C1); RESULT.setLine(C1left); :}
@@ -310,12 +310,10 @@ Term ::= Factor:F1 MulOp:M2 Term:T3 {: RESULT=new TermDerived1(F1, M2, T3); RESU
 
 Factor ::= Designator:D1 {: RESULT=new FactorDerived1(D1); RESULT.setLine(D1left); :} 
 	| (Factor_FunCall) Designator:D1 LPAREN ActualPars:A2 RPAREN {: RESULT=new Factor_FunCall(D1, A2); RESULT.setLine(D1left); :}
-	| NUMBER:N1 {: RESULT=new FactorDerived2(N1); RESULT.setLine(N1left); :}
-	| CHAR:C1 {: RESULT=new FactorDerived3(C1); RESULT.setLine(C1left); :}
-	| BOOL:B1 {: RESULT=new FactorDerived4(B1); RESULT.setLine(B1left); :}
-	| NEW Type:T1 {: RESULT=new FactorDerived5(T1); RESULT.setLine(T1left); :} 
-	| NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new FactorDerived6(T1, E2); RESULT.setLine(T1left); :}
-	| LPAREN Expr:E1 RPAREN {: RESULT=new FactorDerived7(E1); RESULT.setLine(E1left); :}
+	| (Factor_ConstVal) Val:V1 {: RESULT=new Factor_ConstVal(V1); RESULT.setLine(V1left); :}
+	| NEW Type:T1 {: RESULT=new FactorDerived2(T1); RESULT.setLine(T1left); :} 
+	| NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new FactorDerived3(T1, E2); RESULT.setLine(T1left); :}
+	| LPAREN Expr:E1 RPAREN {: RESULT=new FactorDerived4(E1); RESULT.setLine(E1left); :}
 	;
 	
 Designator ::= IDENT:I1 DesignatorList:D2 {: RESULT=new DesignatorDerived1(I1, D2); RESULT.setLine(I1left); :};

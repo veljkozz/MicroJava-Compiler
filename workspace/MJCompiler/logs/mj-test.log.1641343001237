@@ -1,0 +1,130 @@
+INFO  01:36:22,862 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  01:36:23,016 - #2 program
+INFO  01:36:23,016 - #22 MJProgram
+INFO  01:36:23,017 - #33 const
+INFO  01:36:23,019 - #22 char
+INFO  01:36:23,019 - #22 x
+INFO  01:36:23,020 - #11 =
+INFO  01:36:23,021 - #21 a
+INFO  01:36:23,021 - #5 ;
+INFO  01:36:23,022 - #34 class
+INFO  01:36:23,022 - #22 B
+INFO  01:36:23,022 - #3 {
+INFO  01:36:23,024 - #4 }
+INFO  01:36:23,026 - #34 class
+INFO  01:36:23,026 - #22 A
+INFO  01:36:23,027 - #44 extends
+INFO  01:36:23,027 - #22 B
+INFO  01:36:23,027 - #3 {
+INFO  01:36:23,027 - #4 }
+INFO  01:36:23,027 - #3 {
+INFO  01:36:23,028 - #22 int
+INFO  01:36:23,028 - #22 main
+INFO  01:36:23,028 - #7 (
+INFO  01:36:23,030 - #8 )
+INFO  01:36:23,031 - #3 {
+INFO  01:36:23,031 - #12 return
+INFO  01:36:23,031 - #19 1
+INFO  01:36:23,031 - #13 +
+INFO  01:36:23,031 - #19 1
+INFO  01:36:23,036 - #5 ;
+INFO  01:36:23,036 - #4 }
+INFO  01:36:23,036 - #4 }
+INFO  01:36:23,036 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived2(
+        ) [DeclarationsDerived2]
+        Declarations_ConstDecl(
+          Const_Declarations(
+            Type(
+             char
+            ) [Type]
+            ConstDecl_Single(
+             x
+              Val_Char(
+               a
+              ) [Val_Char]
+            ) [ConstDecl_Single]
+          ) [Const_Declarations]
+        ) [Declarations_ConstDecl]
+      ) [DeclarationsDerived1]
+      Declarations_ClassDecl(
+        Class_NoParent_Declaration(
+          ClassName(
+           B
+          ) [ClassName]
+          ClassContentDerived4(
+          ) [ClassContentDerived4]
+        ) [Class_NoParent_Declaration]
+      ) [Declarations_ClassDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_Parent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        Extends_Parent(
+         B
+        ) [Extends_Parent]
+        ClassContentDerived4(
+        ) [ClassContentDerived4]
+      ) [Class_Parent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          Method_Type(
+            Type(
+             int
+            ) [Type]
+          ) [Method_Type]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnExprStmt(
+                ExprDerived1(
+                  TermListDerived2(
+                    TermDerived2(
+                      Factor_ConstVal(
+                        Val_Num(
+                         1
+                        ) [Val_Num]
+                      ) [Factor_ConstVal]
+                    ) [TermDerived2]
+                    AddOpDerived1(
+                    ) [AddOpDerived1]
+                    TermListDerived1(
+                      TermDerived2(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                      ) [TermDerived2]
+                    ) [TermListDerived1]
+                  ) [TermListDerived2]
+                ) [ExprDerived1]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  01:36:23,055 - Deklarisana konstanta x sa tipom 2 on line 2

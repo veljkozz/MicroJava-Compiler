@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 0:27:14
+// 5/0/2022 1:35:55
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -75,12 +75,10 @@ public interface Visitor {
     public void visit(DesignatorListDerived2 DesignatorListDerived2);
     public void visit(DesignatorListDerived1 DesignatorListDerived1);
     public void visit(DesignatorDerived1 DesignatorDerived1);
-    public void visit(FactorDerived7 FactorDerived7);
-    public void visit(FactorDerived6 FactorDerived6);
-    public void visit(FactorDerived5 FactorDerived5);
     public void visit(FactorDerived4 FactorDerived4);
     public void visit(FactorDerived3 FactorDerived3);
     public void visit(FactorDerived2 FactorDerived2);
+    public void visit(Factor_ConstVal Factor_ConstVal);
     public void visit(Factor_FunCall Factor_FunCall);
     public void visit(FactorDerived1 FactorDerived1);
     public void visit(TermDerived2 TermDerived2);
@@ -156,11 +154,11 @@ public interface Visitor {
     public void visit(ClassContentDerived3 ClassContentDerived3);
     public void visit(ClassContentDerived2 ClassContentDerived2);
     public void visit(ClassContentDerived1 ClassContentDerived1);
-    public void visit(ExtendsDerived2 ExtendsDerived2);
     public void visit(ExtendsDerived1 ExtendsDerived1);
+    public void visit(Extends_Parent Extends_Parent);
     public void visit(Class_Parent_Declaration Class_Parent_Declaration);
     public void visit(Class_NoParent_Declaration Class_NoParent_Declaration);
-    public void visit(Class_Name Class_Name);
+    public void visit(ClassName ClassName);
     public void visit(OneVar OneVar);
     public void visit(Var_List Var_List);
     public void visit(Type Type);

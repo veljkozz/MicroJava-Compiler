@@ -1,24 +1,25 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 0:27:14
+// 5/0/2022 1:35:55
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class FactorDerived2 extends Factor {
 
-    private Integer N1;
+    private Type Type;
 
-    public FactorDerived2 (Integer N1) {
-        this.N1=N1;
+    public FactorDerived2 (Type Type) {
+        this.Type=Type;
+        if(Type!=null) Type.setParent(this);
     }
 
-    public Integer getN1() {
-        return N1;
+    public Type getType() {
+        return Type;
     }
 
-    public void setN1(Integer N1) {
-        this.N1=N1;
+    public void setType(Type Type) {
+        this.Type=Type;
     }
 
     public void accept(Visitor visitor) {
@@ -26,13 +27,16 @@ public class FactorDerived2 extends Factor {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(Type!=null) Type.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(Type!=null) Type.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(Type!=null) Type.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -41,7 +45,10 @@ public class FactorDerived2 extends Factor {
         buffer.append(tab);
         buffer.append("FactorDerived2(\n");
 
-        buffer.append(" "+tab+N1);
+        if(Type!=null)
+            buffer.append(Type.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         buffer.append(tab);

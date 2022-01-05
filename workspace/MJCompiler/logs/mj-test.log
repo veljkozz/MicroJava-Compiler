@@ -1,43 +1,82 @@
-INFO  20:07:50,147 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
-INFO  20:07:50,400 - #2 program
-INFO  20:07:50,400 - #22 MJProgram
-INFO  20:07:50,400 - #35 const
-INFO  20:07:50,405 - #22 char
-INFO  20:07:50,405 - #22 x
-INFO  20:07:50,406 - #11 =
-INFO  20:07:50,407 - #21 a
-INFO  20:07:50,407 - #5 ;
-INFO  20:07:50,407 - #3 {
-INFO  20:07:50,407 - #22 int
-INFO  20:07:50,407 - #22 main
-INFO  20:07:50,407 - #7 (
-INFO  20:07:50,407 - #8 )
-INFO  20:07:50,415 - #3 {
-INFO  20:07:50,415 - #12 return
-INFO  20:07:50,415 - #19 1
-INFO  20:07:50,415 - #5 ;
-INFO  20:07:50,420 - #4 }
-INFO  20:07:50,420 - #4 }
-INFO  20:07:50,426 - Program(
+INFO  01:36:49,855 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  01:36:50,000 - #2 program
+INFO  01:36:50,000 - #22 MJProgram
+INFO  01:36:50,000 - #33 const
+INFO  01:36:50,007 - #22 char
+INFO  01:36:50,007 - #22 x
+INFO  01:36:50,007 - #11 =
+INFO  01:36:50,007 - #21 a
+INFO  01:36:50,007 - #5 ;
+INFO  01:36:50,007 - #34 class
+INFO  01:36:50,007 - #22 B
+INFO  01:36:50,007 - #3 {
+INFO  01:36:50,007 - #4 }
+INFO  01:36:50,007 - #34 class
+INFO  01:36:50,007 - #22 A
+INFO  01:36:50,007 - #44 extends
+INFO  01:36:50,007 - #22 B
+INFO  01:36:50,007 - #3 {
+INFO  01:36:50,007 - #4 }
+INFO  01:36:50,007 - #3 {
+INFO  01:36:50,007 - #22 int
+INFO  01:36:50,007 - #22 main
+INFO  01:36:50,021 - #7 (
+INFO  01:36:50,021 - #8 )
+INFO  01:36:50,026 - #3 {
+INFO  01:36:50,027 - #12 return
+INFO  01:36:50,027 - #19 1
+INFO  01:36:50,027 - #13 +
+INFO  01:36:50,027 - #19 1
+INFO  01:36:50,027 - #41 *
+INFO  01:36:50,027 - #22 x
+INFO  01:36:50,031 - #5 ;
+INFO  01:36:50,031 - #4 }
+INFO  01:36:50,031 - #4 }
+INFO  01:36:50,035 - Program(
   ProgName(
    MJProgram
   ) [ProgName]
   DeclarationsDerived1(
-    DeclarationsDerived2(
-    ) [DeclarationsDerived2]
-    Declarations_ConstDecl(
-      Const_Declarations(
-        Type(
-         char
-        ) [Type]
-        ConstDecl_Single(
-         x
-          Val_Char(
-           a
-          ) [Val_Char]
-        ) [ConstDecl_Single]
-      ) [Const_Declarations]
-    ) [Declarations_ConstDecl]
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived2(
+        ) [DeclarationsDerived2]
+        Declarations_ConstDecl(
+          Const_Declarations(
+            Type(
+             char
+            ) [Type]
+            ConstDecl_Single(
+             x
+              Val_Char(
+               a
+              ) [Val_Char]
+            ) [ConstDecl_Single]
+          ) [Const_Declarations]
+        ) [Declarations_ConstDecl]
+      ) [DeclarationsDerived1]
+      Declarations_ClassDecl(
+        Class_NoParent_Declaration(
+          ClassName(
+           B
+          ) [ClassName]
+          ClassContentDerived4(
+          ) [ClassContentDerived4]
+        ) [Class_NoParent_Declaration]
+      ) [Declarations_ClassDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_Parent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        Extends_Parent(
+         B
+        ) [Extends_Parent]
+        ClassContentDerived4(
+        ) [ClassContentDerived4]
+      ) [Class_Parent_Declaration]
+    ) [Declarations_ClassDecl]
   ) [DeclarationsDerived1]
   Global_Methods(
     MethodListDerived2(
@@ -61,13 +100,37 @@ INFO  20:07:50,426 - Program(
             StatementDerived1(
               ReturnExprStmt(
                 ExprDerived1(
-                  TermListDerived1(
+                  TermListDerived2(
                     TermDerived2(
-                      FactorDerived2(
-                       1
-                      ) [FactorDerived2]
+                      Factor_ConstVal(
+                        Val_Num(
+                         1
+                        ) [Val_Num]
+                      ) [Factor_ConstVal]
                     ) [TermDerived2]
-                  ) [TermListDerived1]
+                    AddOpDerived1(
+                    ) [AddOpDerived1]
+                    TermListDerived1(
+                      TermDerived1(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                        MulOpDerived1(
+                        ) [MulOpDerived1]
+                        TermDerived2(
+                          FactorDerived1(
+                            DesignatorDerived1(
+                             x
+                              DesignatorListDerived3(
+                              ) [DesignatorListDerived3]
+                            ) [DesignatorDerived1]
+                          ) [FactorDerived1]
+                        ) [TermDerived2]
+                      ) [TermDerived1]
+                    ) [TermListDerived1]
+                  ) [TermListDerived2]
                 ) [ExprDerived1]
               ) [ReturnExprStmt]
             ) [StatementDerived1]
@@ -77,4 +140,4 @@ INFO  20:07:50,426 - Program(
     ) [MethodListDerived2]
   ) [Global_Methods]
 ) [Program]
-INFO  20:07:50,447 - Deklarisana konstanta x sa tipom 2 na liniji 2
+INFO  01:36:50,038 - Deklarisana konstanta x sa tipom 2 on line 2

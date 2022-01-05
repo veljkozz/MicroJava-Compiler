@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 0:27:14
+// 5/0/2022 1:35:55
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -75,12 +75,10 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(DesignatorListDerived2 DesignatorListDerived2) { visit(); }
     public void visit(DesignatorListDerived1 DesignatorListDerived1) { visit(); }
     public void visit(DesignatorDerived1 DesignatorDerived1) { visit(); }
-    public void visit(FactorDerived7 FactorDerived7) { visit(); }
-    public void visit(FactorDerived6 FactorDerived6) { visit(); }
-    public void visit(FactorDerived5 FactorDerived5) { visit(); }
     public void visit(FactorDerived4 FactorDerived4) { visit(); }
     public void visit(FactorDerived3 FactorDerived3) { visit(); }
     public void visit(FactorDerived2 FactorDerived2) { visit(); }
+    public void visit(Factor_ConstVal Factor_ConstVal) { visit(); }
     public void visit(Factor_FunCall Factor_FunCall) { visit(); }
     public void visit(FactorDerived1 FactorDerived1) { visit(); }
     public void visit(TermDerived2 TermDerived2) { visit(); }
@@ -156,11 +154,11 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ClassContentDerived3 ClassContentDerived3) { visit(); }
     public void visit(ClassContentDerived2 ClassContentDerived2) { visit(); }
     public void visit(ClassContentDerived1 ClassContentDerived1) { visit(); }
-    public void visit(ExtendsDerived2 ExtendsDerived2) { visit(); }
     public void visit(ExtendsDerived1 ExtendsDerived1) { visit(); }
+    public void visit(Extends_Parent Extends_Parent) { visit(); }
     public void visit(Class_Parent_Declaration Class_Parent_Declaration) { visit(); }
     public void visit(Class_NoParent_Declaration Class_NoParent_Declaration) { visit(); }
-    public void visit(Class_Name Class_Name) { visit(); }
+    public void visit(ClassName ClassName) { visit(); }
     public void visit(OneVar OneVar) { visit(); }
     public void visit(Var_List Var_List) { visit(); }
     public void visit(Type Type) { visit(); }

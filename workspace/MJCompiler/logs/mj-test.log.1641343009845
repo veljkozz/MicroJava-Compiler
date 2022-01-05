@@ -1,0 +1,145 @@
+INFO  01:36:41,259 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  01:36:41,526 - #2 program
+INFO  01:36:41,526 - #22 MJProgram
+INFO  01:36:41,531 - #33 const
+INFO  01:36:41,532 - #22 char
+INFO  01:36:41,532 - #22 x
+INFO  01:36:41,532 - #11 =
+INFO  01:36:41,532 - #21 a
+INFO  01:36:41,532 - #5 ;
+INFO  01:36:41,532 - #34 class
+INFO  01:36:41,535 - #22 B
+INFO  01:36:41,535 - #3 {
+INFO  01:36:41,537 - #4 }
+INFO  01:36:41,537 - #34 class
+INFO  01:36:41,537 - #22 A
+INFO  01:36:41,537 - #44 extends
+INFO  01:36:41,537 - #22 B
+INFO  01:36:41,537 - #3 {
+INFO  01:36:41,537 - #4 }
+INFO  01:36:41,537 - #3 {
+INFO  01:36:41,537 - #22 int
+INFO  01:36:41,537 - #22 main
+INFO  01:36:41,537 - #7 (
+INFO  01:36:41,542 - #8 )
+INFO  01:36:41,542 - #3 {
+INFO  01:36:41,546 - #12 return
+INFO  01:36:41,548 - #19 1
+INFO  01:36:41,548 - #13 +
+INFO  01:36:41,548 - #19 1
+INFO  01:36:41,548 - #13 +
+INFO  01:36:41,548 - #22 x
+INFO  01:36:41,548 - #5 ;
+INFO  01:36:41,548 - #4 }
+INFO  01:36:41,548 - #4 }
+INFO  01:36:41,557 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived2(
+        ) [DeclarationsDerived2]
+        Declarations_ConstDecl(
+          Const_Declarations(
+            Type(
+             char
+            ) [Type]
+            ConstDecl_Single(
+             x
+              Val_Char(
+               a
+              ) [Val_Char]
+            ) [ConstDecl_Single]
+          ) [Const_Declarations]
+        ) [Declarations_ConstDecl]
+      ) [DeclarationsDerived1]
+      Declarations_ClassDecl(
+        Class_NoParent_Declaration(
+          ClassName(
+           B
+          ) [ClassName]
+          ClassContentDerived4(
+          ) [ClassContentDerived4]
+        ) [Class_NoParent_Declaration]
+      ) [Declarations_ClassDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_Parent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        Extends_Parent(
+         B
+        ) [Extends_Parent]
+        ClassContentDerived4(
+        ) [ClassContentDerived4]
+      ) [Class_Parent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          Method_Type(
+            Type(
+             int
+            ) [Type]
+          ) [Method_Type]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnExprStmt(
+                ExprDerived1(
+                  TermListDerived2(
+                    TermDerived2(
+                      Factor_ConstVal(
+                        Val_Num(
+                         1
+                        ) [Val_Num]
+                      ) [Factor_ConstVal]
+                    ) [TermDerived2]
+                    AddOpDerived1(
+                    ) [AddOpDerived1]
+                    TermListDerived2(
+                      TermDerived2(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                      ) [TermDerived2]
+                      AddOpDerived1(
+                      ) [AddOpDerived1]
+                      TermListDerived1(
+                        TermDerived2(
+                          FactorDerived1(
+                            DesignatorDerived1(
+                             x
+                              DesignatorListDerived3(
+                              ) [DesignatorListDerived3]
+                            ) [DesignatorDerived1]
+                          ) [FactorDerived1]
+                        ) [TermDerived2]
+                      ) [TermListDerived1]
+                    ) [TermListDerived2]
+                  ) [TermListDerived2]
+                ) [ExprDerived1]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  01:36:41,571 - Deklarisana konstanta x sa tipom 2 on line 2

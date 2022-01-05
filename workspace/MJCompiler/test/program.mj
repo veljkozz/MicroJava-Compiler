@@ -1,8 +1,14 @@
 program MJProgram
 	const char x = "a";
+	class B
+	{
+	}
+	class A extends B
+	{
+	}
 {
 	int main()
 	{
-		return 1;
+		return 1+1*x;
 	}
 }

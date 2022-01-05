@@ -1,29 +1,30 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 0:27:14
+// 5/0/2022 1:35:55
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class Class_Parent_Declaration extends ClassDeclaration {
 
-    private String ClassName;
+    private ClassName ClassName;
     private Extends Extends;
     private ClassContent ClassContent;
 
-    public Class_Parent_Declaration (String ClassName, Extends Extends, ClassContent ClassContent) {
+    public Class_Parent_Declaration (ClassName ClassName, Extends Extends, ClassContent ClassContent) {
         this.ClassName=ClassName;
+        if(ClassName!=null) ClassName.setParent(this);
         this.Extends=Extends;
         if(Extends!=null) Extends.setParent(this);
         this.ClassContent=ClassContent;
         if(ClassContent!=null) ClassContent.setParent(this);
     }
 
-    public String getClassName() {
+    public ClassName getClassName() {
         return ClassName;
     }
 
-    public void setClassName(String ClassName) {
+    public void setClassName(ClassName ClassName) {
         this.ClassName=ClassName;
     }
 
@@ -48,17 +49,20 @@ public class Class_Parent_Declaration extends ClassDeclaration {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(ClassName!=null) ClassName.accept(visitor);
         if(Extends!=null) Extends.accept(visitor);
         if(ClassContent!=null) ClassContent.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(ClassName!=null) ClassName.traverseTopDown(visitor);
         if(Extends!=null) Extends.traverseTopDown(visitor);
         if(ClassContent!=null) ClassContent.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(ClassName!=null) ClassName.traverseBottomUp(visitor);
         if(Extends!=null) Extends.traverseBottomUp(visitor);
         if(ClassContent!=null) ClassContent.traverseBottomUp(visitor);
         accept(visitor);
@@ -69,7 +73,10 @@ public class Class_Parent_Declaration extends ClassDeclaration {
         buffer.append(tab);
         buffer.append("Class_Parent_Declaration(\n");
 
-        buffer.append(" "+tab+ClassName);
+        if(ClassName!=null)
+            buffer.append(ClassName.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         if(Extends!=null)

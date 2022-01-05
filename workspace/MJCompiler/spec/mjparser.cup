@@ -13,6 +13,7 @@ parser code {:
    	{
    		public SimpleType(Struct s) {this.s = s;}
    		public Struct s;
+   		public rs.etf.pp1.symboltable.concepts.Obj obj = null;
    		public Integer num; Character character; Boolean bool;
    	}
    
@@ -24,11 +25,11 @@ parser code {:
     }
   
     public void syntax_error(Symbol cur_token) {
-        //report_error("\nSintaksna greska", cur_token);
+        //report_error("\nSyntax error", cur_token);
     }
   
     public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
-        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+        report_fatal_error("Fatal error, can't continue parsing", cur_token);
     }
 
     public void report_error(String message, Object info) {
@@ -69,8 +70,7 @@ nonterminal MethodList, FormParams, FormParamList, FormParam, OptionalVarDeclara
 nonterminal RecordContent, ClassContent, ClassMethods, Constructor;
 
 nonterminal ClassVarDeclarations, ClassVarDeclarationsList, ClassVar, ClassVarList;
-nonterminal Extends;
-nonterminal String ClassName;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, MethodType;
 
@@ -131,14 +131,14 @@ VarList ::= (Var_List) Var COMMA VarList
 		| (OneVar) Var
 		;
 
-ClassName ::= (Class_Name) IDENT:name;
+ClassName ::= (ClassName) IDENT:name;
 
-ClassDeclaration ::= (Class_NoParent_Declaration) CLASS ClassName:name LBRACE ClassContent RBRACE
-	| (Class_Parent_Declaration) CLASS ClassName:name Extends LBRACE ClassContent RBRACE
+ClassDeclaration ::= (Class_NoParent_Declaration) CLASS ClassName LBRACE ClassContent RBRACE
+	| (Class_Parent_Declaration) CLASS ClassName Extends:parentObj LBRACE ClassContent RBRACE
 		;
 
 
-Extends ::= EXTENDS IDENT
+Extends ::= (Extends_Parent) EXTENDS IDENT:parentName
 	| error:l
 	{: parser.report_error("Error: invalid extends declaration at line " + lleft, null); :}
 	;
@@ -279,9 +279,7 @@ Term ::= Factor MulOp Term
 
 Factor ::= Designator 
 	| (Factor_FunCall) Designator LPAREN ActualPars RPAREN
-	| NUMBER
-	| CHAR
-	| BOOL
+	| (Factor_ConstVal) Val													// RADIM OVO
 	| NEW Type 
 	| NEW Type LBRACKET Expr RBRACKET
 	| LPAREN Expr RPAREN

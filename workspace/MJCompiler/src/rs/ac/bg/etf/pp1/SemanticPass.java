@@ -13,6 +13,8 @@ public class SemanticPass extends VisitorAdaptor {
 	int globalVarCnt = 0;
 	Struct currVarType = null;
 	Obj currMethod = null;
+	Obj currClassObj = null;
+	Struct currClassStruct = null;
 	Logger log = Logger.getLogger(getClass());
 	
 	// Moji dodati tipovi
@@ -28,7 +30,7 @@ public class SemanticPass extends VisitorAdaptor {
     	StringBuilder msg = new StringBuilder(message); 
     	int line = (info == null) ? 0 : info.getLine();
     	if (line != 0)
-            msg.append (" na liniji ").append(line);
+            msg.append (" on line ").append(line);
         log.error(msg.toString());
     }
 	
@@ -36,7 +38,7 @@ public class SemanticPass extends VisitorAdaptor {
     	StringBuilder msg = new StringBuilder(message); 
     	int line = (info == null) ? 0 : info.getLine();
     	if (line != 0)
-            msg.append (" na liniji ").append(line);
+            msg.append (" on line ").append(line);
         log.info(msg.toString());
     }
 	
@@ -44,7 +46,6 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 		progName.obj = Tab.insert(Obj.Prog, progName.getProgName(), Tab.noType);
 		Tab.openScope();
-		System.out.println("\nBuraz jel radi ovo?!\n");
 	}
 	
 	public void visit(Program program)
@@ -106,8 +107,8 @@ public class SemanticPass extends VisitorAdaptor {
 		{
 			switch(val.simpletype.s.getKind())
 			{
-			case Struct.Int: System.out.println("Int\n"); obj.setAdr(val.simpletype.num); break;
-			case Struct.Char: System.out.println("Char\n"); obj.setAdr(val.simpletype.character); break;
+			case Struct.Int: obj.setAdr(val.simpletype.num); break;
+			case Struct.Char: obj.setAdr(val.simpletype.character); break;
 			case Struct.Bool: obj.setAdr(val.simpletype.num); break;
 			default:
 				report_error("Error: invalid type of constant(allowed types are int, char, bool)"  , decl);
@@ -143,19 +144,40 @@ public class SemanticPass extends VisitorAdaptor {
 	}
 	
 	// Class Declaration
-	//public void visit(ClassName className)
+	public void visit(ClassName className)
 	{
-		
+		currClassStruct = new Struct(Struct.Class);
+		currClassObj = Tab.insert(Obj.Type, className.getName(), currClassStruct);
+		className.obj = currClassObj;
+		Tab.openScope();
+	}
+	
+	public void visit(Extends_Parent parent)
+	{
+		// COLLECT PARENT HERE
+		if((parent.obj = Tab.find(parent.getParentName())) == Tab.noObj) report_error("Error: parent class does not exist", parent);
 	}
 	
 	public void visit(Class_NoParent_Declaration classNoParent)
 	{
+		Tab.chainLocalSymbols(currClassStruct);
+		Tab.closeScope();
 		
+		currClassObj = null;
+		currClassStruct = null;
 	}
 	
 	public void visit(Class_Parent_Declaration classParent)
 	{
+		// ADD SUPER AND COPYING MEMBERS FROM PARENT
+		Obj parent = classParent.getExtends().obj;
+		if(parent != Tab.noObj) 
+			System.out.println("Class " + classParent.getClassName().getName() + " has parent class " + parent.getName());
+		Tab.chainLocalSymbols(currClassStruct);
+		Tab.closeScope();
 		
+		currClassObj = null;
+		currClassStruct = null;
 	}
 	
 	public void visit(Method_Type type)
@@ -191,4 +213,9 @@ public class SemanticPass extends VisitorAdaptor {
 			report_error("Error: function " + currMethod.getName() + " must return type " + currMethod.getType().getKind(), ret);
 	}
 	
+	
+	public void visit(Factor_ConstVal fval)
+	{
+		// check if type is correct based on fval
+	}
 }
