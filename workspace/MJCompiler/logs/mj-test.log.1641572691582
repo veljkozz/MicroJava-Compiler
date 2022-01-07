@@ -1,0 +1,288 @@
+INFO  17:22:31,593 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  17:22:31,716 - #2 program
+INFO  17:22:31,716 - #22 MJProgram
+INFO  17:22:31,716 - #34 class
+INFO  17:22:31,718 - #22 B
+INFO  17:22:31,718 - #3 {
+INFO  17:22:31,719 - #22 int
+INFO  17:22:31,719 - #22 k
+INFO  17:22:31,720 - #5 ;
+INFO  17:22:31,720 - #3 {
+INFO  17:22:31,720 - #22 B
+INFO  17:22:31,720 - #7 (
+INFO  17:22:31,721 - #8 )
+INFO  17:22:31,721 - #3 {
+INFO  17:22:31,722 - #4 }
+INFO  17:22:31,722 - #18 void
+INFO  17:22:31,723 - #22 argh
+INFO  17:22:31,724 - #7 (
+INFO  17:22:31,725 - #8 )
+INFO  17:22:31,726 - #3 {
+INFO  17:22:31,726 - #22 k
+INFO  17:22:31,727 - #13 +
+INFO  17:22:31,740 - #13 +
+INFO  17:22:31,740 - #5 ;
+INFO  17:22:31,740 - #4 }
+INFO  17:22:31,740 - #4 }
+INFO  17:22:31,741 - #4 }
+INFO  17:22:31,741 - #34 class
+INFO  17:22:31,741 - #22 A
+INFO  17:22:31,741 - #44 extends
+INFO  17:22:31,741 - #22 B
+INFO  17:22:31,741 - #3 {
+INFO  17:22:31,741 - #4 }
+INFO  17:22:31,742 - #22 B
+INFO  17:22:31,742 - #22 ka
+INFO  17:22:31,742 - #15 ,
+INFO  17:22:31,742 - #22 kb
+INFO  17:22:31,742 - #5 ;
+INFO  17:22:31,743 - #22 int
+INFO  17:22:31,743 - #22 sleep
+INFO  17:22:31,743 - #5 ;
+INFO  17:22:31,743 - #3 {
+INFO  17:22:31,743 - #18 void
+INFO  17:22:31,743 - #22 abc
+INFO  17:22:31,743 - #7 (
+INFO  17:22:31,743 - #8 )
+INFO  17:22:31,743 - #3 {
+INFO  17:22:31,744 - #4 }
+INFO  17:22:31,744 - #18 void
+INFO  17:22:31,744 - #22 main
+INFO  17:22:31,744 - #7 (
+INFO  17:22:31,744 - #8 )
+INFO  17:22:31,744 - #22 int
+INFO  17:22:31,744 - #22 a
+INFO  17:22:31,744 - #15 ,
+INFO  17:22:31,744 - #22 b
+INFO  17:22:31,744 - #5 ;
+INFO  17:22:31,744 - #22 char
+INFO  17:22:31,744 - #22 car
+INFO  17:22:31,744 - #5 ;
+INFO  17:22:31,744 - #3 {
+INFO  17:22:31,745 - #22 ka
+INFO  17:22:31,745 - #6 .
+INFO  17:22:31,745 - #22 argh
+INFO  17:22:31,745 - #7 (
+INFO  17:22:31,746 - #8 )
+INFO  17:22:31,747 - #5 ;
+INFO  17:22:31,747 - #12 return
+INFO  17:22:31,747 - #5 ;
+INFO  17:22:31,747 - #4 }
+INFO  17:22:31,750 - #4 }
+INFO  17:22:31,750 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived1(
+          DeclarationsDerived2(
+          ) [DeclarationsDerived2]
+          Declarations_ClassDecl(
+            Class_NoParent_Declaration(
+              ClassName(
+               B
+              ) [ClassName]
+              ClassContentDerived2(
+                ClassVarDeclarationsListDerived2(
+                  ClassVarDecl(
+                    Type(
+                     int
+                    ) [Type]
+                    ClassVarListDerived2(
+                      Class_Var(
+                       k
+                      ) [Class_Var]
+                    ) [ClassVarListDerived2]
+                  ) [ClassVarDecl]
+                ) [ClassVarDeclarationsListDerived2]
+                ClassMethodsDerived1(
+                  Constructor(
+                    ConstructorName(
+                     B
+                    ) [ConstructorName]
+                    Optional_NoVarDeclarations(
+                    ) [Optional_NoVarDeclarations]
+                    StatementsDerived1(
+                      NoStmt(
+                      ) [NoStmt]
+                    ) [StatementsDerived1]
+                  ) [Constructor]
+                  MethodListDerived2(
+                    Method_Decl(
+                      MethodTypeName(
+                        VoidType(
+                        ) [VoidType]
+                       argh
+                      ) [MethodTypeName]
+                      NoFormParam(
+                      ) [NoFormParam]
+                      Optional_NoVarDeclarations(
+                      ) [Optional_NoVarDeclarations]
+                      StatementsDerived1(
+                        Statement_List(
+                          NoStmt(
+                          ) [NoStmt]
+                          StatementDerived1(
+                            Statement_Designator(
+                              PostIncrement(
+                                Designator(
+                                  DesignatorName(
+                                   k
+                                  ) [DesignatorName]
+                                  DesignatorListDerived1(
+                                  ) [DesignatorListDerived1]
+                                ) [Designator]
+                              ) [PostIncrement]
+                            ) [Statement_Designator]
+                          ) [StatementDerived1]
+                        ) [Statement_List]
+                      ) [StatementsDerived1]
+                    ) [Method_Decl]
+                  ) [MethodListDerived2]
+                ) [ClassMethodsDerived1]
+              ) [ClassContentDerived2]
+            ) [Class_NoParent_Declaration]
+          ) [Declarations_ClassDecl]
+        ) [DeclarationsDerived1]
+        Declarations_ClassDecl(
+          Class_Parent_Declaration(
+            ClassName(
+             A
+            ) [ClassName]
+            Extends_Parent(
+             B
+            ) [Extends_Parent]
+            ClassContentDerived4(
+            ) [ClassContentDerived4]
+          ) [Class_Parent_Declaration]
+        ) [Declarations_ClassDecl]
+      ) [DeclarationsDerived1]
+      Declarations_VarDecl(
+        Var_Declarations(
+          Type(
+           B
+          ) [Type]
+          Var_List(
+            Var_(
+             ka
+            ) [Var_]
+            OneVar(
+              Var_(
+               kb
+              ) [Var_]
+            ) [OneVar]
+          ) [Var_List]
+        ) [Var_Declarations]
+      ) [Declarations_VarDecl]
+    ) [DeclarationsDerived1]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        OneVar(
+          Var_(
+           sleep
+          ) [Var_]
+        ) [OneVar]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived1(
+      MethodListDerived2(
+        Method_Decl(
+          MethodTypeName(
+            VoidType(
+            ) [VoidType]
+           abc
+          ) [MethodTypeName]
+          NoFormParam(
+          ) [NoFormParam]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+          StatementsDerived1(
+            NoStmt(
+            ) [NoStmt]
+          ) [StatementsDerived1]
+        ) [Method_Decl]
+      ) [MethodListDerived2]
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             int
+            ) [Type]
+            Var_List(
+              Var_(
+               a
+              ) [Var_]
+              OneVar(
+                Var_(
+                 b
+                ) [Var_]
+              ) [OneVar]
+            ) [Var_List]
+          ) [Var_Declarations]
+          Optional_VarDeclarations(
+            Var_Declarations(
+              Type(
+               char
+              ) [Type]
+              OneVar(
+                Var_(
+                 car
+                ) [Var_]
+              ) [OneVar]
+            ) [Var_Declarations]
+            Optional_NoVarDeclarations(
+            ) [Optional_NoVarDeclarations]
+          ) [Optional_VarDeclarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            Statement_List(
+              NoStmt(
+              ) [NoStmt]
+              StatementDerived1(
+                Statement_Designator(
+                  FuncCall(
+                    Designator(
+                      DesignatorName(
+                       ka
+                      ) [DesignatorName]
+                      DesignatorList_Field(
+                       argh
+                        DesignatorListDerived1(
+                        ) [DesignatorListDerived1]
+                      ) [DesignatorList_Field]
+                    ) [Designator]
+                    ActualParsDerived3(
+                    ) [ActualParsDerived3]
+                  ) [FuncCall]
+                ) [Statement_Designator]
+              ) [StatementDerived1]
+            ) [Statement_List]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived1]
+  ) [Global_Methods]
+) [Program]
+ERROR 17:22:31,759 - Error: name B does not represent a type on line 16
+ERROR 17:22:31,759 - Error: cannot find field argh on line 21
+ERROR 17:22:31,759 - Error: symbol not a method on line 21
+INFO  17:22:31,760 - Error happened during parsing!

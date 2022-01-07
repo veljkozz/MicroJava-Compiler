@@ -1,5 +1,8 @@
 package rs.ac.bg.etf.pp1;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 
 import rs.ac.bg.etf.pp1.ast.*;
@@ -18,6 +21,8 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	boolean isEqCond = false;
 	Obj currDesignator = null;
+	
+	ArrayList<Struct> currActualParams = new ArrayList<Struct>();
 	
 	Logger log = Logger.getLogger(getClass());
 	
@@ -153,7 +158,8 @@ public class SemanticPass extends VisitorAdaptor {
 	public void visit(Extends_Parent parent)
 	{
 		// COLLECT PARENT HERE
-		if((parent.obj = Tab.find(parent.getParentName())) == Tab.noObj) report_error("Error: parent class does not exist", parent);
+		if((parent.obj = Tab.find(parent.getParentName())) == Tab.noObj) 
+			report_error("Error: undefined parent class", parent);
 	}
 	
 	public void visit(Class_NoParent_Declaration classNoParent)
@@ -190,6 +196,25 @@ public class SemanticPass extends VisitorAdaptor {
 		Tab.insert(Obj.Var, var.getVarName(), s);
 	}
 	
+	// ADD PARAMS
+	public void visit(ConstructorName constructorName)
+	{
+		if(!constructorName.getName().equals(currClassObj.getName()))
+				report_error("Error: constructor name different than class name", constructorName);
+		else {
+			currMethod = Tab.insert(Obj.Meth, constructorName.getName(), Tab.noType);
+			Tab.openScope();
+		}
+	}
+	
+	public void visit(Constructor constructor)
+	{
+		Tab.chainLocalSymbols(currMethod);
+		Tab.closeScope();
+		currMethod = null;
+	}
+	
+	// Methods
 	public void visit(Method_Type type)
 	{
 		type.struct = type.getType().struct;
@@ -206,8 +231,18 @@ public class SemanticPass extends VisitorAdaptor {
 		methodTypeName.obj = currMethod;
 		Tab.openScope();
 	}
+	 
+	public void visit(Form_Param formParam)
+	{
+		Struct type = formParam.getType().struct;
+		String paramName = formParam.getVarname();
+		currMethod.setLevel(currMethod.getLevel() + 1);
+		Obj obj = Tab.insert(Obj.Var, paramName, type);
+		obj.setFpPos(currMethod.getLevel());
+	}
 	
-	public void visit(MethodDecl method)
+	// ADD PARAMS
+	public void visit(Method_Decl method)
 	{
 		Tab.chainLocalSymbols(currMethod);
 		Tab.closeScope();
@@ -215,6 +250,7 @@ public class SemanticPass extends VisitorAdaptor {
 		currMethod = null;
 	}
 	
+	// Statements
 	public void visit(ReturnStmt ret)
 	{
 		if(currMethod.getType().equals(Tab.noType))
@@ -227,7 +263,88 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 	}
 	
+	// DesignatorStatement
+	
+	public void visit(Assignment stmt)
+	{
+		// LEAVE FOR LATER, WHEN ADDING POLIMORPHISM
+	}
+	
+	public void visit(FuncCall stmt)
+	{
+		Obj method = stmt.getDesignator().obj;
+		if(!(method.getKind() == Obj.Meth))
+			report_error("Error: symbol not a method", stmt);
+		// Check parameters
+		Iterator<Obj> paramIt = method.getLocalSymbols().iterator();
+		if(currActualParams.size() != method.getLevel())
+			report_error("Error: number of parameters", stmt);
+		else {
+			while(paramIt.hasNext())
+			{
+				Obj param = paramIt.next();
+				int fpos = param.getFpPos()-1;
+				if(fpos >= 0)
+				{
+					if(!currActualParams.get(fpos).equals(param.getType()))
+					{
+						report_error("Error: parameter types do not match", stmt);
+						break;
+					}
+				}
+			}
+		}
+		currActualParams.clear();
+	}
+	
+	public void visit(PostIncrement stmt)
+	{
+		
+		if(!stmt.getDesignator().obj.getType().equals(Tab.intType))
+		{
+			report_error("Error: variable not an integer", stmt);
+		}else {
+			int kind = stmt.getDesignator().obj.getKind();
+			if(!(kind == Obj.Var || kind == Obj.Elem || kind == Obj.Fld))
+			{
+				report_error("Error: illegal simbol for expression", stmt);
+			}
+		}
+	}
+	
+	public void visit(PostDecrement stmt)
+	{
+		if(!stmt.getDesignator().obj.getType().equals(Tab.intType))
+		{
+			report_error("Error: variable not an integer", stmt);
+		}else {
+			int kind = stmt.getDesignator().obj.getKind();
+			if(!(kind == Obj.Var || kind == Obj.Elem || kind == Obj.Fld))
+			{
+				report_error("Error: illegal simbol for expression", stmt);
+			}
+		}
+	}
+	
+	// ActualParams
+	public void visit(ActualPars_Expr pars)
+	{
+		currActualParams.add(pars.getExpr().struct);
+	}
+	
+	public void visit(ActualPars_List pars)
+	{
+		currActualParams.add(pars.getExpr().struct);
+	}
+	
 	// Condfact
+	
+	public void visit(CondFact_Expr cfact)
+	{
+		if(!cfact.getExpr().struct.equals(boolType))
+			report_error("Error: expression is not a boolean type", cfact);			
+	}
+	
 	public void visit(CondFact_Relop fact)
 	{
 		//MJParser.
@@ -236,7 +353,14 @@ public class SemanticPass extends VisitorAdaptor {
 			report_error("Error: expressions not compatible", fact);
 		}
 		else
+		{
 			fact.struct = fact.getExpr().struct;
+			if(fact.struct.isRefType() && !isEqCond)
+			{
+				report_error("Error: illegal operation with ref type", fact);
+			}
+		}
+		isEqCond = false;
 		//System.out.println("RelOp: " + fact.childrenAccept(null));
 	}
 	
@@ -276,7 +400,7 @@ public class SemanticPass extends VisitorAdaptor {
 	public void visit(Term_MulOp tmul)
 	{
 		tmul.struct = tmul.getFactor().struct;
-		if(!tmul.getFactor().struct.equals(Tab.intType) || tmul.getTerm().struct.equals(Tab.intType))
+		if(!(tmul.getFactor().struct.getKind() == Struct.Int) || !(tmul.getTerm().struct.getKind() == Struct.Int))
 			report_error("Error: expression is not of integer type", tmul);
 	}
 	
@@ -294,10 +418,30 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	public void visit(Factor_FunCall fcall)
 	{
-		Obj obj = fcall.getDesignator().obj;
-		if(!(obj.getKind() == Obj.Meth))
-			report_error("Error: " + obj.getName() + " is not a method", fcall);
-		fcall.struct = obj.getType();
+		Obj method = fcall.getDesignator().obj;
+		if(!(method.getKind() == Obj.Meth))
+			report_error("Error: " + method.getName() + " is not a method", fcall);
+		fcall.struct = method.getType();
+		// Check parameters
+		Iterator<Obj> paramIt = method.getLocalSymbols().iterator();
+		if(currActualParams.size() != method.getLevel())
+			report_error("Error: number of parameters", fcall);
+		else {
+			while(paramIt.hasNext())
+			{
+				Obj param = paramIt.next();
+				int fpos = param.getFpPos()-1;
+				if(fpos >= 0)
+				{
+					if(!currActualParams.get(fpos).equals(param.getType()))
+					{
+						report_error("Error: parameter types do not match", fcall);
+						break;
+					}
+				}
+			}
+		}
+		currActualParams.clear();
 	}
 	
 	public void visit(Factor_ConstVal fval)
@@ -327,7 +471,7 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	public void visit(Factor_ParenExpr fexpr)
 	{
-		// idk sta da radim ovde yet
+		// idk sta da radim ovde
 	}
 	
 	public void visit(Designator designator)

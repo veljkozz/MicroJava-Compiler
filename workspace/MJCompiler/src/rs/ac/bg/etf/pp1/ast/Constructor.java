@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 16:15:17
+// 7/0/2022 18:9:42
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -9,24 +9,25 @@ public class Constructor implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
-    private String I1;
+    private ConstructorName ConstructorName;
     private OptionalVarDeclarations OptionalVarDeclarations;
     private Statements Statements;
 
-    public Constructor (String I1, OptionalVarDeclarations OptionalVarDeclarations, Statements Statements) {
-        this.I1=I1;
+    public Constructor (ConstructorName ConstructorName, OptionalVarDeclarations OptionalVarDeclarations, Statements Statements) {
+        this.ConstructorName=ConstructorName;
+        if(ConstructorName!=null) ConstructorName.setParent(this);
         this.OptionalVarDeclarations=OptionalVarDeclarations;
         if(OptionalVarDeclarations!=null) OptionalVarDeclarations.setParent(this);
         this.Statements=Statements;
         if(Statements!=null) Statements.setParent(this);
     }
 
-    public String getI1() {
-        return I1;
+    public ConstructorName getConstructorName() {
+        return ConstructorName;
     }
 
-    public void setI1(String I1) {
-        this.I1=I1;
+    public void setConstructorName(ConstructorName ConstructorName) {
+        this.ConstructorName=ConstructorName;
     }
 
     public OptionalVarDeclarations getOptionalVarDeclarations() {
@@ -66,17 +67,20 @@ public class Constructor implements SyntaxNode {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(ConstructorName!=null) ConstructorName.accept(visitor);
         if(OptionalVarDeclarations!=null) OptionalVarDeclarations.accept(visitor);
         if(Statements!=null) Statements.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(ConstructorName!=null) ConstructorName.traverseTopDown(visitor);
         if(OptionalVarDeclarations!=null) OptionalVarDeclarations.traverseTopDown(visitor);
         if(Statements!=null) Statements.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(ConstructorName!=null) ConstructorName.traverseBottomUp(visitor);
         if(OptionalVarDeclarations!=null) OptionalVarDeclarations.traverseBottomUp(visitor);
         if(Statements!=null) Statements.traverseBottomUp(visitor);
         accept(visitor);
@@ -87,7 +91,10 @@ public class Constructor implements SyntaxNode {
         buffer.append(tab);
         buffer.append("Constructor(\n");
 
-        buffer.append(" "+tab+I1);
+        if(ConstructorName!=null)
+            buffer.append(ConstructorName.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         if(OptionalVarDeclarations!=null)

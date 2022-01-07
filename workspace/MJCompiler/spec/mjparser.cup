@@ -68,7 +68,7 @@ terminal EXTENDS, SUPER;
 nonterminal Declarations, Declaration, GlobalMethods;
 nonterminal VarDeclarations, VarDeclarationsList, ConstDeclarations, ClassDeclaration, RecordDeclaration; 
 nonterminal MethodList, FormParams, FormParamList, FormParam, OptionalVarDeclarations;
-nonterminal RecordContent, ClassContent, ClassMethods, Constructor;
+nonterminal RecordContent, ClassContent, ClassMethods, Constructor, ConstructorName;
 
 nonterminal ClassVarDeclarations, ClassVarDeclarationsList, ClassVar, ClassVarList;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
@@ -177,7 +177,8 @@ ClassMethods ::= LBRACE Constructor MethodList RBRACE
 	| LBRACE RBRACE
 	;
 	
-Constructor ::= (Constructor) IDENT LPAREN RPAREN OptionalVarDeclarations Statements;	
+Constructor ::= (Constructor) ConstructorName LPAREN RPAREN OptionalVarDeclarations Statements;	
+ConstructorName ::= (ConstructorName) IDENT:name;
 		
 RecordDeclaration ::= (Record_Declaration) RECORD IDENT LBRACE RecordContent RBRACE;
 
@@ -201,7 +202,7 @@ MethodType ::= (Method_Type) Type:typeName
 			| (VoidType) VOID
 			;
 
-OptionalVarDeclarations ::= (Optional_VarDeclarations) VarDeclarations
+OptionalVarDeclarations ::= (Optional_VarDeclarations) VarDeclarations OptionalVarDeclarations
 						| (Optional_NoVarDeclarations) /*epsilon*/
 						;
 
@@ -213,7 +214,7 @@ FormParamList ::= (FormParam_List) FormParamList COMMA FormParam
 		| (SingleFormalParam) FormParam
 		;
 
-FormParam ::= Type IDENT
+FormParam ::= (Form_Param) Type:typename IDENT:varname
 	| error:l
 	{: parser.report_error("Error: invalid parameter at line " + lleft, null); :}
 	;
@@ -284,7 +285,7 @@ Term ::= (Term_MulOp) Factor MulOp Term
 
 Factor ::= (Factor_Designator) Designator 
 	| (Factor_FunCall) Designator LPAREN ActualPars RPAREN
-	| (Factor_ConstVal) Val													// RADIM OVO
+	| (Factor_ConstVal) Val													
 	| (Factor_New) NEW Type 
 	| (Factor_New_Arr) NEW Type LBRACKET Expr RBRACKET
 	| (Factor_ParenExpr) LPAREN Expr RPAREN
@@ -300,11 +301,10 @@ DesignatorList ::= (DesignatorList_Arr) LBRACKET Expr RBRACKET DesignatorList
 	;
 
 
-ActualPars ::= Expr
-	| ActualPars COMMA Expr
+ActualPars ::= (ActualPars_Expr) Expr
+	| (ActualPars_List) ActualPars COMMA Expr
 	| /* epsilon*/
 	;
-
 
 AssignOp ::= EQUAL;
 

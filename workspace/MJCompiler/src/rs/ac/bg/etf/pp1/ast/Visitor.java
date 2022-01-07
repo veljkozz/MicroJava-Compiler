@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 16:15:17
+// 7/0/2022 18:9:42
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -40,8 +40,8 @@ public interface Visitor {
     public void visit(VarDeclarationsList VarDeclarationsList);
     public void visit(AddOp AddOp);
     public void visit(DesignatorList DesignatorList);
-    public void visit(RecordContent RecordContent);
     public void visit(DesignatorStatement DesignatorStatement);
+    public void visit(RecordContent RecordContent);
     public void visit(ActualPars ActualPars);
     public void visit(FormParamList FormParamList);
     public void visit(ClassVarList ClassVarList);
@@ -66,9 +66,9 @@ public interface Visitor {
     public void visit(AddOpDerived2 AddOpDerived2);
     public void visit(AddOpDerived1 AddOpDerived1);
     public void visit(AssignOpDerived1 AssignOpDerived1);
-    public void visit(ActualParsDerived3 ActualParsDerived3);
-    public void visit(ActualParsDerived2 ActualParsDerived2);
     public void visit(ActualParsDerived1 ActualParsDerived1);
+    public void visit(ActualPars_List ActualPars_List);
+    public void visit(ActualPars_Expr ActualPars_Expr);
     public void visit(DesignatorListDerived1 DesignatorListDerived1);
     public void visit(DesignatorList_Field DesignatorList_Field);
     public void visit(DesignatorList_Arr DesignatorList_Arr);
@@ -116,8 +116,8 @@ public interface Visitor {
     public void visit(StatementDerived1 StatementDerived1);
     public void visit(NoStmt NoStmt);
     public void visit(Statement_List Statement_List);
-    public void visit(FormParamDerived2 FormParamDerived2);
     public void visit(FormParamDerived1 FormParamDerived1);
+    public void visit(Form_Param Form_Param);
     public void visit(SingleFormalParam SingleFormalParam);
     public void visit(FormParam_List FormParam_List);
     public void visit(NoFormParam NoFormParam);
@@ -135,6 +135,7 @@ public interface Visitor {
     public void visit(RecordContentDerived2 RecordContentDerived2);
     public void visit(RecordContentDerived1 RecordContentDerived1);
     public void visit(Record_Declaration Record_Declaration);
+    public void visit(ConstructorName ConstructorName);
     public void visit(Constructor Constructor);
     public void visit(ClassMethodsDerived4 ClassMethodsDerived4);
     public void visit(ClassMethodsDerived3 ClassMethodsDerived3);

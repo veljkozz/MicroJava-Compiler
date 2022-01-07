@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 16:15:17
+// 7/0/2022 18:9:42
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -40,8 +40,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(VarDeclarationsList VarDeclarationsList) { }
     public void visit(AddOp AddOp) { }
     public void visit(DesignatorList DesignatorList) { }
-    public void visit(RecordContent RecordContent) { }
     public void visit(DesignatorStatement DesignatorStatement) { }
+    public void visit(RecordContent RecordContent) { }
     public void visit(ActualPars ActualPars) { }
     public void visit(FormParamList FormParamList) { }
     public void visit(ClassVarList ClassVarList) { }
@@ -66,9 +66,9 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(AddOpDerived2 AddOpDerived2) { visit(); }
     public void visit(AddOpDerived1 AddOpDerived1) { visit(); }
     public void visit(AssignOpDerived1 AssignOpDerived1) { visit(); }
-    public void visit(ActualParsDerived3 ActualParsDerived3) { visit(); }
-    public void visit(ActualParsDerived2 ActualParsDerived2) { visit(); }
     public void visit(ActualParsDerived1 ActualParsDerived1) { visit(); }
+    public void visit(ActualPars_List ActualPars_List) { visit(); }
+    public void visit(ActualPars_Expr ActualPars_Expr) { visit(); }
     public void visit(DesignatorListDerived1 DesignatorListDerived1) { visit(); }
     public void visit(DesignatorList_Field DesignatorList_Field) { visit(); }
     public void visit(DesignatorList_Arr DesignatorList_Arr) { visit(); }
@@ -116,8 +116,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(StatementDerived1 StatementDerived1) { visit(); }
     public void visit(NoStmt NoStmt) { visit(); }
     public void visit(Statement_List Statement_List) { visit(); }
-    public void visit(FormParamDerived2 FormParamDerived2) { visit(); }
     public void visit(FormParamDerived1 FormParamDerived1) { visit(); }
+    public void visit(Form_Param Form_Param) { visit(); }
     public void visit(SingleFormalParam SingleFormalParam) { visit(); }
     public void visit(FormParam_List FormParam_List) { visit(); }
     public void visit(NoFormParam NoFormParam) { visit(); }
@@ -135,6 +135,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(RecordContentDerived2 RecordContentDerived2) { visit(); }
     public void visit(RecordContentDerived1 RecordContentDerived1) { visit(); }
     public void visit(Record_Declaration Record_Declaration) { visit(); }
+    public void visit(ConstructorName ConstructorName) { visit(); }
     public void visit(Constructor Constructor) { visit(); }
     public void visit(ClassMethodsDerived4 ClassMethodsDerived4) { visit(); }
     public void visit(ClassMethodsDerived3 ClassMethodsDerived3) { visit(); }

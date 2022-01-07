@@ -1,0 +1,200 @@
+INFO  16:22:54,149 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  16:22:54,530 - #2 program
+INFO  16:22:54,530 - #22 MJProgram
+INFO  16:22:54,530 - #34 class
+INFO  16:22:54,537 - #22 B
+INFO  16:22:54,537 - #3 {
+INFO  16:22:54,541 - #22 int
+INFO  16:22:54,541 - #22 k
+INFO  16:22:54,545 - #15 ,
+INFO  16:22:54,545 - #22 j
+INFO  16:22:54,546 - #15 ,
+INFO  16:22:54,546 - #22 t
+INFO  16:22:54,546 - #5 ;
+INFO  16:22:54,547 - #3 {
+INFO  16:22:54,548 - #18 void
+INFO  16:22:54,549 - #22 argh
+INFO  16:22:54,552 - #7 (
+INFO  16:22:54,556 - #8 )
+INFO  16:22:54,560 - #3 {
+INFO  16:22:54,563 - #4 }
+INFO  16:22:54,565 - #4 }
+INFO  16:22:54,567 - #4 }
+INFO  16:22:54,579 - #34 class
+INFO  16:22:54,580 - #22 A
+INFO  16:22:54,581 - #44 extends
+INFO  16:22:54,581 - #22 B
+INFO  16:22:54,581 - #3 {
+INFO  16:22:54,581 - #4 }
+INFO  16:22:54,584 - #22 B
+INFO  16:22:54,585 - #22 ka
+INFO  16:22:54,586 - #15 ,
+INFO  16:22:54,587 - #22 kb
+INFO  16:22:54,587 - #5 ;
+INFO  16:22:54,588 - #22 int
+INFO  16:22:54,590 - #22 sleep
+INFO  16:22:54,590 - #5 ;
+INFO  16:22:54,590 - #3 {
+INFO  16:22:54,590 - #18 void
+INFO  16:22:54,591 - #22 abc
+INFO  16:22:54,591 - #7 (
+INFO  16:22:54,591 - #8 )
+INFO  16:22:54,591 - #3 {
+INFO  16:22:54,592 - #4 }
+INFO  16:22:54,592 - #18 void
+INFO  16:22:54,592 - #22 main
+INFO  16:22:54,592 - #7 (
+INFO  16:22:54,593 - #8 )
+INFO  16:22:54,593 - #3 {
+INFO  16:22:54,593 - #12 return
+INFO  16:22:54,594 - #5 ;
+INFO  16:22:54,594 - #4 }
+INFO  16:22:54,598 - #4 }
+INFO  16:22:54,603 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived1(
+          DeclarationsDerived2(
+          ) [DeclarationsDerived2]
+          Declarations_ClassDecl(
+            Class_NoParent_Declaration(
+              ClassName(
+               B
+              ) [ClassName]
+              ClassContentDerived2(
+                ClassVarDeclarationsListDerived2(
+                  ClassVarDecl(
+                    Type(
+                     int
+                    ) [Type]
+                    ClassVarListDerived1(
+                      Class_Var(
+                       k
+                      ) [Class_Var]
+                      ClassVarListDerived1(
+                        Class_Var(
+                         j
+                        ) [Class_Var]
+                        ClassVarListDerived2(
+                          Class_Var(
+                           t
+                          ) [Class_Var]
+                        ) [ClassVarListDerived2]
+                      ) [ClassVarListDerived1]
+                    ) [ClassVarListDerived1]
+                  ) [ClassVarDecl]
+                ) [ClassVarDeclarationsListDerived2]
+                ClassMethodsDerived2(
+                  MethodListDerived2(
+                    Method_Decl(
+                      MethodTypeName(
+                        VoidType(
+                        ) [VoidType]
+                       argh
+                      ) [MethodTypeName]
+                      NoFormParam(
+                      ) [NoFormParam]
+                      Optional_NoVarDeclarations(
+                      ) [Optional_NoVarDeclarations]
+                      StatementsDerived1(
+                        NoStmt(
+                        ) [NoStmt]
+                      ) [StatementsDerived1]
+                    ) [Method_Decl]
+                  ) [MethodListDerived2]
+                ) [ClassMethodsDerived2]
+              ) [ClassContentDerived2]
+            ) [Class_NoParent_Declaration]
+          ) [Declarations_ClassDecl]
+        ) [DeclarationsDerived1]
+        Declarations_ClassDecl(
+          Class_Parent_Declaration(
+            ClassName(
+             A
+            ) [ClassName]
+            Extends_Parent(
+             B
+            ) [Extends_Parent]
+            ClassContentDerived4(
+            ) [ClassContentDerived4]
+          ) [Class_Parent_Declaration]
+        ) [Declarations_ClassDecl]
+      ) [DeclarationsDerived1]
+      Declarations_VarDecl(
+        Var_Declarations(
+          Type(
+           B
+          ) [Type]
+          Var_List(
+            Var_(
+             ka
+            ) [Var_]
+            OneVar(
+              Var_(
+               kb
+              ) [Var_]
+            ) [OneVar]
+          ) [Var_List]
+        ) [Var_Declarations]
+      ) [Declarations_VarDecl]
+    ) [DeclarationsDerived1]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        OneVar(
+          Var_(
+           sleep
+          ) [Var_]
+        ) [OneVar]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived1(
+      MethodListDerived2(
+        Method_Decl(
+          MethodTypeName(
+            VoidType(
+            ) [VoidType]
+           abc
+          ) [MethodTypeName]
+          NoFormParam(
+          ) [NoFormParam]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+          StatementsDerived1(
+            NoStmt(
+            ) [NoStmt]
+          ) [StatementsDerived1]
+        ) [Method_Decl]
+      ) [MethodListDerived2]
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived1]
+  ) [Global_Methods]
+) [Program]

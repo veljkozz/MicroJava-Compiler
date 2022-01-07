@@ -1,25 +1,13 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 16:15:17
+// 7/0/2022 18:9:42
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class ActualParsDerived1 extends ActualPars {
 
-    private Expr Expr;
-
-    public ActualParsDerived1 (Expr Expr) {
-        this.Expr=Expr;
-        if(Expr!=null) Expr.setParent(this);
-    }
-
-    public Expr getExpr() {
-        return Expr;
-    }
-
-    public void setExpr(Expr Expr) {
-        this.Expr=Expr;
+    public ActualParsDerived1 () {
     }
 
     public void accept(Visitor visitor) {
@@ -27,16 +15,13 @@ public class ActualParsDerived1 extends ActualPars {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(Expr!=null) Expr.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(Expr!=null) Expr.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(Expr!=null) Expr.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -44,12 +29,6 @@ public class ActualParsDerived1 extends ActualPars {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("ActualParsDerived1(\n");
-
-        if(Expr!=null)
-            buffer.append(Expr.toString("  "+tab));
-        else
-            buffer.append(tab+"  null");
-        buffer.append("\n");
 
         buffer.append(tab);
         buffer.append(") [ActualParsDerived1]");

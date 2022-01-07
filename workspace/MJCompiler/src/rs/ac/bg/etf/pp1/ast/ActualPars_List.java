@@ -1,16 +1,16 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 16:15:17
+// 7/0/2022 18:9:42
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class ActualParsDerived2 extends ActualPars {
+public class ActualPars_List extends ActualPars {
 
     private ActualPars ActualPars;
     private Expr Expr;
 
-    public ActualParsDerived2 (ActualPars ActualPars, Expr Expr) {
+    public ActualPars_List (ActualPars ActualPars, Expr Expr) {
         this.ActualPars=ActualPars;
         if(ActualPars!=null) ActualPars.setParent(this);
         this.Expr=Expr;
@@ -57,7 +57,7 @@ public class ActualParsDerived2 extends ActualPars {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("ActualParsDerived2(\n");
+        buffer.append("ActualPars_List(\n");
 
         if(ActualPars!=null)
             buffer.append(ActualPars.toString("  "+tab));
@@ -72,7 +72,7 @@ public class ActualParsDerived2 extends ActualPars {
         buffer.append("\n");
 
         buffer.append(tab);
-        buffer.append(") [ActualParsDerived2]");
+        buffer.append(") [ActualPars_List]");
         return buffer.toString();
     }
 }

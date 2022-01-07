@@ -82,6 +82,7 @@ nonterminal RecordContent RecordContent;
 nonterminal ClassContent ClassContent;
 nonterminal ClassMethods ClassMethods;
 nonterminal Constructor Constructor;
+nonterminal ConstructorName ConstructorName;
 
 nonterminal ClassVarDeclarations ClassVarDeclarations;
 nonterminal ClassVarDeclarationsList ClassVarDeclarationsList;
@@ -201,7 +202,8 @@ ClassMethods ::= LBRACE Constructor:C1 MethodList:M2 RBRACE {: RESULT=new ClassM
 	| LBRACE RBRACE {: RESULT=new ClassMethodsDerived4(); :}
 	;
 	
-Constructor ::= (Constructor) IDENT:I1 LPAREN RPAREN OptionalVarDeclarations:O2 Statements:S3 {: RESULT=new Constructor(I1, O2, S3); RESULT.setLine(I1left); :};	
+Constructor ::= (Constructor) ConstructorName:C1 LPAREN RPAREN OptionalVarDeclarations:O2 Statements:S3 {: RESULT=new Constructor(C1, O2, S3); RESULT.setLine(C1left); :};	
+ConstructorName ::= (ConstructorName) IDENT:name {: RESULT=new ConstructorName(name); RESULT.setLine(nameleft); :};
 		
 RecordDeclaration ::= (Record_Declaration) RECORD IDENT:I1 LBRACE RecordContent:R2 RBRACE {: RESULT=new Record_Declaration(I1, R2); RESULT.setLine(I1left); :};
 
@@ -225,7 +227,7 @@ MethodType ::= (Method_Type) Type:typeName {: RESULT=new Method_Type(typeName); 
 			| (VoidType) VOID {: RESULT=new VoidType(); :}
 			;
 
-OptionalVarDeclarations ::= (Optional_VarDeclarations) VarDeclarations:V1 {: RESULT=new Optional_VarDeclarations(V1); RESULT.setLine(V1left); :}
+OptionalVarDeclarations ::= (Optional_VarDeclarations) VarDeclarations:V1 OptionalVarDeclarations:O2 {: RESULT=new Optional_VarDeclarations(V1, O2); RESULT.setLine(V1left); :}
 						| (Optional_NoVarDeclarations) {: RESULT=new Optional_NoVarDeclarations(); :} /*epsilon*/
 						;
 
@@ -237,9 +239,9 @@ FormParamList ::= (FormParam_List) FormParamList:F1 COMMA FormParam:F2 {: RESULT
 		| (SingleFormalParam) FormParam:F1 {: RESULT=new SingleFormalParam(F1); RESULT.setLine(F1left); :}
 		;
 
-FormParam ::= Type:T1 IDENT:I2 {: RESULT=new FormParamDerived1(T1, I2); RESULT.setLine(T1left); :}
+FormParam ::= (Form_Param) Type:typename IDENT:varname {: RESULT=new Form_Param(typename, varname); RESULT.setLine(typenameleft); :}
 	| error:l
-	{: parser.report_error("Error: invalid parameter at line " + lleft, null); :} {: RESULT=new FormParamDerived2(); :}
+	{: parser.report_error("Error: invalid parameter at line " + lleft, null); :} {: RESULT=new FormParamDerived1(); :}
 	;
 
 StatementList ::= (Statement_List) StatementList:S1 Statement:S2 {: RESULT=new Statement_List(S1, S2); RESULT.setLine(S1left); :}
@@ -308,7 +310,7 @@ Term ::= (Term_MulOp) Factor:F1 MulOp:M2 Term:T3 {: RESULT=new Term_MulOp(F1, M2
 
 Factor ::= (Factor_Designator) Designator:D1 {: RESULT=new Factor_Designator(D1); RESULT.setLine(D1left); :} 
 	| (Factor_FunCall) Designator:D1 LPAREN ActualPars:A2 RPAREN {: RESULT=new Factor_FunCall(D1, A2); RESULT.setLine(D1left); :}
-	| (Factor_ConstVal) Val:V1 {: RESULT=new Factor_ConstVal(V1); RESULT.setLine(V1left); :}													// RADIM OVO
+	| (Factor_ConstVal) Val:V1 {: RESULT=new Factor_ConstVal(V1); RESULT.setLine(V1left); :}													
 	| (Factor_New) NEW Type:T1 {: RESULT=new Factor_New(T1); RESULT.setLine(T1left); :} 
 	| (Factor_New_Arr) NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new Factor_New_Arr(T1, E2); RESULT.setLine(T1left); :}
 	| (Factor_ParenExpr) LPAREN Expr:E1 RPAREN {: RESULT=new Factor_ParenExpr(E1); RESULT.setLine(E1left); :}
@@ -324,11 +326,10 @@ DesignatorList ::= (DesignatorList_Arr) LBRACKET Expr:E1 RBRACKET DesignatorList
 	;
 
 
-ActualPars ::= Expr:E1 {: RESULT=new ActualParsDerived1(E1); RESULT.setLine(E1left); :}
-	| ActualPars:A1 COMMA Expr:E2 {: RESULT=new ActualParsDerived2(A1, E2); RESULT.setLine(A1left); :}
-	| {: RESULT=new ActualParsDerived3(); :} /* epsilon*/
+ActualPars ::= (ActualPars_Expr) Expr:E1 {: RESULT=new ActualPars_Expr(E1); RESULT.setLine(E1left); :}
+	| (ActualPars_List) ActualPars:A1 COMMA Expr:E2 {: RESULT=new ActualPars_List(A1, E2); RESULT.setLine(A1left); :}
+	| {: RESULT=new ActualParsDerived1(); :} /* epsilon*/
 	;
-
 
 AssignOp ::= EQUAL {: RESULT=new AssignOpDerived1(); :};
 
