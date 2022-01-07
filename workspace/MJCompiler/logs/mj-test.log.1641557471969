@@ -1,0 +1,230 @@
+INFO  13:09:53,269 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  13:09:53,429 - #2 program
+INFO  13:09:53,429 - #22 MJProgram
+INFO  13:09:53,429 - #33 const
+INFO  13:09:53,432 - #22 char
+INFO  13:09:53,432 - #22 x
+INFO  13:09:53,433 - #11 =
+INFO  13:09:53,433 - #21 A
+INFO  13:09:53,434 - #5 ;
+INFO  13:09:53,434 - #22 char
+INFO  13:09:53,434 - #22 sentence
+INFO  13:09:53,434 - #9 [
+INFO  13:09:53,434 - #10 ]
+INFO  13:09:53,434 - #5 ;
+INFO  13:09:53,435 - #34 class
+INFO  13:09:53,435 - #22 B
+INFO  13:09:53,435 - #3 {
+INFO  13:09:53,436 - #22 int
+INFO  13:09:53,436 - #22 k
+INFO  13:09:53,437 - #5 ;
+INFO  13:09:53,437 - #4 }
+INFO  13:09:53,437 - #34 class
+INFO  13:09:53,438 - #22 A
+INFO  13:09:53,438 - #44 extends
+INFO  13:09:53,438 - #22 B
+INFO  13:09:53,438 - #3 {
+INFO  13:09:53,438 - #4 }
+INFO  13:09:53,439 - #3 {
+INFO  13:09:53,439 - #18 void
+INFO  13:09:53,439 - #22 main
+INFO  13:09:53,441 - #7 (
+INFO  13:09:53,443 - #8 )
+INFO  13:09:53,444 - #22 B
+INFO  13:09:53,444 - #22 kb
+INFO  13:09:53,445 - #5 ;
+INFO  13:09:53,445 - #3 {
+INFO  13:09:53,445 - #22 kb
+INFO  13:09:53,446 - #6 .
+INFO  13:09:53,448 - #22 b
+INFO  13:09:53,448 - #11 =
+INFO  13:09:53,451 - #19 5
+INFO  13:09:53,453 - #5 ;
+INFO  13:09:53,454 - #12 return
+INFO  13:09:53,454 - #19 1
+INFO  13:09:53,454 - #13 +
+INFO  13:09:53,454 - #19 1
+INFO  13:09:53,456 - #41 *
+INFO  13:09:53,456 - #22 x
+INFO  13:09:53,459 - #5 ;
+INFO  13:09:53,459 - #4 }
+INFO  13:09:53,459 - #4 }
+INFO  13:09:53,464 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived1(
+          DeclarationsDerived2(
+          ) [DeclarationsDerived2]
+          Declarations_ConstDecl(
+            Const_Declarations(
+              Type(
+               char
+              ) [Type]
+              ConstDecl_Single(
+               x
+                Val_Char(
+                 A
+                ) [Val_Char]
+              ) [ConstDecl_Single]
+            ) [Const_Declarations]
+          ) [Declarations_ConstDecl]
+        ) [DeclarationsDerived1]
+        Declarations_VarDecl(
+          Var_Declarations(
+            Type(
+             char
+            ) [Type]
+            OneVar(
+              Var_Array(
+               sentence
+              ) [Var_Array]
+            ) [OneVar]
+          ) [Var_Declarations]
+        ) [Declarations_VarDecl]
+      ) [DeclarationsDerived1]
+      Declarations_ClassDecl(
+        Class_NoParent_Declaration(
+          ClassName(
+           B
+          ) [ClassName]
+          ClassContentDerived3(
+            ClassVarDeclarationsListDerived2(
+              ClassVarDeclarationsDerived1(
+                Type(
+                 int
+                ) [Type]
+                ClassVarListDerived2(
+                  ClassVarDerived1(
+                   k
+                  ) [ClassVarDerived1]
+                ) [ClassVarListDerived2]
+              ) [ClassVarDeclarationsDerived1]
+            ) [ClassVarDeclarationsListDerived2]
+          ) [ClassContentDerived3]
+        ) [Class_NoParent_Declaration]
+      ) [Declarations_ClassDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_Parent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        Extends_Parent(
+         B
+        ) [Extends_Parent]
+        ClassContentDerived4(
+        ) [ClassContentDerived4]
+      ) [Class_Parent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             B
+            ) [Type]
+            OneVar(
+              Var_(
+               kb
+              ) [Var_]
+            ) [OneVar]
+          ) [Var_Declarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            Statement_List(
+              NoStmt(
+              ) [NoStmt]
+              StatementDerived1(
+                Statement_Designator(
+                  Assignment(
+                    Designator(
+                      DesignatorName(
+                       kb
+                      ) [DesignatorName]
+                      DesignatorList_Field(
+                       b
+                        DesignatorListDerived1(
+                        ) [DesignatorListDerived1]
+                      ) [DesignatorList_Field]
+                    ) [Designator]
+                    AssignOpDerived1(
+                    ) [AssignOpDerived1]
+                    AssignExprDerived1(
+                      ExprDerived1(
+                        TermListDerived1(
+                          TermDerived2(
+                            Factor_ConstVal(
+                              Val_Num(
+                               5
+                              ) [Val_Num]
+                            ) [Factor_ConstVal]
+                          ) [TermDerived2]
+                        ) [TermListDerived1]
+                      ) [ExprDerived1]
+                    ) [AssignExprDerived1]
+                  ) [Assignment]
+                ) [Statement_Designator]
+              ) [StatementDerived1]
+            ) [Statement_List]
+            StatementDerived1(
+              ReturnExprStmt(
+                ExprDerived1(
+                  TermListDerived2(
+                    TermDerived2(
+                      Factor_ConstVal(
+                        Val_Num(
+                         1
+                        ) [Val_Num]
+                      ) [Factor_ConstVal]
+                    ) [TermDerived2]
+                    AddOpDerived1(
+                    ) [AddOpDerived1]
+                    TermListDerived1(
+                      TermDerived1(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                        MulOpDerived1(
+                        ) [MulOpDerived1]
+                        TermDerived2(
+                          Factor_Designator(
+                            Designator(
+                              DesignatorName(
+                               x
+                              ) [DesignatorName]
+                              DesignatorListDerived1(
+                              ) [DesignatorListDerived1]
+                            ) [Designator]
+                          ) [Factor_Designator]
+                        ) [TermDerived2]
+                      ) [TermDerived1]
+                    ) [TermListDerived1]
+                  ) [TermListDerived2]
+                ) [ExprDerived1]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  13:09:53,493 - Deklarisana konstanta x sa tipom 2 on line 2
+INFO  13:09:53,493 - Deklarisana promenljiva sentence sa tipom 3 on line 3
+INFO  13:09:53,494 - Deklarisana promenljiva kb sa tipom 4 on line 12

@@ -50,7 +50,7 @@ public class MJParserTest {
 			prog.traverseBottomUp(semPass);
 			Tab.dump();
 			//log.info("Global variable count: " + v.globalVarCnt);
-			if(semPass.errorDetected)
+			if(semPass.errorDetected || p.errorDetected)
 				log.info("Error happened during parsing!");
 			
 		} 

@@ -1,13 +1,24 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 1:35:55
+// 7/0/2022 16:15:17
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class RelOpDerived2 extends RelOp {
 
-    public RelOpDerived2 () {
+    private String t;
+
+    public RelOpDerived2 (String t) {
+        this.t=t;
+    }
+
+    public String getT() {
+        return t;
+    }
+
+    public void setT(String t) {
+        this.t=t;
     }
 
     public void accept(Visitor visitor) {
@@ -29,6 +40,9 @@ public class RelOpDerived2 extends RelOp {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("RelOpDerived2(\n");
+
+        buffer.append(" "+tab+t);
+        buffer.append("\n");
 
         buffer.append(tab);
         buffer.append(") [RelOpDerived2]");

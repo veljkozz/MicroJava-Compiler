@@ -6,7 +6,7 @@ import rs.ac.bg.etf.pp1.ast.*;
 import rs.etf.pp1.symboltable.concepts.*;
 
 parser code {:
-	boolean errorDetected;
+	public boolean errorDetected;
 	Logger log = Logger.getLogger(getClass());
    
    	public static class SimpleType
@@ -58,7 +58,8 @@ terminal Integer NUMBER;
 terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
-terminal IF, ELSE, AND, OR, EQ, NEQ, GRT, GRE, LSS, LSSE;
+terminal IF, ELSE, AND, OR;
+terminal String EQ, NEQ, GRT, GRE, LSS, LSSE;
 terminal CONST, CLASS, RECORD, NEW;
 terminal DO, WHILE, BREAK, CONTINUE;
 terminal STAR, SLASH, PERCENT;
@@ -78,13 +79,17 @@ nonterminal rs.ac.bg.etf.pp1.MJParser.SimpleType Val;
 
 nonterminal Var, VarList, ConstVarList;
 nonterminal StatementList, Statement, Statements, SingleStatement;
-nonterminal DesignatorStatement, Designator, DesignatorList;
+
+nonterminal DesignatorStatement;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorList, DesignatorName;
+
 nonterminal PrintStmt;
-nonterminal Expr, AssignExpr, Term, TermList;
 nonterminal ActualPars;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Expr, AssignExpr, Term, TermList;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
 nonterminal MulOp, AddOp, RelOp, AssignOp;
-nonterminal Factor;
-nonterminal Condition, CondTerm, CondFact;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MethodTypeName, MethodDecl;
@@ -155,15 +160,15 @@ ClassVarDeclarationsList ::= ClassVarDeclarations ClassVarDeclarationsList
 	{: parser.report_error("Error: invalid class attribute declarations at line " + lleft, null); :}
 	;
 
-ClassVarDeclarations ::= Type ClassVarList SEMI;
+ClassVarDeclarations ::= (ClassVarDecl) Type ClassVarList SEMI;
 
 ClassVarList ::= ClassVar COMMA ClassVarList
 		| ClassVar
 		| error:l
 		{: parser.report_error("Error: invalid class attribute declaration at line " + lleft, null); :}
 		;
-ClassVar ::= IDENT:varName
-	| IDENT LBRACKET RBRACKET
+ClassVar ::= (Class_Var) IDENT:varName
+	| (Class_Var_Arr) IDENT:varName LBRACKET RBRACKET
 	;
 
 ClassMethods ::= LBRACE Constructor MethodList RBRACE
@@ -172,7 +177,7 @@ ClassMethods ::= LBRACE Constructor MethodList RBRACE
 	| LBRACE RBRACE
 	;
 	
-Constructor ::= IDENT LPAREN RPAREN OptionalVarDeclarations Statements;	
+Constructor ::= (Constructor) IDENT LPAREN RPAREN OptionalVarDeclarations Statements;	
 		
 RecordDeclaration ::= (Record_Declaration) RECORD IDENT LBRACE RecordContent RBRACE;
 
@@ -256,39 +261,41 @@ CondTerm ::= CondFact
 	| CondTerm AND CondFact
 	;
 
-CondFact ::= Expr 
-	| Expr RelOp Expr
+CondFact ::= (CondFact_Expr) Expr 
+	| (CondFact_Relop) Expr RelOp Expr
 	;
 
-AssignExpr ::= Expr
+AssignExpr ::= (Assign_Expr) Expr
 	| error:l
 	{: parser.report_error("Error: invalid assignment at line " + lleft, null); :}
 	;
 
-Expr ::= TermList
-	| MINUS TermList
+Expr ::= (Expr_Pos) TermList
+	| (Expr_Neg) MINUS TermList
 	;
 	
-TermList ::= Term
-	| Term AddOp TermList
+TermList ::= (TermList_Term) Term
+	| (TermList_AddOp) Term AddOp TermList
 	;
 
-Term ::= Factor MulOp Term
-	| Factor
+Term ::= (Term_MulOp) Factor MulOp Term
+	| (Term_Fact) Factor
 	;
 
-Factor ::= Designator 
+Factor ::= (Factor_Designator) Designator 
 	| (Factor_FunCall) Designator LPAREN ActualPars RPAREN
 	| (Factor_ConstVal) Val													// RADIM OVO
-	| NEW Type 
-	| NEW Type LBRACKET Expr RBRACKET
-	| LPAREN Expr RPAREN
+	| (Factor_New) NEW Type 
+	| (Factor_New_Arr) NEW Type LBRACKET Expr RBRACKET
+	| (Factor_ParenExpr) LPAREN Expr RPAREN
 	;
 	
-Designator ::= IDENT DesignatorList;
+Designator ::= (Designator) DesignatorName:name DesignatorList;
 
-DesignatorList ::= LBRACKET Expr RBRACKET DesignatorList
-	| DOT IDENT DesignatorList
+DesignatorName ::= (DesignatorName) IDENT:name;
+
+DesignatorList ::= (DesignatorList_Arr) LBRACKET Expr RBRACKET DesignatorList
+	| (DesignatorList_Field) DOT IDENT:name DesignatorList
 	| /*epsilon*/
 	;
 
@@ -310,12 +317,12 @@ MulOp ::= STAR
 	| PERCENT
 	;
 
-RelOp ::= EQ
-	| NEQ
-	| GRT
-	| GRE
-	| LSS
-	| LSSE
+RelOp ::= (RelOp_EQ) EQ:t
+	| (RelOp_NEQ) NEQ:t
+	| GRT:t
+	| GRE:t
+	| LSS:t
+	| LSSE:t
 	;
 	
 	

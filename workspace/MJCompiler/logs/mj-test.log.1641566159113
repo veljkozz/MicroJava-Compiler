@@ -1,0 +1,314 @@
+INFO  15:35:45,014 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  15:35:45,382 - #2 program
+INFO  15:35:45,382 - #22 MJProgram
+INFO  15:35:45,383 - #33 const
+INFO  15:35:45,388 - #22 char
+INFO  15:35:45,389 - #22 x
+INFO  15:35:45,392 - #11 =
+INFO  15:35:45,393 - #21 A
+INFO  15:35:45,393 - #5 ;
+INFO  15:35:45,393 - #22 char
+INFO  15:35:45,395 - #22 sentence
+INFO  15:35:45,396 - #9 [
+INFO  15:35:45,396 - #10 ]
+INFO  15:35:45,396 - #5 ;
+INFO  15:35:45,397 - #34 class
+INFO  15:35:45,398 - #22 B
+INFO  15:35:45,398 - #3 {
+INFO  15:35:45,401 - #22 int
+INFO  15:35:45,402 - #22 k
+INFO  15:35:45,402 - #5 ;
+INFO  15:35:45,403 - #4 }
+INFO  15:35:45,404 - #34 class
+INFO  15:35:45,416 - #22 A
+INFO  15:35:45,416 - #44 extends
+INFO  15:35:45,416 - #22 B
+INFO  15:35:45,417 - #3 {
+INFO  15:35:45,417 - #4 }
+INFO  15:35:45,420 - #22 B
+INFO  15:35:45,420 - #22 kb
+INFO  15:35:45,421 - #5 ;
+INFO  15:35:45,421 - #22 int
+INFO  15:35:45,422 - #22 sleep
+INFO  15:35:45,422 - #5 ;
+INFO  15:35:45,422 - #3 {
+INFO  15:35:45,422 - #18 void
+INFO  15:35:45,423 - #22 abc
+INFO  15:35:45,425 - #7 (
+INFO  15:35:45,428 - #8 )
+INFO  15:35:45,431 - #3 {
+INFO  15:35:45,434 - #4 }
+INFO  15:35:45,437 - #18 void
+INFO  15:35:45,439 - #22 main
+INFO  15:35:45,440 - #7 (
+INFO  15:35:45,440 - #8 )
+INFO  15:35:45,441 - #3 {
+INFO  15:35:45,441 - #23 if
+INFO  15:35:45,441 - #7 (
+INFO  15:35:45,442 - #21 a
+INFO  15:35:45,442 - #27 ==
+INFO  15:35:45,444 - #21 b
+INFO  15:35:45,445 - #26 ||
+INFO  15:35:45,446 - #22 kb
+INFO  15:35:45,446 - #6 .
+INFO  15:35:45,449 - #22 k
+INFO  15:35:45,450 - #27 ==
+INFO  15:35:45,457 - #21 a
+INFO  15:35:45,458 - #8 )
+INFO  15:35:45,458 - #3 {
+INFO  15:35:45,459 - #4 }
+INFO  15:35:45,459 - #12 return
+INFO  15:35:45,460 - #19 1
+INFO  15:35:45,461 - #13 +
+INFO  15:35:45,461 - #19 1
+INFO  15:35:45,467 - #5 ;
+INFO  15:35:45,468 - #4 }
+INFO  15:35:45,469 - #4 }
+INFO  15:35:45,479 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived1(
+          DeclarationsDerived1(
+            DeclarationsDerived1(
+              DeclarationsDerived2(
+              ) [DeclarationsDerived2]
+              Declarations_ConstDecl(
+                Const_Declarations(
+                  Type(
+                   char
+                  ) [Type]
+                  ConstDecl_Single(
+                   x
+                    Val_Char(
+                     A
+                    ) [Val_Char]
+                  ) [ConstDecl_Single]
+                ) [Const_Declarations]
+              ) [Declarations_ConstDecl]
+            ) [DeclarationsDerived1]
+            Declarations_VarDecl(
+              Var_Declarations(
+                Type(
+                 char
+                ) [Type]
+                OneVar(
+                  Var_Array(
+                   sentence
+                  ) [Var_Array]
+                ) [OneVar]
+              ) [Var_Declarations]
+            ) [Declarations_VarDecl]
+          ) [DeclarationsDerived1]
+          Declarations_ClassDecl(
+            Class_NoParent_Declaration(
+              ClassName(
+               B
+              ) [ClassName]
+              ClassContentDerived3(
+                ClassVarDeclarationsListDerived2(
+                  ClassVarDecl(
+                    Type(
+                     int
+                    ) [Type]
+                    ClassVarListDerived2(
+                      Class_Var(
+                       k
+                      ) [Class_Var]
+                    ) [ClassVarListDerived2]
+                  ) [ClassVarDecl]
+                ) [ClassVarDeclarationsListDerived2]
+              ) [ClassContentDerived3]
+            ) [Class_NoParent_Declaration]
+          ) [Declarations_ClassDecl]
+        ) [DeclarationsDerived1]
+        Declarations_ClassDecl(
+          Class_Parent_Declaration(
+            ClassName(
+             A
+            ) [ClassName]
+            Extends_Parent(
+             B
+            ) [Extends_Parent]
+            ClassContentDerived4(
+            ) [ClassContentDerived4]
+          ) [Class_Parent_Declaration]
+        ) [Declarations_ClassDecl]
+      ) [DeclarationsDerived1]
+      Declarations_VarDecl(
+        Var_Declarations(
+          Type(
+           B
+          ) [Type]
+          OneVar(
+            Var_(
+             kb
+            ) [Var_]
+          ) [OneVar]
+        ) [Var_Declarations]
+      ) [Declarations_VarDecl]
+    ) [DeclarationsDerived1]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        OneVar(
+          Var_(
+           sleep
+          ) [Var_]
+        ) [OneVar]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived1(
+      MethodListDerived2(
+        Method_Decl(
+          MethodTypeName(
+            VoidType(
+            ) [VoidType]
+           abc
+          ) [MethodTypeName]
+          NoFormParam(
+          ) [NoFormParam]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+          StatementsDerived1(
+            NoStmt(
+            ) [NoStmt]
+          ) [StatementsDerived1]
+        ) [Method_Decl]
+      ) [MethodListDerived2]
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            Statement_List(
+              NoStmt(
+              ) [NoStmt]
+              StatementDerived1(
+                IfStmt(
+                  ConditionDerived2(
+                    ConditionDerived1(
+                      CondTermDerived1(
+                        CondFact_Relop(
+                          Expr_Pos(
+                            TermList_Term(
+                              Term_Fact(
+                                Factor_ConstVal(
+                                  Val_Char(
+                                   a
+                                  ) [Val_Char]
+                                ) [Factor_ConstVal]
+                              ) [Term_Fact]
+                            ) [TermList_Term]
+                          ) [Expr_Pos]
+                          RelOp_EQ(
+                           ==
+                          ) [RelOp_EQ]
+                          Expr_Pos(
+                            TermList_Term(
+                              Term_Fact(
+                                Factor_ConstVal(
+                                  Val_Char(
+                                   b
+                                  ) [Val_Char]
+                                ) [Factor_ConstVal]
+                              ) [Term_Fact]
+                            ) [TermList_Term]
+                          ) [Expr_Pos]
+                        ) [CondFact_Relop]
+                      ) [CondTermDerived1]
+                    ) [ConditionDerived1]
+                    CondTermDerived1(
+                      CondFact_Relop(
+                        Expr_Pos(
+                          TermList_Term(
+                            Term_Fact(
+                              Factor_Designator(
+                                Designator(
+                                  DesignatorName(
+                                   kb
+                                  ) [DesignatorName]
+                                  DesignatorList_Field(
+                                   k
+                                    DesignatorListDerived1(
+                                    ) [DesignatorListDerived1]
+                                  ) [DesignatorList_Field]
+                                ) [Designator]
+                              ) [Factor_Designator]
+                            ) [Term_Fact]
+                          ) [TermList_Term]
+                        ) [Expr_Pos]
+                        RelOp_EQ(
+                         ==
+                        ) [RelOp_EQ]
+                        Expr_Pos(
+                          TermList_Term(
+                            Term_Fact(
+                              Factor_ConstVal(
+                                Val_Char(
+                                 a
+                                ) [Val_Char]
+                              ) [Factor_ConstVal]
+                            ) [Term_Fact]
+                          ) [TermList_Term]
+                        ) [Expr_Pos]
+                      ) [CondFact_Relop]
+                    ) [CondTermDerived1]
+                  ) [ConditionDerived2]
+                  StatementDerived2(
+                    StatementsDerived1(
+                      NoStmt(
+                      ) [NoStmt]
+                    ) [StatementsDerived1]
+                  ) [StatementDerived2]
+                ) [IfStmt]
+              ) [StatementDerived1]
+            ) [Statement_List]
+            StatementDerived1(
+              ReturnExprStmt(
+                Expr_Pos(
+                  TermList_AddOp(
+                    Term_Fact(
+                      Factor_ConstVal(
+                        Val_Num(
+                         1
+                        ) [Val_Num]
+                      ) [Factor_ConstVal]
+                    ) [Term_Fact]
+                    AddOpDerived1(
+                    ) [AddOpDerived1]
+                    TermList_Term(
+                      Term_Fact(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                      ) [Term_Fact]
+                    ) [TermList_Term]
+                  ) [TermList_AddOp]
+                ) [Expr_Pos]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived1]
+  ) [Global_Methods]
+) [Program]
+ERROR 15:35:45,515 - Error: expressions not compatible on line 16
+INFO  15:35:45,517 - Error happened during parsing!

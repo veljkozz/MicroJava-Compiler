@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 1:35:55
+// 7/0/2022 16:15:17
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,7 +8,6 @@ package rs.ac.bg.etf.pp1.ast;
 public abstract class VisitorAdaptor implements Visitor { 
 
     public void visit(MethodDecl MethodDecl) { }
-    public void visit(Constructor Constructor) { }
     public void visit(TermList TermList) { }
     public void visit(GlobalMethods GlobalMethods) { }
     public void visit(MethodType MethodType) { }
@@ -20,7 +19,6 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Factor Factor) { }
     public void visit(CondTerm CondTerm) { }
     public void visit(VarList VarList) { }
-    public void visit(Designator Designator) { }
     public void visit(ClassVarDeclarations ClassVarDeclarations) { }
     public void visit(OptionalVarDeclarations OptionalVarDeclarations) { }
     public void visit(Term Term) { }
@@ -56,12 +54,12 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(SingleStatement SingleStatement) { }
     public void visit(ClassMethods ClassMethods) { }
     public void visit(FormParam FormParam) { }
-    public void visit(RelOpDerived6 RelOpDerived6) { visit(); }
-    public void visit(RelOpDerived5 RelOpDerived5) { visit(); }
     public void visit(RelOpDerived4 RelOpDerived4) { visit(); }
     public void visit(RelOpDerived3 RelOpDerived3) { visit(); }
     public void visit(RelOpDerived2 RelOpDerived2) { visit(); }
     public void visit(RelOpDerived1 RelOpDerived1) { visit(); }
+    public void visit(RelOp_NEQ RelOp_NEQ) { visit(); }
+    public void visit(RelOp_EQ RelOp_EQ) { visit(); }
     public void visit(MulOpDerived3 MulOpDerived3) { visit(); }
     public void visit(MulOpDerived2 MulOpDerived2) { visit(); }
     public void visit(MulOpDerived1 MulOpDerived1) { visit(); }
@@ -71,26 +69,27 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ActualParsDerived3 ActualParsDerived3) { visit(); }
     public void visit(ActualParsDerived2 ActualParsDerived2) { visit(); }
     public void visit(ActualParsDerived1 ActualParsDerived1) { visit(); }
-    public void visit(DesignatorListDerived3 DesignatorListDerived3) { visit(); }
-    public void visit(DesignatorListDerived2 DesignatorListDerived2) { visit(); }
     public void visit(DesignatorListDerived1 DesignatorListDerived1) { visit(); }
-    public void visit(DesignatorDerived1 DesignatorDerived1) { visit(); }
-    public void visit(FactorDerived4 FactorDerived4) { visit(); }
-    public void visit(FactorDerived3 FactorDerived3) { visit(); }
-    public void visit(FactorDerived2 FactorDerived2) { visit(); }
+    public void visit(DesignatorList_Field DesignatorList_Field) { visit(); }
+    public void visit(DesignatorList_Arr DesignatorList_Arr) { visit(); }
+    public void visit(DesignatorName DesignatorName) { visit(); }
+    public void visit(Designator Designator) { visit(); }
+    public void visit(Factor_ParenExpr Factor_ParenExpr) { visit(); }
+    public void visit(Factor_New_Arr Factor_New_Arr) { visit(); }
+    public void visit(Factor_New Factor_New) { visit(); }
     public void visit(Factor_ConstVal Factor_ConstVal) { visit(); }
     public void visit(Factor_FunCall Factor_FunCall) { visit(); }
-    public void visit(FactorDerived1 FactorDerived1) { visit(); }
-    public void visit(TermDerived2 TermDerived2) { visit(); }
-    public void visit(TermDerived1 TermDerived1) { visit(); }
-    public void visit(TermListDerived2 TermListDerived2) { visit(); }
-    public void visit(TermListDerived1 TermListDerived1) { visit(); }
-    public void visit(ExprDerived2 ExprDerived2) { visit(); }
-    public void visit(ExprDerived1 ExprDerived1) { visit(); }
-    public void visit(AssignExprDerived2 AssignExprDerived2) { visit(); }
+    public void visit(Factor_Designator Factor_Designator) { visit(); }
+    public void visit(Term_Fact Term_Fact) { visit(); }
+    public void visit(Term_MulOp Term_MulOp) { visit(); }
+    public void visit(TermList_AddOp TermList_AddOp) { visit(); }
+    public void visit(TermList_Term TermList_Term) { visit(); }
+    public void visit(Expr_Neg Expr_Neg) { visit(); }
+    public void visit(Expr_Pos Expr_Pos) { visit(); }
     public void visit(AssignExprDerived1 AssignExprDerived1) { visit(); }
-    public void visit(CondFactDerived2 CondFactDerived2) { visit(); }
-    public void visit(CondFactDerived1 CondFactDerived1) { visit(); }
+    public void visit(Assign_Expr Assign_Expr) { visit(); }
+    public void visit(CondFact_Relop CondFact_Relop) { visit(); }
+    public void visit(CondFact_Expr CondFact_Expr) { visit(); }
     public void visit(CondTermDerived2 CondTermDerived2) { visit(); }
     public void visit(CondTermDerived1 CondTermDerived1) { visit(); }
     public void visit(ConditionDerived3 ConditionDerived3) { visit(); }
@@ -136,17 +135,17 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(RecordContentDerived2 RecordContentDerived2) { visit(); }
     public void visit(RecordContentDerived1 RecordContentDerived1) { visit(); }
     public void visit(Record_Declaration Record_Declaration) { visit(); }
-    public void visit(ConstructorDerived1 ConstructorDerived1) { visit(); }
+    public void visit(Constructor Constructor) { visit(); }
     public void visit(ClassMethodsDerived4 ClassMethodsDerived4) { visit(); }
     public void visit(ClassMethodsDerived3 ClassMethodsDerived3) { visit(); }
     public void visit(ClassMethodsDerived2 ClassMethodsDerived2) { visit(); }
     public void visit(ClassMethodsDerived1 ClassMethodsDerived1) { visit(); }
-    public void visit(ClassVarDerived2 ClassVarDerived2) { visit(); }
-    public void visit(ClassVarDerived1 ClassVarDerived1) { visit(); }
+    public void visit(Class_Var_Arr Class_Var_Arr) { visit(); }
+    public void visit(Class_Var Class_Var) { visit(); }
     public void visit(ClassVarListDerived3 ClassVarListDerived3) { visit(); }
     public void visit(ClassVarListDerived2 ClassVarListDerived2) { visit(); }
     public void visit(ClassVarListDerived1 ClassVarListDerived1) { visit(); }
-    public void visit(ClassVarDeclarationsDerived1 ClassVarDeclarationsDerived1) { visit(); }
+    public void visit(ClassVarDecl ClassVarDecl) { visit(); }
     public void visit(ClassVarDeclarationsListDerived3 ClassVarDeclarationsListDerived3) { visit(); }
     public void visit(ClassVarDeclarationsListDerived2 ClassVarDeclarationsListDerived2) { visit(); }
     public void visit(ClassVarDeclarationsListDerived1 ClassVarDeclarationsListDerived1) { visit(); }

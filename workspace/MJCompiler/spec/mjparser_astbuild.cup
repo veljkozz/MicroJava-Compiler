@@ -6,14 +6,14 @@ import rs.ac.bg.etf.pp1.ast.*;
 import rs.etf.pp1.symboltable.concepts.*;
 
 parser code {:
-	boolean errorDetected;
+	public boolean errorDetected;
 	Logger log = Logger.getLogger(getClass());
    
    	public static class SimpleType
    	{
    		public SimpleType(Struct s) {this.s = s;}
    		public Struct s;
-   		public rs.etf.pp1.symboltable.concepts.Obj obj;
+   		public rs.etf.pp1.symboltable.concepts.Obj obj = null;
    		public Integer num; Character character; Boolean bool;
    	}
    
@@ -58,7 +58,8 @@ terminal Integer NUMBER;
 terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
-terminal IF, ELSE, AND, OR, EQ, NEQ, GRT, GRE, LSS, LSSE;
+terminal IF, ELSE, AND, OR;
+terminal String EQ, NEQ, GRT, GRE, LSS, LSSE;
 terminal CONST, CLASS, RECORD, NEW;
 terminal DO, WHILE, BREAK, CONTINUE;
 terminal STAR, SLASH, PERCENT;
@@ -99,23 +100,20 @@ nonterminal StatementList StatementList;
 nonterminal Statement Statement;
 nonterminal Statements Statements;
 nonterminal SingleStatement SingleStatement;
+
 nonterminal DesignatorStatement DesignatorStatement;
-nonterminal Designator Designator;
-nonterminal DesignatorList DesignatorList;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorList, DesignatorName;
+
 nonterminal PrintStmt PrintStmt;
-nonterminal Expr Expr;
-nonterminal AssignExpr AssignExpr;
-nonterminal Term Term;
-nonterminal TermList TermList;
 nonterminal ActualPars ActualPars;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Expr, AssignExpr, Term, TermList;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
 nonterminal MulOp MulOp;
 nonterminal AddOp AddOp;
 nonterminal RelOp RelOp;
 nonterminal AssignOp AssignOp;
-nonterminal Factor Factor;
-nonterminal Condition Condition;
-nonterminal CondTerm CondTerm;
-nonterminal CondFact CondFact;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MethodTypeName, MethodDecl;
@@ -186,15 +184,15 @@ ClassVarDeclarationsList ::= ClassVarDeclarations:C1 ClassVarDeclarationsList:C2
 	{: parser.report_error("Error: invalid class attribute declarations at line " + lleft, null); :} {: RESULT=new ClassVarDeclarationsListDerived3(); :}
 	;
 
-ClassVarDeclarations ::= Type:T1 ClassVarList:C2 SEMI {: RESULT=new ClassVarDeclarationsDerived1(T1, C2); RESULT.setLine(T1left); :};
+ClassVarDeclarations ::= (ClassVarDecl) Type:T1 ClassVarList:C2 SEMI {: RESULT=new ClassVarDecl(T1, C2); RESULT.setLine(T1left); :};
 
 ClassVarList ::= ClassVar:C1 COMMA ClassVarList:C2 {: RESULT=new ClassVarListDerived1(C1, C2); RESULT.setLine(C1left); :}
 		| ClassVar:C1 {: RESULT=new ClassVarListDerived2(C1); RESULT.setLine(C1left); :}
 		| error:l
 		{: parser.report_error("Error: invalid class attribute declaration at line " + lleft, null); :} {: RESULT=new ClassVarListDerived3(); :}
 		;
-ClassVar ::= IDENT:varName {: RESULT=new ClassVarDerived1(varName); RESULT.setLine(varNameleft); :}
-	| IDENT:I1 LBRACKET RBRACKET {: RESULT=new ClassVarDerived2(I1); RESULT.setLine(I1left); :}
+ClassVar ::= (Class_Var) IDENT:varName {: RESULT=new Class_Var(varName); RESULT.setLine(varNameleft); :}
+	| (Class_Var_Arr) IDENT:varName LBRACKET RBRACKET {: RESULT=new Class_Var_Arr(varName); RESULT.setLine(varNameleft); :}
 	;
 
 ClassMethods ::= LBRACE Constructor:C1 MethodList:M2 RBRACE {: RESULT=new ClassMethodsDerived1(C1, M2); RESULT.setLine(C1left); :}
@@ -203,7 +201,7 @@ ClassMethods ::= LBRACE Constructor:C1 MethodList:M2 RBRACE {: RESULT=new ClassM
 	| LBRACE RBRACE {: RESULT=new ClassMethodsDerived4(); :}
 	;
 	
-Constructor ::= IDENT:I1 LPAREN RPAREN OptionalVarDeclarations:O2 Statements:S3 {: RESULT=new ConstructorDerived1(I1, O2, S3); RESULT.setLine(I1left); :};	
+Constructor ::= (Constructor) IDENT:I1 LPAREN RPAREN OptionalVarDeclarations:O2 Statements:S3 {: RESULT=new Constructor(I1, O2, S3); RESULT.setLine(I1left); :};	
 		
 RecordDeclaration ::= (Record_Declaration) RECORD IDENT:I1 LBRACE RecordContent:R2 RBRACE {: RESULT=new Record_Declaration(I1, R2); RESULT.setLine(I1left); :};
 
@@ -287,40 +285,42 @@ CondTerm ::= CondFact:C1 {: RESULT=new CondTermDerived1(C1); RESULT.setLine(C1le
 	| CondTerm:C1 AND CondFact:C2 {: RESULT=new CondTermDerived2(C1, C2); RESULT.setLine(C1left); :}
 	;
 
-CondFact ::= Expr:E1 {: RESULT=new CondFactDerived1(E1); RESULT.setLine(E1left); :} 
-	| Expr:E1 RelOp:R2 Expr:E3 {: RESULT=new CondFactDerived2(E1, R2, E3); RESULT.setLine(E1left); :}
+CondFact ::= (CondFact_Expr) Expr:E1 {: RESULT=new CondFact_Expr(E1); RESULT.setLine(E1left); :} 
+	| (CondFact_Relop) Expr:E1 RelOp:R2 Expr:E3 {: RESULT=new CondFact_Relop(E1, R2, E3); RESULT.setLine(E1left); :}
 	;
 
-AssignExpr ::= Expr:E1 {: RESULT=new AssignExprDerived1(E1); RESULT.setLine(E1left); :}
+AssignExpr ::= (Assign_Expr) Expr:E1 {: RESULT=new Assign_Expr(E1); RESULT.setLine(E1left); :}
 	| error:l
-	{: parser.report_error("Error: invalid assignment at line " + lleft, null); :} {: RESULT=new AssignExprDerived2(); :}
+	{: parser.report_error("Error: invalid assignment at line " + lleft, null); :} {: RESULT=new AssignExprDerived1(); :}
 	;
 
-Expr ::= TermList:T1 {: RESULT=new ExprDerived1(T1); RESULT.setLine(T1left); :}
-	| MINUS TermList:T1 {: RESULT=new ExprDerived2(T1); RESULT.setLine(T1left); :}
+Expr ::= (Expr_Pos) TermList:T1 {: RESULT=new Expr_Pos(T1); RESULT.setLine(T1left); :}
+	| (Expr_Neg) MINUS TermList:T1 {: RESULT=new Expr_Neg(T1); RESULT.setLine(T1left); :}
 	;
 	
-TermList ::= Term:T1 {: RESULT=new TermListDerived1(T1); RESULT.setLine(T1left); :}
-	| Term:T1 AddOp:A2 TermList:T3 {: RESULT=new TermListDerived2(T1, A2, T3); RESULT.setLine(T1left); :}
+TermList ::= (TermList_Term) Term:T1 {: RESULT=new TermList_Term(T1); RESULT.setLine(T1left); :}
+	| (TermList_AddOp) Term:T1 AddOp:A2 TermList:T3 {: RESULT=new TermList_AddOp(T1, A2, T3); RESULT.setLine(T1left); :}
 	;
 
-Term ::= Factor:F1 MulOp:M2 Term:T3 {: RESULT=new TermDerived1(F1, M2, T3); RESULT.setLine(F1left); :}
-	| Factor:F1 {: RESULT=new TermDerived2(F1); RESULT.setLine(F1left); :}
+Term ::= (Term_MulOp) Factor:F1 MulOp:M2 Term:T3 {: RESULT=new Term_MulOp(F1, M2, T3); RESULT.setLine(F1left); :}
+	| (Term_Fact) Factor:F1 {: RESULT=new Term_Fact(F1); RESULT.setLine(F1left); :}
 	;
 
-Factor ::= Designator:D1 {: RESULT=new FactorDerived1(D1); RESULT.setLine(D1left); :} 
+Factor ::= (Factor_Designator) Designator:D1 {: RESULT=new Factor_Designator(D1); RESULT.setLine(D1left); :} 
 	| (Factor_FunCall) Designator:D1 LPAREN ActualPars:A2 RPAREN {: RESULT=new Factor_FunCall(D1, A2); RESULT.setLine(D1left); :}
-	| (Factor_ConstVal) Val:V1 {: RESULT=new Factor_ConstVal(V1); RESULT.setLine(V1left); :}
-	| NEW Type:T1 {: RESULT=new FactorDerived2(T1); RESULT.setLine(T1left); :} 
-	| NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new FactorDerived3(T1, E2); RESULT.setLine(T1left); :}
-	| LPAREN Expr:E1 RPAREN {: RESULT=new FactorDerived4(E1); RESULT.setLine(E1left); :}
+	| (Factor_ConstVal) Val:V1 {: RESULT=new Factor_ConstVal(V1); RESULT.setLine(V1left); :}													// RADIM OVO
+	| (Factor_New) NEW Type:T1 {: RESULT=new Factor_New(T1); RESULT.setLine(T1left); :} 
+	| (Factor_New_Arr) NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new Factor_New_Arr(T1, E2); RESULT.setLine(T1left); :}
+	| (Factor_ParenExpr) LPAREN Expr:E1 RPAREN {: RESULT=new Factor_ParenExpr(E1); RESULT.setLine(E1left); :}
 	;
 	
-Designator ::= IDENT:I1 DesignatorList:D2 {: RESULT=new DesignatorDerived1(I1, D2); RESULT.setLine(I1left); :};
+Designator ::= (Designator) DesignatorName:name DesignatorList:D1 {: RESULT=new Designator(name, D1); RESULT.setLine(nameleft); :};
 
-DesignatorList ::= LBRACKET Expr:E1 RBRACKET DesignatorList:D2 {: RESULT=new DesignatorListDerived1(E1, D2); RESULT.setLine(E1left); :}
-	| DOT IDENT:I1 DesignatorList:D2 {: RESULT=new DesignatorListDerived2(I1, D2); RESULT.setLine(I1left); :}
-	| {: RESULT=new DesignatorListDerived3(); :} /*epsilon*/
+DesignatorName ::= (DesignatorName) IDENT:name {: RESULT=new DesignatorName(name); RESULT.setLine(nameleft); :};
+
+DesignatorList ::= (DesignatorList_Arr) LBRACKET Expr:E1 RBRACKET DesignatorList:D2 {: RESULT=new DesignatorList_Arr(E1, D2); RESULT.setLine(E1left); :}
+	| (DesignatorList_Field) DOT IDENT:name DesignatorList:D1 {: RESULT=new DesignatorList_Field(name, D1); RESULT.setLine(nameleft); :}
+	| {: RESULT=new DesignatorListDerived1(); :} /*epsilon*/
 	;
 
 
@@ -341,12 +341,12 @@ MulOp ::= STAR {: RESULT=new MulOpDerived1(); :}
 	| PERCENT {: RESULT=new MulOpDerived3(); :}
 	;
 
-RelOp ::= EQ {: RESULT=new RelOpDerived1(); :}
-	| NEQ {: RESULT=new RelOpDerived2(); :}
-	| GRT {: RESULT=new RelOpDerived3(); :}
-	| GRE {: RESULT=new RelOpDerived4(); :}
-	| LSS {: RESULT=new RelOpDerived5(); :}
-	| LSSE {: RESULT=new RelOpDerived6(); :}
+RelOp ::= (RelOp_EQ) EQ:t {: RESULT=new RelOp_EQ(t); RESULT.setLine(tleft); :}
+	| (RelOp_NEQ) NEQ:t {: RESULT=new RelOp_NEQ(t); RESULT.setLine(tleft); :}
+	| GRT:t {: RESULT=new RelOpDerived1(t); RESULT.setLine(tleft); :}
+	| GRE:t {: RESULT=new RelOpDerived2(t); RESULT.setLine(tleft); :}
+	| LSS:t {: RESULT=new RelOpDerived3(t); RESULT.setLine(tleft); :}
+	| LSSE:t {: RESULT=new RelOpDerived4(t); RESULT.setLine(tleft); :}
 	;
 	
 	

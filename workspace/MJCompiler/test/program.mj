@@ -1,14 +1,27 @@
 program MJProgram
-	const char x = "a";
+	const char x = "A";
+	char sentence[];
 	class B
 	{
+		int k;
+		
+		B()
+		{}
+		void argh()
+		{}
 	}
 	class A extends B
 	{
 	}
+	B ka, kb; int sleep;
 {
-	int main()
+	void abc(){}
+	void main()
 	{
-		return 1+1*x;
+		if( "a" == "b" || kb.k == 1 + sleep)
+		{}
+		ka[1] = 1;
+		//sleep = 1 + "a";
+		return 1+1;
 	}
 }

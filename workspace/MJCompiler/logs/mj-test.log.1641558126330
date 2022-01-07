@@ -1,0 +1,191 @@
+INFO  13:11:11,976 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  13:11:12,100 - #2 program
+INFO  13:11:12,100 - #22 MJProgram
+INFO  13:11:12,100 - #33 const
+INFO  13:11:12,103 - #22 char
+INFO  13:11:12,103 - #22 x
+INFO  13:11:12,104 - #11 =
+INFO  13:11:12,104 - #21 A
+INFO  13:11:12,104 - #5 ;
+INFO  13:11:12,104 - #22 char
+INFO  13:11:12,104 - #22 sentence
+INFO  13:11:12,105 - #9 [
+INFO  13:11:12,105 - #10 ]
+INFO  13:11:12,105 - #5 ;
+INFO  13:11:12,105 - #34 class
+INFO  13:11:12,105 - #22 B
+INFO  13:11:12,105 - #3 {
+INFO  13:11:12,106 - #22 int
+INFO  13:11:12,107 - #22 k
+INFO  13:11:12,107 - #5 ;
+INFO  13:11:12,107 - #4 }
+INFO  13:11:12,107 - #34 class
+INFO  13:11:12,118 - #22 A
+INFO  13:11:12,118 - #44 extends
+INFO  13:11:12,118 - #22 B
+INFO  13:11:12,118 - #3 {
+INFO  13:11:12,119 - #4 }
+INFO  13:11:12,120 - #3 {
+INFO  13:11:12,120 - #18 void
+INFO  13:11:12,120 - #22 main
+INFO  13:11:12,121 - #7 (
+INFO  13:11:12,123 - #8 )
+INFO  13:11:12,124 - #22 B
+INFO  13:11:12,124 - #22 kb
+INFO  13:11:12,124 - #5 ;
+INFO  13:11:12,124 - #3 {
+INFO  13:11:12,124 - #12 return
+INFO  13:11:12,125 - #19 1
+INFO  13:11:12,125 - #13 +
+INFO  13:11:12,125 - #19 1
+INFO  13:11:12,127 - #41 *
+INFO  13:11:12,127 - #22 x
+INFO  13:11:12,130 - #5 ;
+INFO  13:11:12,134 - #4 }
+INFO  13:11:12,134 - #4 }
+INFO  13:11:12,136 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived1(
+          DeclarationsDerived2(
+          ) [DeclarationsDerived2]
+          Declarations_ConstDecl(
+            Const_Declarations(
+              Type(
+               char
+              ) [Type]
+              ConstDecl_Single(
+               x
+                Val_Char(
+                 A
+                ) [Val_Char]
+              ) [ConstDecl_Single]
+            ) [Const_Declarations]
+          ) [Declarations_ConstDecl]
+        ) [DeclarationsDerived1]
+        Declarations_VarDecl(
+          Var_Declarations(
+            Type(
+             char
+            ) [Type]
+            OneVar(
+              Var_Array(
+               sentence
+              ) [Var_Array]
+            ) [OneVar]
+          ) [Var_Declarations]
+        ) [Declarations_VarDecl]
+      ) [DeclarationsDerived1]
+      Declarations_ClassDecl(
+        Class_NoParent_Declaration(
+          ClassName(
+           B
+          ) [ClassName]
+          ClassContentDerived3(
+            ClassVarDeclarationsListDerived2(
+              ClassVarDeclarationsDerived1(
+                Type(
+                 int
+                ) [Type]
+                ClassVarListDerived2(
+                  ClassVarDerived1(
+                   k
+                  ) [ClassVarDerived1]
+                ) [ClassVarListDerived2]
+              ) [ClassVarDeclarationsDerived1]
+            ) [ClassVarDeclarationsListDerived2]
+          ) [ClassContentDerived3]
+        ) [Class_NoParent_Declaration]
+      ) [Declarations_ClassDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_Parent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        Extends_Parent(
+         B
+        ) [Extends_Parent]
+        ClassContentDerived4(
+        ) [ClassContentDerived4]
+      ) [Class_Parent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             B
+            ) [Type]
+            OneVar(
+              Var_(
+               kb
+              ) [Var_]
+            ) [OneVar]
+          ) [Var_Declarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnExprStmt(
+                ExprDerived1(
+                  TermListDerived2(
+                    TermDerived2(
+                      Factor_ConstVal(
+                        Val_Num(
+                         1
+                        ) [Val_Num]
+                      ) [Factor_ConstVal]
+                    ) [TermDerived2]
+                    AddOpDerived1(
+                    ) [AddOpDerived1]
+                    TermListDerived1(
+                      TermDerived1(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                        MulOpDerived1(
+                        ) [MulOpDerived1]
+                        TermDerived2(
+                          Factor_Designator(
+                            Designator(
+                              DesignatorName(
+                               x
+                              ) [DesignatorName]
+                              DesignatorListDerived1(
+                              ) [DesignatorListDerived1]
+                            ) [Designator]
+                          ) [Factor_Designator]
+                        ) [TermDerived2]
+                      ) [TermDerived1]
+                    ) [TermListDerived1]
+                  ) [TermListDerived2]
+                ) [ExprDerived1]
+              ) [ReturnExprStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  13:11:12,147 - Deklarisana konstanta x sa tipom 2 on line 2
+INFO  13:11:12,147 - Deklarisana promenljiva sentence sa tipom 3 on line 3
+INFO  13:11:12,148 - Deklarisana promenljiva kb sa tipom 4 on line 12

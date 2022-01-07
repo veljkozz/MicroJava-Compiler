@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/0/2022 1:35:55
+// 7/0/2022 16:15:17
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,7 +8,6 @@ package rs.ac.bg.etf.pp1.ast;
 public interface Visitor { 
 
     public void visit(MethodDecl MethodDecl);
-    public void visit(Constructor Constructor);
     public void visit(TermList TermList);
     public void visit(GlobalMethods GlobalMethods);
     public void visit(MethodType MethodType);
@@ -20,7 +19,6 @@ public interface Visitor {
     public void visit(Factor Factor);
     public void visit(CondTerm CondTerm);
     public void visit(VarList VarList);
-    public void visit(Designator Designator);
     public void visit(ClassVarDeclarations ClassVarDeclarations);
     public void visit(OptionalVarDeclarations OptionalVarDeclarations);
     public void visit(Term Term);
@@ -56,12 +54,12 @@ public interface Visitor {
     public void visit(SingleStatement SingleStatement);
     public void visit(ClassMethods ClassMethods);
     public void visit(FormParam FormParam);
-    public void visit(RelOpDerived6 RelOpDerived6);
-    public void visit(RelOpDerived5 RelOpDerived5);
     public void visit(RelOpDerived4 RelOpDerived4);
     public void visit(RelOpDerived3 RelOpDerived3);
     public void visit(RelOpDerived2 RelOpDerived2);
     public void visit(RelOpDerived1 RelOpDerived1);
+    public void visit(RelOp_NEQ RelOp_NEQ);
+    public void visit(RelOp_EQ RelOp_EQ);
     public void visit(MulOpDerived3 MulOpDerived3);
     public void visit(MulOpDerived2 MulOpDerived2);
     public void visit(MulOpDerived1 MulOpDerived1);
@@ -71,26 +69,27 @@ public interface Visitor {
     public void visit(ActualParsDerived3 ActualParsDerived3);
     public void visit(ActualParsDerived2 ActualParsDerived2);
     public void visit(ActualParsDerived1 ActualParsDerived1);
-    public void visit(DesignatorListDerived3 DesignatorListDerived3);
-    public void visit(DesignatorListDerived2 DesignatorListDerived2);
     public void visit(DesignatorListDerived1 DesignatorListDerived1);
-    public void visit(DesignatorDerived1 DesignatorDerived1);
-    public void visit(FactorDerived4 FactorDerived4);
-    public void visit(FactorDerived3 FactorDerived3);
-    public void visit(FactorDerived2 FactorDerived2);
+    public void visit(DesignatorList_Field DesignatorList_Field);
+    public void visit(DesignatorList_Arr DesignatorList_Arr);
+    public void visit(DesignatorName DesignatorName);
+    public void visit(Designator Designator);
+    public void visit(Factor_ParenExpr Factor_ParenExpr);
+    public void visit(Factor_New_Arr Factor_New_Arr);
+    public void visit(Factor_New Factor_New);
     public void visit(Factor_ConstVal Factor_ConstVal);
     public void visit(Factor_FunCall Factor_FunCall);
-    public void visit(FactorDerived1 FactorDerived1);
-    public void visit(TermDerived2 TermDerived2);
-    public void visit(TermDerived1 TermDerived1);
-    public void visit(TermListDerived2 TermListDerived2);
-    public void visit(TermListDerived1 TermListDerived1);
-    public void visit(ExprDerived2 ExprDerived2);
-    public void visit(ExprDerived1 ExprDerived1);
-    public void visit(AssignExprDerived2 AssignExprDerived2);
+    public void visit(Factor_Designator Factor_Designator);
+    public void visit(Term_Fact Term_Fact);
+    public void visit(Term_MulOp Term_MulOp);
+    public void visit(TermList_AddOp TermList_AddOp);
+    public void visit(TermList_Term TermList_Term);
+    public void visit(Expr_Neg Expr_Neg);
+    public void visit(Expr_Pos Expr_Pos);
     public void visit(AssignExprDerived1 AssignExprDerived1);
-    public void visit(CondFactDerived2 CondFactDerived2);
-    public void visit(CondFactDerived1 CondFactDerived1);
+    public void visit(Assign_Expr Assign_Expr);
+    public void visit(CondFact_Relop CondFact_Relop);
+    public void visit(CondFact_Expr CondFact_Expr);
     public void visit(CondTermDerived2 CondTermDerived2);
     public void visit(CondTermDerived1 CondTermDerived1);
     public void visit(ConditionDerived3 ConditionDerived3);
@@ -136,17 +135,17 @@ public interface Visitor {
     public void visit(RecordContentDerived2 RecordContentDerived2);
     public void visit(RecordContentDerived1 RecordContentDerived1);
     public void visit(Record_Declaration Record_Declaration);
-    public void visit(ConstructorDerived1 ConstructorDerived1);
+    public void visit(Constructor Constructor);
     public void visit(ClassMethodsDerived4 ClassMethodsDerived4);
     public void visit(ClassMethodsDerived3 ClassMethodsDerived3);
     public void visit(ClassMethodsDerived2 ClassMethodsDerived2);
     public void visit(ClassMethodsDerived1 ClassMethodsDerived1);
-    public void visit(ClassVarDerived2 ClassVarDerived2);
-    public void visit(ClassVarDerived1 ClassVarDerived1);
+    public void visit(Class_Var_Arr Class_Var_Arr);
+    public void visit(Class_Var Class_Var);
     public void visit(ClassVarListDerived3 ClassVarListDerived3);
     public void visit(ClassVarListDerived2 ClassVarListDerived2);
     public void visit(ClassVarListDerived1 ClassVarListDerived1);
-    public void visit(ClassVarDeclarationsDerived1 ClassVarDeclarationsDerived1);
+    public void visit(ClassVarDecl ClassVarDecl);
     public void visit(ClassVarDeclarationsListDerived3 ClassVarDeclarationsListDerived3);
     public void visit(ClassVarDeclarationsListDerived2 ClassVarDeclarationsListDerived2);
     public void visit(ClassVarDeclarationsListDerived1 ClassVarDeclarationsListDerived1);
