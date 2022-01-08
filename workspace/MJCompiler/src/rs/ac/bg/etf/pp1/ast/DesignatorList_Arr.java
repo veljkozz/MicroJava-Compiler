@@ -1,28 +1,20 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 18:9:42
+// 8/0/2022 2:52:6
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class DesignatorList_Arr extends DesignatorList {
 
-    private Expr Expr;
     private DesignatorList DesignatorList;
+    private Expr Expr;
 
-    public DesignatorList_Arr (Expr Expr, DesignatorList DesignatorList) {
-        this.Expr=Expr;
-        if(Expr!=null) Expr.setParent(this);
+    public DesignatorList_Arr (DesignatorList DesignatorList, Expr Expr) {
         this.DesignatorList=DesignatorList;
         if(DesignatorList!=null) DesignatorList.setParent(this);
-    }
-
-    public Expr getExpr() {
-        return Expr;
-    }
-
-    public void setExpr(Expr Expr) {
         this.Expr=Expr;
+        if(Expr!=null) Expr.setParent(this);
     }
 
     public DesignatorList getDesignatorList() {
@@ -33,24 +25,32 @@ public class DesignatorList_Arr extends DesignatorList {
         this.DesignatorList=DesignatorList;
     }
 
+    public Expr getExpr() {
+        return Expr;
+    }
+
+    public void setExpr(Expr Expr) {
+        this.Expr=Expr;
+    }
+
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(Expr!=null) Expr.accept(visitor);
         if(DesignatorList!=null) DesignatorList.accept(visitor);
+        if(Expr!=null) Expr.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(Expr!=null) Expr.traverseTopDown(visitor);
         if(DesignatorList!=null) DesignatorList.traverseTopDown(visitor);
+        if(Expr!=null) Expr.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(Expr!=null) Expr.traverseBottomUp(visitor);
         if(DesignatorList!=null) DesignatorList.traverseBottomUp(visitor);
+        if(Expr!=null) Expr.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -59,14 +59,14 @@ public class DesignatorList_Arr extends DesignatorList {
         buffer.append(tab);
         buffer.append("DesignatorList_Arr(\n");
 
-        if(Expr!=null)
-            buffer.append(Expr.toString("  "+tab));
+        if(DesignatorList!=null)
+            buffer.append(DesignatorList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(DesignatorList!=null)
-            buffer.append(DesignatorList.toString("  "+tab));
+        if(Expr!=null)
+            buffer.append(Expr.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

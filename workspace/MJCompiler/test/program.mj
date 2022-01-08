@@ -1,23 +1,29 @@
 program MJProgram
-	class B
+	class A
 	{
+		char li;
 		{
-			B() int k; 
-			{ k++; }
-			void argh()
+			void M(){}
+		}
+	}
+	class B 
+	{
+		A atr;
+		{
+			void M()
 			{
+				super();
 			}
 		}
 	}
-	class A extends B
-	{
-	}
 {
-	int abc(int a, int b) { return a + b;}
-	void main() int a,b; char car;
-	{
-		a = 1; b = 3;
-		a = 1 + abc(a, -1);
+	int klanje(){
+		return 1;
+	}
+	void main() 
+	int arr[]; bool Boo;
+	{ 
+		
 		return;
 	}
 }

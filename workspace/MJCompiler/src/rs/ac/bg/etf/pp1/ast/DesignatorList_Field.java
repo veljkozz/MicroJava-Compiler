@@ -1,26 +1,18 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 18:9:42
+// 8/0/2022 2:52:6
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class DesignatorList_Field extends DesignatorList {
 
-    private String name;
     private DesignatorList DesignatorList;
+    private String name;
 
-    public DesignatorList_Field (String name, DesignatorList DesignatorList) {
-        this.name=name;
+    public DesignatorList_Field (DesignatorList DesignatorList, String name) {
         this.DesignatorList=DesignatorList;
         if(DesignatorList!=null) DesignatorList.setParent(this);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name=name;
     }
 
@@ -30,6 +22,14 @@ public class DesignatorList_Field extends DesignatorList {
 
     public void setDesignatorList(DesignatorList DesignatorList) {
         this.DesignatorList=DesignatorList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name=name;
     }
 
     public void accept(Visitor visitor) {
@@ -55,13 +55,13 @@ public class DesignatorList_Field extends DesignatorList {
         buffer.append(tab);
         buffer.append("DesignatorList_Field(\n");
 
-        buffer.append(" "+tab+name);
-        buffer.append("\n");
-
         if(DesignatorList!=null)
             buffer.append(DesignatorList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        buffer.append(" "+tab+name);
         buffer.append("\n");
 
         buffer.append(tab);

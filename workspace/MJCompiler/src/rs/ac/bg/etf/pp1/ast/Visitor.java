@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 18:9:42
+// 8/0/2022 2:52:6
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -50,7 +50,6 @@ public interface Visitor {
     public void visit(CondFact CondFact);
     public void visit(VarDeclarations VarDeclarations);
     public void visit(Declaration Declaration);
-    public void visit(RecordDeclaration RecordDeclaration);
     public void visit(SingleStatement SingleStatement);
     public void visit(ClassMethods ClassMethods);
     public void visit(FormParam FormParam);
@@ -78,6 +77,7 @@ public interface Visitor {
     public void visit(Factor_New_Arr Factor_New_Arr);
     public void visit(Factor_New Factor_New);
     public void visit(Factor_ConstVal Factor_ConstVal);
+    public void visit(Factor_Super Factor_Super);
     public void visit(Factor_FunCall Factor_FunCall);
     public void visit(Factor_Designator Factor_Designator);
     public void visit(Term_Fact Term_Fact);
@@ -90,17 +90,19 @@ public interface Visitor {
     public void visit(Assign_Expr Assign_Expr);
     public void visit(CondFact_Relop CondFact_Relop);
     public void visit(CondFact_Expr CondFact_Expr);
-    public void visit(CondTermDerived2 CondTermDerived2);
-    public void visit(CondTermDerived1 CondTermDerived1);
-    public void visit(ConditionDerived3 ConditionDerived3);
-    public void visit(ConditionDerived2 ConditionDerived2);
+    public void visit(CondTerm_List CondTerm_List);
+    public void visit(CondTerm_CondFact CondTerm_CondFact);
     public void visit(ConditionDerived1 ConditionDerived1);
+    public void visit(Condition_List Condition_List);
+    public void visit(Condition_CondTerm Condition_CondTerm);
     public void visit(PostDecrement PostDecrement);
     public void visit(PostIncrement PostIncrement);
+    public void visit(SuperCall SuperCall);
     public void visit(FuncCall FuncCall);
     public void visit(Assignment Assignment);
-    public void visit(PrintStmtDerived2 PrintStmtDerived2);
-    public void visit(PrintStmtDerived1 PrintStmtDerived1);
+    public void visit(PrintStmt_Num PrintStmt_Num);
+    public void visit(PrintStmt_ PrintStmt_);
+    public void visit(DO_NT DO_NT);
     public void visit(Print_Stmt Print_Stmt);
     public void visit(ReadStmt ReadStmt);
     public void visit(ReturnExprStmt ReturnExprStmt);
@@ -117,6 +119,7 @@ public interface Visitor {
     public void visit(NoStmt NoStmt);
     public void visit(Statement_List Statement_List);
     public void visit(FormParamDerived1 FormParamDerived1);
+    public void visit(Form_Param_Arr Form_Param_Arr);
     public void visit(Form_Param Form_Param);
     public void visit(SingleFormalParam SingleFormalParam);
     public void visit(FormParam_List FormParam_List);
@@ -134,7 +137,8 @@ public interface Visitor {
     public void visit(Global_Methods Global_Methods);
     public void visit(RecordContentDerived2 RecordContentDerived2);
     public void visit(RecordContentDerived1 RecordContentDerived1);
-    public void visit(Record_Declaration Record_Declaration);
+    public void visit(RecordName RecordName);
+    public void visit(RecordDeclaration RecordDeclaration);
     public void visit(ConstructorName ConstructorName);
     public void visit(Constructor Constructor);
     public void visit(ClassMethodsDerived4 ClassMethodsDerived4);

@@ -68,7 +68,7 @@ terminal EXTENDS, SUPER;
 nonterminal Declarations, Declaration, GlobalMethods;
 nonterminal VarDeclarations, VarDeclarationsList, ConstDeclarations, ClassDeclaration, RecordDeclaration; 
 nonterminal MethodList, FormParams, FormParamList, FormParam, OptionalVarDeclarations;
-nonterminal RecordContent, ClassContent, ClassMethods, Constructor, ConstructorName;
+nonterminal RecordContent, RecordName, ClassContent, ClassMethods, Constructor, ConstructorName;
 
 nonterminal ClassVarDeclarations, ClassVarDeclarationsList, ClassVar, ClassVarList;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
@@ -76,7 +76,6 @@ nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, MethodType;
 
 nonterminal rs.ac.bg.etf.pp1.MJParser.SimpleType Val;
-
 nonterminal Var, VarList, ConstVarList;
 nonterminal StatementList, Statement, Statements, SingleStatement;
 
@@ -90,6 +89,8 @@ nonterminal rs.etf.pp1.symboltable.concepts.Struct Expr, AssignExpr, Term, TermL
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Factor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
 nonterminal MulOp, AddOp, RelOp, AssignOp;
+
+nonterminal DO_NT;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MethodTypeName, MethodDecl;
@@ -180,7 +181,9 @@ ClassMethods ::= LBRACE Constructor MethodList RBRACE
 Constructor ::= (Constructor) ConstructorName LPAREN RPAREN OptionalVarDeclarations Statements;	
 ConstructorName ::= (ConstructorName) IDENT:name;
 		
-RecordDeclaration ::= (Record_Declaration) RECORD IDENT LBRACE RecordContent RBRACE;
+RecordDeclaration ::= (RecordDeclaration) RECORD RecordName LBRACE RecordContent RBRACE;
+
+RecordName ::= (RecordName) IDENT:name;
 
 RecordContent ::= RecordContent VarDeclarations
 	| /*epsilon*/
@@ -215,6 +218,7 @@ FormParamList ::= (FormParam_List) FormParamList COMMA FormParam
 		;
 
 FormParam ::= (Form_Param) Type:typename IDENT:varname
+	| (Form_Param_Arr) Type:typename IDENT:varname LBRACKET RBRACKET
 	| error:l
 	{: parser.report_error("Error: invalid parameter at line " + lleft, null); :}
 	;
@@ -233,7 +237,7 @@ Statements ::= LBRACE StatementList RBRACE;
 SingleStatement ::= (Statement_Designator) DesignatorStatement SEMI
 			| (IfStmt) IF LPAREN Condition RPAREN Statement
 			| (IfElseStmt) IF LPAREN Condition RPAREN Statement ELSE Statement
-			| (DoWhileStmt) DO Statements WHILE LPAREN Condition RPAREN SEMI
+			| (DoWhileStmt) DO_NT Statements WHILE LPAREN Condition RPAREN SEMI
 			| (BreakStmt) BREAK SEMI
 			| (ContinueStmt) CONTINUE SEMI
 			| (ReturnStmt) RETURN SEMI
@@ -241,25 +245,27 @@ SingleStatement ::= (Statement_Designator) DesignatorStatement SEMI
 			| (ReadStmt) READ LPAREN Designator RPAREN SEMI
 			| (Print_Stmt) PrintStmt SEMI
 			;
+DO_NT ::= (DO_NT) DO; 
 
-PrintStmt ::= PRINT LPAREN Expr RPAREN
-	| PRINT LPAREN Expr COMMA NUMBER RPAREN
+PrintStmt ::= (PrintStmt_) PRINT LPAREN Expr RPAREN
+	| (PrintStmt_Num) PRINT LPAREN Expr COMMA NUMBER RPAREN
 	;
 
 DesignatorStatement ::= (Assignment) Designator AssignOp AssignExpr
 					| (FuncCall) Designator LPAREN ActualPars RPAREN
+					| (SuperCall) SUPER LPAREN ActualPars RPAREN
 					| (PostIncrement) Designator PLUS PLUS 
 					| (PostDecrement) Designator MINUS MINUS
 					; 
 					
-Condition ::= CondTerm
-	| Condition OR CondTerm
+Condition ::= (Condition_CondTerm) CondTerm
+	|(Condition_List) Condition OR CondTerm
 	| error:l
 	{: parser.report_error("Error: invalid condition at line " + lleft, null); :}
 	;
 	
-CondTerm ::= CondFact
-	| CondTerm AND CondFact
+CondTerm ::= (CondTerm_CondFact) CondFact
+	| (CondTerm_List) CondTerm AND CondFact
 	;
 
 CondFact ::= (CondFact_Expr) Expr 
@@ -285,18 +291,20 @@ Term ::= (Term_MulOp) Factor MulOp Term
 
 Factor ::= (Factor_Designator) Designator 
 	| (Factor_FunCall) Designator LPAREN ActualPars RPAREN
+	| (Factor_Super) SUPER LPAREN ActualPars RPAREN
 	| (Factor_ConstVal) Val													
 	| (Factor_New) NEW Type 
 	| (Factor_New_Arr) NEW Type LBRACKET Expr RBRACKET
 	| (Factor_ParenExpr) LPAREN Expr RPAREN
 	;
 	
-Designator ::= (Designator) DesignatorName:name DesignatorList;
+Designator ::= (Designator) DesignatorName:name DesignatorList
+;
 
 DesignatorName ::= (DesignatorName) IDENT:name;
 
-DesignatorList ::= (DesignatorList_Arr) LBRACKET Expr RBRACKET DesignatorList
-	| (DesignatorList_Field) DOT IDENT:name DesignatorList
+DesignatorList ::= (DesignatorList_Arr) DesignatorList LBRACKET Expr RBRACKET 
+	| (DesignatorList_Field) DesignatorList DOT IDENT:name 
 	| /*epsilon*/
 	;
 

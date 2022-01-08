@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/0/2022 18:9:42
+// 8/0/2022 2:52:6
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -50,7 +50,6 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(CondFact CondFact) { }
     public void visit(VarDeclarations VarDeclarations) { }
     public void visit(Declaration Declaration) { }
-    public void visit(RecordDeclaration RecordDeclaration) { }
     public void visit(SingleStatement SingleStatement) { }
     public void visit(ClassMethods ClassMethods) { }
     public void visit(FormParam FormParam) { }
@@ -78,6 +77,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Factor_New_Arr Factor_New_Arr) { visit(); }
     public void visit(Factor_New Factor_New) { visit(); }
     public void visit(Factor_ConstVal Factor_ConstVal) { visit(); }
+    public void visit(Factor_Super Factor_Super) { visit(); }
     public void visit(Factor_FunCall Factor_FunCall) { visit(); }
     public void visit(Factor_Designator Factor_Designator) { visit(); }
     public void visit(Term_Fact Term_Fact) { visit(); }
@@ -90,17 +90,19 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Assign_Expr Assign_Expr) { visit(); }
     public void visit(CondFact_Relop CondFact_Relop) { visit(); }
     public void visit(CondFact_Expr CondFact_Expr) { visit(); }
-    public void visit(CondTermDerived2 CondTermDerived2) { visit(); }
-    public void visit(CondTermDerived1 CondTermDerived1) { visit(); }
-    public void visit(ConditionDerived3 ConditionDerived3) { visit(); }
-    public void visit(ConditionDerived2 ConditionDerived2) { visit(); }
+    public void visit(CondTerm_List CondTerm_List) { visit(); }
+    public void visit(CondTerm_CondFact CondTerm_CondFact) { visit(); }
     public void visit(ConditionDerived1 ConditionDerived1) { visit(); }
+    public void visit(Condition_List Condition_List) { visit(); }
+    public void visit(Condition_CondTerm Condition_CondTerm) { visit(); }
     public void visit(PostDecrement PostDecrement) { visit(); }
     public void visit(PostIncrement PostIncrement) { visit(); }
+    public void visit(SuperCall SuperCall) { visit(); }
     public void visit(FuncCall FuncCall) { visit(); }
     public void visit(Assignment Assignment) { visit(); }
-    public void visit(PrintStmtDerived2 PrintStmtDerived2) { visit(); }
-    public void visit(PrintStmtDerived1 PrintStmtDerived1) { visit(); }
+    public void visit(PrintStmt_Num PrintStmt_Num) { visit(); }
+    public void visit(PrintStmt_ PrintStmt_) { visit(); }
+    public void visit(DO_NT DO_NT) { visit(); }
     public void visit(Print_Stmt Print_Stmt) { visit(); }
     public void visit(ReadStmt ReadStmt) { visit(); }
     public void visit(ReturnExprStmt ReturnExprStmt) { visit(); }
@@ -117,6 +119,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(NoStmt NoStmt) { visit(); }
     public void visit(Statement_List Statement_List) { visit(); }
     public void visit(FormParamDerived1 FormParamDerived1) { visit(); }
+    public void visit(Form_Param_Arr Form_Param_Arr) { visit(); }
     public void visit(Form_Param Form_Param) { visit(); }
     public void visit(SingleFormalParam SingleFormalParam) { visit(); }
     public void visit(FormParam_List FormParam_List) { visit(); }
@@ -134,7 +137,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Global_Methods Global_Methods) { visit(); }
     public void visit(RecordContentDerived2 RecordContentDerived2) { visit(); }
     public void visit(RecordContentDerived1 RecordContentDerived1) { visit(); }
-    public void visit(Record_Declaration Record_Declaration) { visit(); }
+    public void visit(RecordName RecordName) { visit(); }
+    public void visit(RecordDeclaration RecordDeclaration) { visit(); }
     public void visit(ConstructorName ConstructorName) { visit(); }
     public void visit(Constructor Constructor) { visit(); }
     public void visit(ClassMethodsDerived4 ClassMethodsDerived4) { visit(); }
