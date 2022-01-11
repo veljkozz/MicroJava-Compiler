@@ -1,0 +1,70 @@
+INFO  14:27:11,897 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:27:12,277 - #2 program
+INFO  14:27:12,278 - #22 MJProgram
+INFO  14:27:12,278 - #22 int
+INFO  14:27:12,284 - #19 9
+INFO  14:27:12,284 - #15 ,
+INFO  14:27:12,284 - #22 a
+INFO  14:27:12,285 - #14 -
+INFO  14:27:12,286 - #15 ,
+INFO  14:27:12,286 - #22 a
+INFO  14:27:12,286 - #15 ,
+INFO  14:27:12,287 - #19 10
+INFO  14:27:12,287 - #15 ,
+INFO  14:27:12,287 - #22 b
+INFO  14:27:12,287 - #15 ,
+INFO  14:27:12,288 - #19 9
+INFO  14:27:12,288 - #22 b
+INFO  14:27:12,288 - #15 ,
+INFO  14:27:12,289 - #22 d
+INFO  14:27:12,289 - #5 ;
+INFO  14:27:12,289 - #3 {
+INFO  14:27:12,289 - #18 void
+INFO  14:27:12,290 - #22 main
+ERROR 14:27:12,291 - Error: whole declarations kinda fucked 2
+INFO  14:27:12,297 - #7 (
+INFO  14:27:12,300 - #8 )
+INFO  14:27:12,302 - #3 {
+INFO  14:27:12,305 - #12 return
+INFO  14:27:12,307 - #5 ;
+INFO  14:27:12,308 - #4 }
+INFO  14:27:12,310 - #4 }
+INFO  14:27:12,315 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      VarDecl_Error(
+      ) [VarDecl_Error]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:27:12,345 - Error happened during parsing!

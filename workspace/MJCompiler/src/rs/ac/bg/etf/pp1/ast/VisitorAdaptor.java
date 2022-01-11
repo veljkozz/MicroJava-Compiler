@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 8/0/2022 2:52:6
+// 11/0/2022 1:29:58
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -33,7 +33,9 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ClassContent ClassContent) { }
     public void visit(AssignOp AssignOp) { }
     public void visit(MethodList MethodList) { }
+    public void visit(DesignatorName DesignatorName) { }
     public void visit(ConstDeclarations ConstDeclarations) { }
+    public void visit(SuperCall SuperCall) { }
     public void visit(Declarations Declarations) { }
     public void visit(Expr Expr) { }
     public void visit(ClassDeclaration ClassDeclaration) { }
@@ -71,7 +73,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(DesignatorListDerived1 DesignatorListDerived1) { visit(); }
     public void visit(DesignatorList_Field DesignatorList_Field) { visit(); }
     public void visit(DesignatorList_Arr DesignatorList_Arr) { visit(); }
-    public void visit(DesignatorName DesignatorName) { visit(); }
+    public void visit(DesignatorName_Arr DesignatorName_Arr) { visit(); }
+    public void visit(Designator_Name Designator_Name) { visit(); }
     public void visit(Designator Designator) { visit(); }
     public void visit(Factor_ParenExpr Factor_ParenExpr) { visit(); }
     public void visit(Factor_New_Arr Factor_New_Arr) { visit(); }
@@ -95,9 +98,10 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ConditionDerived1 ConditionDerived1) { visit(); }
     public void visit(Condition_List Condition_List) { visit(); }
     public void visit(Condition_CondTerm Condition_CondTerm) { visit(); }
+    public void visit(Super_Call Super_Call) { visit(); }
     public void visit(PostDecrement PostDecrement) { visit(); }
     public void visit(PostIncrement PostIncrement) { visit(); }
-    public void visit(SuperCall SuperCall) { visit(); }
+    public void visit(Super_Call_Stmt Super_Call_Stmt) { visit(); }
     public void visit(FuncCall FuncCall) { visit(); }
     public void visit(Assignment Assignment) { visit(); }
     public void visit(PrintStmt_Num PrintStmt_Num) { visit(); }
@@ -172,6 +176,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Val_Bool Val_Bool) { visit(); }
     public void visit(Val_Char Val_Char) { visit(); }
     public void visit(Val_Num Val_Num) { visit(); }
+    public void visit(VarDecl_Error VarDecl_Error) { visit(); }
     public void visit(Var_Declarations Var_Declarations) { visit(); }
     public void visit(ConstVarListDerived1 ConstVarListDerived1) { visit(); }
     public void visit(ConstDecl_List ConstDecl_List) { visit(); }

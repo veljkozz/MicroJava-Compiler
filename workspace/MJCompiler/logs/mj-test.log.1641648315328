@@ -1,0 +1,57 @@
+INFO  14:22:33,431 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:22:33,798 - #2 program
+INFO  14:22:33,798 - #22 MJProgram
+INFO  14:22:33,798 - #22 int
+INFO  14:22:33,803 - #19 9
+INFO  14:22:33,803 - #22 a9
+INFO  14:22:33,804 - #5 ;
+INFO  14:22:33,804 - #3 {
+INFO  14:22:33,805 - #18 void
+INFO  14:22:33,805 - #22 main
+ERROR 14:22:33,806 - Error: whole declarations kinda fucked 2
+INFO  14:22:33,811 - #7 (
+INFO  14:22:33,814 - #8 )
+INFO  14:22:33,816 - #3 {
+INFO  14:22:33,819 - #12 return
+INFO  14:22:33,823 - #5 ;
+INFO  14:22:33,823 - #4 }
+INFO  14:22:33,827 - #4 }
+INFO  14:22:33,833 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      VarDecl_Error(
+      ) [VarDecl_Error]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:22:33,875 - Error happened during parsing!

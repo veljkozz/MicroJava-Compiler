@@ -25,10 +25,12 @@ parser code {:
     }
   
     public void syntax_error(Symbol cur_token) {
+    	errorDetected = true;
         //report_error("\nSyntax error", cur_token);
     }
   
     public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+    	errorDetected = true;
         report_fatal_error("Fatal error, can't continue parsing", cur_token);
     }
 
@@ -69,7 +71,6 @@ nonterminal Declarations, Declaration, GlobalMethods;
 nonterminal VarDeclarations, VarDeclarationsList, ConstDeclarations, ClassDeclaration, RecordDeclaration; 
 nonterminal MethodList, FormParams, FormParamList, FormParam, OptionalVarDeclarations;
 nonterminal RecordContent, RecordName, ClassContent, ClassMethods, Constructor, ConstructorName;
-
 nonterminal ClassVarDeclarations, ClassVarDeclarationsList, ClassVar, ClassVarList;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
 
@@ -82,6 +83,7 @@ nonterminal StatementList, Statement, Statements, SingleStatement;
 nonterminal DesignatorStatement;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorList, DesignatorName;
 
+nonterminal SuperCall;
 nonterminal PrintStmt;
 nonterminal ActualPars;
 
@@ -120,7 +122,10 @@ ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL Val
 	{:  parser.report_error("Error: invalid constant declaration in line " + lleft, null); :}
 ;
 
-VarDeclarations ::= (Var_Declarations) Type VarList SEMI;
+VarDeclarations ::= (Var_Declarations) Type VarList SEMI
+	| (VarDecl_Error) error SEMI:l
+	{: parser.report_error("Error: invalid declaration" + lleft, null); :}
+	;
 
 Val ::= (Val_Num) NUMBER
 	| (Val_Char) CHAR
@@ -133,7 +138,7 @@ Var ::= (Var_) IDENT:varName
 	;
 Type ::= (Type) IDENT:typeName;
 
-VarList ::= (Var_List) Var COMMA VarList
+VarList ::= (Var_List) VarList COMMA Var
 		| (OneVar) Var
 		;
 
@@ -253,11 +258,13 @@ PrintStmt ::= (PrintStmt_) PRINT LPAREN Expr RPAREN
 
 DesignatorStatement ::= (Assignment) Designator AssignOp AssignExpr
 					| (FuncCall) Designator LPAREN ActualPars RPAREN
-					| (SuperCall) SUPER LPAREN ActualPars RPAREN
+					| (Super_Call_Stmt) SUPER SuperCall LPAREN ActualPars RPAREN
 					| (PostIncrement) Designator PLUS PLUS 
 					| (PostDecrement) Designator MINUS MINUS
 					; 
-					
+
+SuperCall ::= (Super_Call)/*epsilon*/;
+
 Condition ::= (Condition_CondTerm) CondTerm
 	|(Condition_List) Condition OR CondTerm
 	| error:l
@@ -301,9 +308,11 @@ Factor ::= (Factor_Designator) Designator
 Designator ::= (Designator) DesignatorName:name DesignatorList
 ;
 
-DesignatorName ::= (DesignatorName) IDENT:name;
+DesignatorName ::= (Designator_Name) IDENT:name
+	| (DesignatorName_Arr) IDENT:name LBRACKET Expr RBRACKET
+	;
 
-DesignatorList ::= (DesignatorList_Arr) DesignatorList LBRACKET Expr RBRACKET 
+DesignatorList ::= (DesignatorList_Arr) DesignatorList DOT IDENT:name LBRACKET Expr RBRACKET 
 	| (DesignatorList_Field) DesignatorList DOT IDENT:name 
 	| /*epsilon*/
 	;

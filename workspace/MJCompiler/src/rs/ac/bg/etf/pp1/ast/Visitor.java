@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 8/0/2022 2:52:6
+// 11/0/2022 1:29:58
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -33,7 +33,9 @@ public interface Visitor {
     public void visit(ClassContent ClassContent);
     public void visit(AssignOp AssignOp);
     public void visit(MethodList MethodList);
+    public void visit(DesignatorName DesignatorName);
     public void visit(ConstDeclarations ConstDeclarations);
+    public void visit(SuperCall SuperCall);
     public void visit(Declarations Declarations);
     public void visit(Expr Expr);
     public void visit(ClassDeclaration ClassDeclaration);
@@ -71,7 +73,8 @@ public interface Visitor {
     public void visit(DesignatorListDerived1 DesignatorListDerived1);
     public void visit(DesignatorList_Field DesignatorList_Field);
     public void visit(DesignatorList_Arr DesignatorList_Arr);
-    public void visit(DesignatorName DesignatorName);
+    public void visit(DesignatorName_Arr DesignatorName_Arr);
+    public void visit(Designator_Name Designator_Name);
     public void visit(Designator Designator);
     public void visit(Factor_ParenExpr Factor_ParenExpr);
     public void visit(Factor_New_Arr Factor_New_Arr);
@@ -95,9 +98,10 @@ public interface Visitor {
     public void visit(ConditionDerived1 ConditionDerived1);
     public void visit(Condition_List Condition_List);
     public void visit(Condition_CondTerm Condition_CondTerm);
+    public void visit(Super_Call Super_Call);
     public void visit(PostDecrement PostDecrement);
     public void visit(PostIncrement PostIncrement);
-    public void visit(SuperCall SuperCall);
+    public void visit(Super_Call_Stmt Super_Call_Stmt);
     public void visit(FuncCall FuncCall);
     public void visit(Assignment Assignment);
     public void visit(PrintStmt_Num PrintStmt_Num);
@@ -172,6 +176,7 @@ public interface Visitor {
     public void visit(Val_Bool Val_Bool);
     public void visit(Val_Char Val_Char);
     public void visit(Val_Num Val_Num);
+    public void visit(VarDecl_Error VarDecl_Error);
     public void visit(Var_Declarations Var_Declarations);
     public void visit(ConstVarListDerived1 ConstVarListDerived1);
     public void visit(ConstDecl_List ConstDecl_List);

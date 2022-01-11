@@ -1,0 +1,100 @@
+INFO  14:31:08,907 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:31:09,276 - #2 program
+INFO  14:31:09,277 - #22 MJProgram
+INFO  14:31:09,277 - #22 int
+INFO  14:31:09,283 - #22 a
+INFO  14:31:09,286 - #14 -
+INFO  14:31:09,287 - #15 ,
+INFO  14:31:09,287 - #22 a
+INFO  14:31:09,287 - #15 ,
+INFO  14:31:09,289 - #19 10
+ERROR 14:31:09,290 - Error: invalid variable declaration at line 2
+INFO  14:31:09,294 - #15 ,
+INFO  14:31:09,294 - #22 b
+INFO  14:31:09,295 - #15 ,
+INFO  14:31:09,295 - #19 9
+ERROR 14:31:09,295 - Error: invalid variable declaration at line 2
+INFO  14:31:09,296 - #22 b
+INFO  14:31:09,296 - #15 ,
+INFO  14:31:09,296 - #22 d
+INFO  14:31:09,308 - #5 ;
+INFO  14:31:09,308 - #3 {
+ERROR 14:31:09,308 - Error: invalid variable declaration at line 2
+INFO  14:31:09,309 - #18 void
+INFO  14:31:09,309 - #22 main
+INFO  14:31:09,312 - #7 (
+INFO  14:31:09,315 - #8 )
+INFO  14:31:09,317 - #3 {
+INFO  14:31:09,320 - #12 return
+INFO  14:31:09,323 - #5 ;
+INFO  14:31:09,323 - #4 }
+INFO  14:31:09,326 - #4 }
+INFO  14:31:09,331 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        Var_List(
+          Var_List(
+            Var_List(
+              Var_List(
+                Var_List(
+                  OneVar(
+                    VarDerived1(
+                    ) [VarDerived1]
+                  ) [OneVar]
+                  Var_(
+                   a
+                  ) [Var_]
+                ) [Var_List]
+                VarDerived1(
+                ) [VarDerived1]
+              ) [Var_List]
+              Var_(
+               b
+              ) [Var_]
+            ) [Var_List]
+            VarDerived1(
+            ) [VarDerived1]
+          ) [Var_List]
+          Var_(
+           d
+          ) [Var_]
+        ) [Var_List]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:31:09,360 - Error happened during parsing!

@@ -1,0 +1,62 @@
+INFO  13:51:16,932 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  13:51:17,276 - #2 program
+INFO  13:51:17,278 - #22 MJProgram
+INFO  13:51:17,278 - #22 int
+INFO  13:51:17,283 - #22 a
+INFO  13:51:17,285 - #5 ;
+INFO  13:51:17,286 - #3 {
+INFO  13:51:17,287 - #18 void
+INFO  13:51:17,287 - #22 main
+INFO  13:51:17,290 - #7 (
+INFO  13:51:17,303 - #8 )
+INFO  13:51:17,307 - #3 {
+INFO  13:51:17,310 - #12 return
+INFO  13:51:17,313 - #5 ;
+INFO  13:51:17,313 - #4 }
+INFO  13:51:17,317 - #4 }
+INFO  13:51:17,324 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        OneVar(
+          Var_(
+           a
+          ) [Var_]
+        ) [OneVar]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]

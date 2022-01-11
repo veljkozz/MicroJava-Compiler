@@ -1,0 +1,104 @@
+INFO  20:31:10,417 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  20:31:10,676 - #2 program
+INFO  20:31:10,676 - #22 MJProgram
+INFO  20:31:10,676 - #34 class
+INFO  20:31:10,679 - #22 A
+INFO  20:31:10,679 - #3 {
+INFO  20:31:10,680 - #22 int
+INFO  20:31:10,680 - #22 c
+INFO  20:31:10,682 - #15 ,
+INFO  20:31:10,682 - #22 b
+INFO  20:31:10,683 - #15 ,
+INFO  20:31:10,683 - #22 kraa
+INFO  20:31:10,683 - #5 ;
+INFO  20:31:10,684 - #4 }
+INFO  20:31:10,685 - #3 {
+INFO  20:31:10,686 - #18 void
+INFO  20:31:10,686 - #22 main
+INFO  20:31:10,688 - #7 (
+INFO  20:31:10,690 - #8 )
+INFO  20:31:10,691 - #22 int
+INFO  20:31:10,691 - #22 a
+INFO  20:31:10,692 - #5 ;
+INFO  20:31:10,692 - #3 {
+INFO  20:31:10,694 - #12 return
+INFO  20:31:10,696 - #5 ;
+INFO  20:31:10,696 - #4 }
+INFO  20:31:10,699 - #4 }
+INFO  20:31:10,703 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_ClassDecl(
+      Class_NoParent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        ClassContentDerived3(
+          ClassVarDeclarationsListDerived2(
+            ClassVarDecl(
+              Type(
+               int
+              ) [Type]
+              ClassVarListDerived1(
+                Class_Var(
+                 c
+                ) [Class_Var]
+                ClassVarListDerived1(
+                  Class_Var(
+                   b
+                  ) [Class_Var]
+                  ClassVarListDerived2(
+                    Class_Var(
+                     kraa
+                    ) [Class_Var]
+                  ) [ClassVarListDerived2]
+                ) [ClassVarListDerived1]
+              ) [ClassVarListDerived1]
+            ) [ClassVarDecl]
+          ) [ClassVarDeclarationsListDerived2]
+        ) [ClassContentDerived3]
+      ) [Class_NoParent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             int
+            ) [Type]
+            OneVar(
+              Var_(
+               a
+              ) [Var_]
+            ) [OneVar]
+          ) [Var_Declarations]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]

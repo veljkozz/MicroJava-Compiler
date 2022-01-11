@@ -1,0 +1,181 @@
+INFO  20:34:10,330 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  20:34:10,533 - #2 program
+INFO  20:34:10,534 - #22 MJProgram
+INFO  20:34:10,534 - #34 class
+INFO  20:34:10,536 - #22 A
+INFO  20:34:10,536 - #3 {
+INFO  20:34:10,537 - #22 int
+INFO  20:34:10,538 - #22 c
+INFO  20:34:10,539 - #15 ,
+INFO  20:34:10,539 - #22 b
+INFO  20:34:10,539 - #15 ,
+INFO  20:34:10,540 - #22 kraa
+INFO  20:34:10,540 - #5 ;
+INFO  20:34:10,540 - #4 }
+INFO  20:34:10,541 - #3 {
+INFO  20:34:10,541 - #18 void
+INFO  20:34:10,542 - #22 main
+INFO  20:34:10,544 - #7 (
+INFO  20:34:10,546 - #8 )
+INFO  20:34:10,548 - #22 int
+INFO  20:34:10,548 - #22 a
+INFO  20:34:10,548 - #5 ;
+INFO  20:34:10,560 - #3 {
+INFO  20:34:10,562 - #22 a
+INFO  20:34:10,563 - #6 .
+INFO  20:34:10,567 - #22 c
+INFO  20:34:10,567 - #11 =
+INFO  20:34:10,568 - #19 1
+INFO  20:34:10,571 - #5 ;
+INFO  20:34:10,571 - #22 b
+INFO  20:34:10,572 - #11 =
+INFO  20:34:10,572 - #19 3
+INFO  20:34:10,572 - #5 ;
+INFO  20:34:10,572 - #12 return
+INFO  20:34:10,572 - #5 ;
+INFO  20:34:10,572 - #4 }
+INFO  20:34:10,574 - #4 }
+INFO  20:34:10,578 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_ClassDecl(
+      Class_NoParent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        ClassContentDerived3(
+          ClassVarDeclarationsListDerived2(
+            ClassVarDecl(
+              Type(
+               int
+              ) [Type]
+              ClassVarListDerived1(
+                Class_Var(
+                 c
+                ) [Class_Var]
+                ClassVarListDerived1(
+                  Class_Var(
+                   b
+                  ) [Class_Var]
+                  ClassVarListDerived2(
+                    Class_Var(
+                     kraa
+                    ) [Class_Var]
+                  ) [ClassVarListDerived2]
+                ) [ClassVarListDerived1]
+              ) [ClassVarListDerived1]
+            ) [ClassVarDecl]
+          ) [ClassVarDeclarationsListDerived2]
+        ) [ClassContentDerived3]
+      ) [Class_NoParent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             int
+            ) [Type]
+            OneVar(
+              Var_(
+               a
+              ) [Var_]
+            ) [OneVar]
+          ) [Var_Declarations]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            Statement_List(
+              Statement_List(
+                NoStmt(
+                ) [NoStmt]
+                StatementDerived1(
+                  Statement_Designator(
+                    Assignment(
+                      Designator(
+                        DesignatorName(
+                         a
+                        ) [DesignatorName]
+                        DesignatorList_Field(
+                          DesignatorListDerived1(
+                          ) [DesignatorListDerived1]
+                         c
+                        ) [DesignatorList_Field]
+                      ) [Designator]
+                      AssignOpDerived1(
+                      ) [AssignOpDerived1]
+                      Assign_Expr(
+                        Expr_Pos(
+                          TermList_Term(
+                            Term_Fact(
+                              Factor_ConstVal(
+                                Val_Num(
+                                 1
+                                ) [Val_Num]
+                              ) [Factor_ConstVal]
+                            ) [Term_Fact]
+                          ) [TermList_Term]
+                        ) [Expr_Pos]
+                      ) [Assign_Expr]
+                    ) [Assignment]
+                  ) [Statement_Designator]
+                ) [StatementDerived1]
+              ) [Statement_List]
+              StatementDerived1(
+                Statement_Designator(
+                  Assignment(
+                    Designator(
+                      DesignatorName(
+                       b
+                      ) [DesignatorName]
+                      DesignatorListDerived1(
+                      ) [DesignatorListDerived1]
+                    ) [Designator]
+                    AssignOpDerived1(
+                    ) [AssignOpDerived1]
+                    Assign_Expr(
+                      Expr_Pos(
+                        TermList_Term(
+                          Term_Fact(
+                            Factor_ConstVal(
+                              Val_Num(
+                               3
+                              ) [Val_Num]
+                            ) [Factor_ConstVal]
+                          ) [Term_Fact]
+                        ) [TermList_Term]
+                      ) [Expr_Pos]
+                    ) [Assign_Expr]
+                  ) [Assignment]
+                ) [Statement_Designator]
+              ) [StatementDerived1]
+            ) [Statement_List]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+ERROR 20:34:10,600 - Error: cannot find field c on line 3
+ERROR 20:34:10,602 - Error: no variable with name b defined on line 10
+ERROR 20:34:10,602 - Error: non compatible types on line 10
+INFO  20:34:10,603 - Error happened during parsing!

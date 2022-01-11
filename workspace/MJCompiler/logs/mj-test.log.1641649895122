@@ -1,0 +1,102 @@
+INFO  14:51:19,472 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:51:19,600 - #2 program
+INFO  14:51:19,600 - #22 MJProgram
+INFO  14:51:19,600 - #22 int
+INFO  14:51:19,604 - #19 9
+INFO  14:51:19,604 - #15 ,
+INFO  14:51:19,604 - #22 c
+INFO  14:51:19,604 - #15 ,
+INFO  14:51:19,605 - #22 a
+INFO  14:51:19,605 - #14 -
+INFO  14:51:19,605 - #15 ,
+INFO  14:51:19,605 - #22 b
+INFO  14:51:19,605 - #5 ;
+INFO  14:51:19,605 - #34 class
+INFO  14:51:19,605 - #22 A
+INFO  14:51:19,606 - #3 {
+ERROR 14:51:19,606 - Error: whole declarations kinda fucked 2
+INFO  14:51:19,609 - #22 int
+INFO  14:51:19,609 - #22 c
+INFO  14:51:19,611 - #15 ,
+INFO  14:51:19,612 - #19 9
+INFO  14:51:19,650 - #15 ,
+INFO  14:51:19,650 - #22 b
+INFO  14:51:19,650 - #15 ,
+INFO  14:51:19,650 - #22 kraa
+INFO  14:51:19,650 - #5 ;
+INFO  14:51:19,650 - #4 }
+INFO  14:51:19,650 - #3 {
+INFO  14:51:19,651 - #18 void
+ERROR 14:51:19,651 - Error: invalid class attribute declaration at line 5
+INFO  14:51:19,652 - #22 main
+INFO  14:51:19,653 - #7 (
+INFO  14:51:19,654 - #8 )
+INFO  14:51:19,654 - #3 {
+INFO  14:51:19,655 - #12 return
+INFO  14:51:19,656 - #5 ;
+INFO  14:51:19,656 - #4 }
+INFO  14:51:19,657 - #4 }
+INFO  14:51:19,658 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived2(
+      ) [DeclarationsDerived2]
+      Declarations_VarDecl(
+        VarDecl_Error(
+        ) [VarDecl_Error]
+      ) [Declarations_VarDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_NoParent_Declaration(
+        ClassName(
+         A
+        ) [ClassName]
+        ClassContentDerived3(
+          ClassVarDeclarationsListDerived2(
+            ClassVarDecl(
+              Type(
+               int
+              ) [Type]
+              ClassVarListDerived1(
+                Class_Var(
+                 c
+                ) [Class_Var]
+                ClassVarListDerived3(
+                ) [ClassVarListDerived3]
+              ) [ClassVarListDerived1]
+            ) [ClassVarDecl]
+          ) [ClassVarDeclarationsListDerived2]
+        ) [ClassContentDerived3]
+      ) [Class_NoParent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:51:19,667 - Error happened during parsing!

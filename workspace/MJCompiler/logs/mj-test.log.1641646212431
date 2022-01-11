@@ -1,0 +1,253 @@
+INFO  03:06:52,476 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  03:06:52,849 - #2 program
+INFO  03:06:52,849 - #22 MJProgram
+INFO  03:06:52,849 - #34 class
+INFO  03:06:52,855 - #22 A
+INFO  03:06:52,856 - #3 {
+INFO  03:06:52,859 - #22 char
+INFO  03:06:52,859 - #22 li
+INFO  03:06:52,862 - #5 ;
+INFO  03:06:52,863 - #3 {
+INFO  03:06:52,864 - #18 void
+INFO  03:06:52,864 - #22 M
+INFO  03:06:52,867 - #7 (
+INFO  03:06:52,871 - #8 )
+INFO  03:06:52,874 - #3 {
+INFO  03:06:52,877 - #4 }
+INFO  03:06:52,880 - #4 }
+INFO  03:06:52,881 - #4 }
+INFO  03:06:52,882 - #34 class
+INFO  03:06:52,884 - #22 B
+INFO  03:06:52,884 - #3 {
+INFO  03:06:52,884 - #22 A
+INFO  03:06:52,896 - #22 atr
+INFO  03:06:52,897 - #5 ;
+INFO  03:06:52,897 - #3 {
+INFO  03:06:52,897 - #18 void
+INFO  03:06:52,897 - #22 M
+INFO  03:06:52,897 - #7 (
+INFO  03:06:52,897 - #8 )
+INFO  03:06:52,897 - #3 {
+INFO  03:06:52,898 - #45 super
+INFO  03:06:52,898 - #7 (
+INFO  03:06:52,898 - #8 )
+INFO  03:06:52,901 - #5 ;
+INFO  03:06:52,901 - #4 }
+INFO  03:06:52,902 - #4 }
+INFO  03:06:52,902 - #4 }
+INFO  03:06:52,902 - #3 {
+INFO  03:06:52,903 - #22 int
+INFO  03:06:52,903 - #22 klanje
+INFO  03:06:52,903 - #7 (
+INFO  03:06:52,904 - #8 )
+INFO  03:06:52,904 - #3 {
+INFO  03:06:52,904 - #12 return
+INFO  03:06:52,904 - #19 1
+INFO  03:06:52,905 - #5 ;
+INFO  03:06:52,906 - #4 }
+INFO  03:06:52,906 - #18 void
+INFO  03:06:52,907 - #22 main
+INFO  03:06:52,907 - #7 (
+INFO  03:06:52,907 - #8 )
+INFO  03:06:52,907 - #22 int
+INFO  03:06:52,907 - #22 arr
+INFO  03:06:52,907 - #9 [
+INFO  03:06:52,908 - #10 ]
+INFO  03:06:52,908 - #5 ;
+INFO  03:06:52,909 - #22 bool
+INFO  03:06:52,909 - #22 Boo
+INFO  03:06:52,909 - #5 ;
+INFO  03:06:52,910 - #3 {
+INFO  03:06:52,911 - #12 return
+INFO  03:06:52,911 - #5 ;
+INFO  03:06:52,911 - #4 }
+INFO  03:06:52,914 - #4 }
+INFO  03:06:52,922 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived2(
+      ) [DeclarationsDerived2]
+      Declarations_ClassDecl(
+        Class_NoParent_Declaration(
+          ClassName(
+           A
+          ) [ClassName]
+          ClassContentDerived2(
+            ClassVarDeclarationsListDerived2(
+              ClassVarDecl(
+                Type(
+                 char
+                ) [Type]
+                ClassVarListDerived2(
+                  Class_Var(
+                   li
+                  ) [Class_Var]
+                ) [ClassVarListDerived2]
+              ) [ClassVarDecl]
+            ) [ClassVarDeclarationsListDerived2]
+            ClassMethodsDerived2(
+              MethodListDerived2(
+                Method_Decl(
+                  MethodTypeName(
+                    VoidType(
+                    ) [VoidType]
+                   M
+                  ) [MethodTypeName]
+                  NoFormParam(
+                  ) [NoFormParam]
+                  Optional_NoVarDeclarations(
+                  ) [Optional_NoVarDeclarations]
+                  StatementsDerived1(
+                    NoStmt(
+                    ) [NoStmt]
+                  ) [StatementsDerived1]
+                ) [Method_Decl]
+              ) [MethodListDerived2]
+            ) [ClassMethodsDerived2]
+          ) [ClassContentDerived2]
+        ) [Class_NoParent_Declaration]
+      ) [Declarations_ClassDecl]
+    ) [DeclarationsDerived1]
+    Declarations_ClassDecl(
+      Class_NoParent_Declaration(
+        ClassName(
+         B
+        ) [ClassName]
+        ClassContentDerived2(
+          ClassVarDeclarationsListDerived2(
+            ClassVarDecl(
+              Type(
+               A
+              ) [Type]
+              ClassVarListDerived2(
+                Class_Var(
+                 atr
+                ) [Class_Var]
+              ) [ClassVarListDerived2]
+            ) [ClassVarDecl]
+          ) [ClassVarDeclarationsListDerived2]
+          ClassMethodsDerived2(
+            MethodListDerived2(
+              Method_Decl(
+                MethodTypeName(
+                  VoidType(
+                  ) [VoidType]
+                 M
+                ) [MethodTypeName]
+                NoFormParam(
+                ) [NoFormParam]
+                Optional_NoVarDeclarations(
+                ) [Optional_NoVarDeclarations]
+                StatementsDerived1(
+                  Statement_List(
+                    NoStmt(
+                    ) [NoStmt]
+                    StatementDerived1(
+                      Statement_Designator(
+                        SuperCall(
+                          ActualParsDerived1(
+                          ) [ActualParsDerived1]
+                        ) [SuperCall]
+                      ) [Statement_Designator]
+                    ) [StatementDerived1]
+                  ) [Statement_List]
+                ) [StatementsDerived1]
+              ) [Method_Decl]
+            ) [MethodListDerived2]
+          ) [ClassMethodsDerived2]
+        ) [ClassContentDerived2]
+      ) [Class_NoParent_Declaration]
+    ) [Declarations_ClassDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived1(
+      MethodListDerived2(
+        Method_Decl(
+          MethodTypeName(
+            Method_Type(
+              Type(
+               int
+              ) [Type]
+            ) [Method_Type]
+           klanje
+          ) [MethodTypeName]
+          NoFormParam(
+          ) [NoFormParam]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+          StatementsDerived1(
+            Statement_List(
+              NoStmt(
+              ) [NoStmt]
+              StatementDerived1(
+                ReturnExprStmt(
+                  Expr_Pos(
+                    TermList_Term(
+                      Term_Fact(
+                        Factor_ConstVal(
+                          Val_Num(
+                           1
+                          ) [Val_Num]
+                        ) [Factor_ConstVal]
+                      ) [Term_Fact]
+                    ) [TermList_Term]
+                  ) [Expr_Pos]
+                ) [ReturnExprStmt]
+              ) [StatementDerived1]
+            ) [Statement_List]
+          ) [StatementsDerived1]
+        ) [Method_Decl]
+      ) [MethodListDerived2]
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             int
+            ) [Type]
+            OneVar(
+              Var_Array(
+               arr
+              ) [Var_Array]
+            ) [OneVar]
+          ) [Var_Declarations]
+          Optional_VarDeclarations(
+            Var_Declarations(
+              Type(
+               bool
+              ) [Type]
+              OneVar(
+                Var_(
+                 Boo
+                ) [Var_]
+              ) [OneVar]
+            ) [Var_Declarations]
+            Optional_NoVarDeclarations(
+            ) [Optional_NoVarDeclarations]
+          ) [Optional_VarDeclarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived1]
+  ) [Global_Methods]
+) [Program]
+ERROR 03:06:52,948 - Error: class calls super but has no parent on line 9
+INFO  03:06:52,954 - Error happened during parsing!

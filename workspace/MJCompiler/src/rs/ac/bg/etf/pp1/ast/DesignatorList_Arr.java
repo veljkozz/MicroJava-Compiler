@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 8/0/2022 2:52:6
+// 11/0/2022 1:29:58
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,11 +8,13 @@ package rs.ac.bg.etf.pp1.ast;
 public class DesignatorList_Arr extends DesignatorList {
 
     private DesignatorList DesignatorList;
+    private String name;
     private Expr Expr;
 
-    public DesignatorList_Arr (DesignatorList DesignatorList, Expr Expr) {
+    public DesignatorList_Arr (DesignatorList DesignatorList, String name, Expr Expr) {
         this.DesignatorList=DesignatorList;
         if(DesignatorList!=null) DesignatorList.setParent(this);
+        this.name=name;
         this.Expr=Expr;
         if(Expr!=null) Expr.setParent(this);
     }
@@ -23,6 +25,14 @@ public class DesignatorList_Arr extends DesignatorList {
 
     public void setDesignatorList(DesignatorList DesignatorList) {
         this.DesignatorList=DesignatorList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name=name;
     }
 
     public Expr getExpr() {
@@ -63,6 +73,9 @@ public class DesignatorList_Arr extends DesignatorList {
             buffer.append(DesignatorList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        buffer.append(" "+tab+name);
         buffer.append("\n");
 
         if(Expr!=null)

@@ -1,0 +1,12 @@
+INFO  14:41:19,903 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:41:20,035 - #2 program
+INFO  14:41:20,035 - #22 MJProgram
+INFO  14:41:20,035 - #22 int
+INFO  14:41:20,037 - #22 c
+INFO  14:41:20,038 - #15 ,
+INFO  14:41:20,039 - #22 a
+INFO  14:41:20,039 - #14 -
+INFO  14:41:20,039 - #15 ,
+INFO  14:41:20,039 - #22 b
+INFO  14:41:20,039 - #5 ;
+INFO  14:41:20,040 - #3 {

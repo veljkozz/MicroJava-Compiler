@@ -1,0 +1,78 @@
+INFO  14:43:49,037 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:43:49,159 - #2 program
+INFO  14:43:49,159 - #22 MJProgram
+INFO  14:43:49,159 - #22 int
+INFO  14:43:49,162 - #22 c
+INFO  14:43:49,163 - #15 ,
+INFO  14:43:49,163 - #22 a
+INFO  14:43:49,163 - #14 -
+INFO  14:43:49,164 - #15 ,
+INFO  14:43:49,164 - #22 b
+INFO  14:43:49,164 - #5 ;
+INFO  14:43:49,164 - #3 {
+ERROR 14:43:49,164 - Error: invalid variable declaration at line 2
+INFO  14:43:49,165 - #18 void
+INFO  14:43:49,165 - #22 main
+INFO  14:43:49,166 - #7 (
+INFO  14:43:49,167 - #8 )
+INFO  14:43:49,168 - #3 {
+INFO  14:43:49,169 - #12 return
+INFO  14:43:49,169 - #5 ;
+INFO  14:43:49,180 - #4 }
+INFO  14:43:49,181 - #4 }
+INFO  14:43:49,183 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        Var_List(
+          Var_List(
+            OneVar(
+              Var_(
+               c
+              ) [Var_]
+            ) [OneVar]
+            VarDerived1(
+            ) [VarDerived1]
+          ) [Var_List]
+          Var_(
+           b
+          ) [Var_]
+        ) [Var_List]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:43:49,193 - Error happened during parsing!

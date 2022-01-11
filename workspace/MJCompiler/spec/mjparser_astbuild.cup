@@ -25,10 +25,12 @@ parser code {:
     }
   
     public void syntax_error(Symbol cur_token) {
+    	errorDetected = true;
         //report_error("\nSyntax error", cur_token);
     }
   
     public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+    	errorDetected = true;
         report_fatal_error("Fatal error, can't continue parsing", cur_token);
     }
 
@@ -84,7 +86,6 @@ nonterminal ClassContent ClassContent;
 nonterminal ClassMethods ClassMethods;
 nonterminal Constructor Constructor;
 nonterminal ConstructorName ConstructorName;
-
 nonterminal ClassVarDeclarations ClassVarDeclarations;
 nonterminal ClassVarDeclarationsList ClassVarDeclarationsList;
 nonterminal ClassVar ClassVar;
@@ -105,6 +106,7 @@ nonterminal SingleStatement SingleStatement;
 nonterminal DesignatorStatement DesignatorStatement;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorList, DesignatorName;
 
+nonterminal SuperCall SuperCall;
 nonterminal PrintStmt PrintStmt;
 nonterminal ActualPars ActualPars;
 
@@ -146,7 +148,10 @@ ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL Val:V1 {: RESULT=new Con
 	{:  parser.report_error("Error: invalid constant declaration in line " + lleft, null); :} {: RESULT=new ConstVarListDerived1(); :}
 ;
 
-VarDeclarations ::= (Var_Declarations) Type:T1 VarList:V2 SEMI {: RESULT=new Var_Declarations(T1, V2); RESULT.setLine(T1left); :};
+VarDeclarations ::= (Var_Declarations) Type:T1 VarList:V2 SEMI {: RESULT=new Var_Declarations(T1, V2); RESULT.setLine(T1left); :}
+	| (VarDecl_Error) error SEMI:l
+	{: parser.report_error("Error: invalid declaration" + lleft, null); :} {: RESULT=new VarDecl_Error(); :}
+	;
 
 Val ::= (Val_Num) NUMBER:N1 {: RESULT=new Val_Num(N1); RESULT.setLine(N1left); :}
 	| (Val_Char) CHAR:C1 {: RESULT=new Val_Char(C1); RESULT.setLine(C1left); :}
@@ -159,7 +164,7 @@ Var ::= (Var_) IDENT:varName {: RESULT=new Var_(varName); RESULT.setLine(varName
 	;
 Type ::= (Type) IDENT:typeName {: RESULT=new Type(typeName); RESULT.setLine(typeNameleft); :};
 
-VarList ::= (Var_List) Var:V1 COMMA VarList:V2 {: RESULT=new Var_List(V1, V2); RESULT.setLine(V1left); :}
+VarList ::= (Var_List) VarList:V1 COMMA Var:V2 {: RESULT=new Var_List(V1, V2); RESULT.setLine(V1left); :}
 		| (OneVar) Var:V1 {: RESULT=new OneVar(V1); RESULT.setLine(V1left); :}
 		;
 
@@ -279,11 +284,13 @@ PrintStmt ::= (PrintStmt_) PRINT LPAREN Expr:E1 RPAREN {: RESULT=new PrintStmt_(
 
 DesignatorStatement ::= (Assignment) Designator:D1 AssignOp:A2 AssignExpr:A3 {: RESULT=new Assignment(D1, A2, A3); RESULT.setLine(D1left); :}
 					| (FuncCall) Designator:D1 LPAREN ActualPars:A2 RPAREN {: RESULT=new FuncCall(D1, A2); RESULT.setLine(D1left); :}
-					| (SuperCall) SUPER LPAREN ActualPars:A1 RPAREN {: RESULT=new SuperCall(A1); RESULT.setLine(A1left); :}
+					| (Super_Call_Stmt) SUPER SuperCall:S1 LPAREN ActualPars:A2 RPAREN {: RESULT=new Super_Call_Stmt(S1, A2); RESULT.setLine(S1left); :}
 					| (PostIncrement) Designator:D1 PLUS PLUS {: RESULT=new PostIncrement(D1); RESULT.setLine(D1left); :} 
 					| (PostDecrement) Designator:D1 MINUS MINUS {: RESULT=new PostDecrement(D1); RESULT.setLine(D1left); :}
 					; 
-					
+
+SuperCall ::= (Super_Call) {: RESULT=new Super_Call(); :}/*epsilon*/;
+
 Condition ::= (Condition_CondTerm) CondTerm:C1 {: RESULT=new Condition_CondTerm(C1); RESULT.setLine(C1left); :}
 	|(Condition_List) Condition:C1 OR CondTerm:C2 {: RESULT=new Condition_List(C1, C2); RESULT.setLine(C1left); :}
 	| error:l
@@ -327,9 +334,11 @@ Factor ::= (Factor_Designator) Designator:D1 {: RESULT=new Factor_Designator(D1)
 Designator ::= (Designator) DesignatorName:name DesignatorList:D1 {: RESULT=new Designator(name, D1); RESULT.setLine(nameleft); :}
 ;
 
-DesignatorName ::= (DesignatorName) IDENT:name {: RESULT=new DesignatorName(name); RESULT.setLine(nameleft); :};
+DesignatorName ::= (Designator_Name) IDENT:name {: RESULT=new Designator_Name(name); RESULT.setLine(nameleft); :}
+	| (DesignatorName_Arr) IDENT:name LBRACKET Expr:E1 RBRACKET {: RESULT=new DesignatorName_Arr(name, E1); RESULT.setLine(nameleft); :}
+	;
 
-DesignatorList ::= (DesignatorList_Arr) DesignatorList:D1 LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorList_Arr(D1, E2); RESULT.setLine(D1left); :} 
+DesignatorList ::= (DesignatorList_Arr) DesignatorList:D1 DOT IDENT:name LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorList_Arr(D1, name, E2); RESULT.setLine(D1left); :} 
 	| (DesignatorList_Field) DesignatorList:D1 DOT IDENT:name {: RESULT=new DesignatorList_Field(D1, name); RESULT.setLine(D1left); :} 
 	| {: RESULT=new DesignatorListDerived1(); :} /*epsilon*/
 	;

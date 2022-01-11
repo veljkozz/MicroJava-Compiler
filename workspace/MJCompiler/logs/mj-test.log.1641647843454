@@ -1,0 +1,66 @@
+INFO  14:14:20,495 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:14:20,934 - #2 program
+INFO  14:14:20,936 - #22 MJProgram
+INFO  14:14:20,936 - #22 int
+INFO  14:14:20,940 - #22 a9
+INFO  14:14:20,943 - #14 -
+ERROR 14:14:20,944 - 
+Syntax error na liniji 2
+INFO  14:14:20,945 - #5 ;
+INFO  14:14:20,945 - #3 {
+INFO  14:14:20,945 - #18 void
+INFO  14:14:20,947 - #22 main
+ERROR 14:14:20,947 - Error: invalid variable declaration at line 2
+INFO  14:14:20,954 - #7 (
+INFO  14:14:20,957 - #8 )
+INFO  14:14:20,960 - #3 {
+INFO  14:14:20,963 - #12 return
+INFO  14:14:20,966 - #5 ;
+INFO  14:14:20,967 - #4 }
+INFO  14:14:20,971 - #4 }
+INFO  14:14:20,977 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        OneVar(
+          VarDerived1(
+          ) [VarDerived1]
+        ) [OneVar]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:14:21,009 - Error happened during parsing!

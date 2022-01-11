@@ -1,0 +1,72 @@
+INFO  14:38:09,271 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:38:09,490 - #2 program
+INFO  14:38:09,491 - #22 MJProgram
+INFO  14:38:09,491 - #22 int
+INFO  14:38:09,494 - #22 a
+INFO  14:38:09,495 - #15 ,
+INFO  14:38:09,495 - #22 a
+INFO  14:38:09,495 - #15 ,
+INFO  14:38:09,496 - #19 10
+INFO  14:38:09,496 - #15 ,
+INFO  14:38:09,496 - #22 b
+INFO  14:38:09,496 - #5 ;
+INFO  14:38:09,497 - #3 {
+ERROR 14:38:09,497 - Error: invalid variable declaration at line 2
+INFO  14:38:09,499 - #18 void
+INFO  14:38:09,499 - #22 main
+INFO  14:38:09,501 - #7 (
+INFO  14:38:09,502 - #8 )
+INFO  14:38:09,503 - #3 {
+INFO  14:38:09,504 - #12 return
+INFO  14:38:09,506 - #5 ;
+INFO  14:38:09,506 - #4 }
+INFO  14:38:09,507 - #4 }
+INFO  14:38:09,510 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        Var_List(
+          VarListDerived1(
+          ) [VarListDerived1]
+          Var_(
+           b
+          ) [Var_]
+        ) [Var_List]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:38:09,533 - Error happened during parsing!

@@ -1,0 +1,338 @@
+INFO  00:35:45,757 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  00:35:45,876 - #2 program
+INFO  00:35:45,876 - #22 test_303
+INFO  00:35:45,876 - #33 const
+INFO  00:35:45,879 - #22 int
+INFO  00:35:45,879 - #22 delilac
+INFO  00:35:45,880 - #11 =
+INFO  00:35:45,881 - #19 3
+INFO  00:35:45,881 - #5 ;
+INFO  00:35:45,881 - #34 class
+INFO  00:35:45,882 - #22 Predmet
+INFO  00:35:45,882 - #3 {
+INFO  00:35:45,883 - #22 int
+INFO  00:35:45,883 - #22 tezina
+INFO  00:35:45,883 - #5 ;
+INFO  00:35:45,883 - #22 char
+INFO  00:35:45,884 - #22 vrsta
+INFO  00:35:45,884 - #5 ;
+INFO  00:35:45,884 - #3 {
+INFO  00:35:45,884 - #22 int
+INFO  00:35:45,884 - #22 zapremina
+INFO  00:35:45,895 - #7 (
+INFO  00:35:45,896 - #8 )
+INFO  00:35:45,898 - #3 {
+INFO  00:35:45,899 - #12 return
+INFO  00:35:45,900 - #19 0
+INFO  00:35:45,900 - #5 ;
+INFO  00:35:45,901 - #4 }
+INFO  00:35:45,901 - #22 int
+INFO  00:35:45,901 - #22 Q
+INFO  00:35:45,901 - #7 (
+INFO  00:35:45,901 - #8 )
+INFO  00:35:45,901 - #3 {
+INFO  00:35:45,902 - #12 return
+INFO  00:35:45,902 - #22 zapremina
+INFO  00:35:45,902 - #7 (
+INFO  00:35:45,904 - #8 )
+INFO  00:35:45,905 - #41 *
+INFO  00:35:45,905 - #22 tezina
+INFO  00:35:45,907 - #5 ;
+INFO  00:35:45,907 - #4 }
+INFO  00:35:45,908 - #4 }
+INFO  00:35:45,908 - #4 }
+INFO  00:35:45,908 - #22 int
+INFO  00:35:45,908 - #22 zapreminaK
+INFO  00:35:45,908 - #15 ,
+INFO  00:35:45,908 - #22 zapreminaS
+INFO  00:35:45,908 - #5 ;
+INFO  00:35:45,909 - #22 int
+INFO  00:35:45,909 - #22 tezinaK
+INFO  00:35:45,909 - #15 ,
+INFO  00:35:45,909 - #22 tezinaS
+INFO  00:35:45,909 - #5 ;
+INFO  00:35:45,909 - #3 {
+INFO  00:35:45,910 - #18 void
+INFO  00:35:45,910 - #22 main
+INFO  00:35:45,911 - #7 (
+INFO  00:35:45,911 - #8 )
+INFO  00:35:45,911 - #22 Predmet
+INFO  00:35:45,911 - #22 predmeti
+INFO  00:35:45,911 - #9 [
+INFO  00:35:45,911 - #10 ]
+INFO  00:35:45,911 - #5 ;
+INFO  00:35:45,911 - #3 {
+INFO  00:35:45,911 - #22 predmeti
+INFO  00:35:45,911 - #11 =
+INFO  00:35:45,911 - #36 new
+INFO  00:35:45,913 - #22 Predmet
+INFO  00:35:45,913 - #9 [
+INFO  00:35:45,914 - #19 6
+INFO  00:35:45,916 - #10 ]
+INFO  00:35:45,916 - #5 ;
+INFO  00:35:45,917 - #4 }
+INFO  00:35:45,917 - #4 }
+INFO  00:35:45,919 - Program(
+  ProgName(
+   test_303
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived1(
+      DeclarationsDerived1(
+        DeclarationsDerived1(
+          DeclarationsDerived2(
+          ) [DeclarationsDerived2]
+          Declarations_ConstDecl(
+            Const_Declarations(
+              Type(
+               int
+              ) [Type]
+              ConstDecl_Single(
+               delilac
+                Val_Num(
+                 3
+                ) [Val_Num]
+              ) [ConstDecl_Single]
+            ) [Const_Declarations]
+          ) [Declarations_ConstDecl]
+        ) [DeclarationsDerived1]
+        Declarations_ClassDecl(
+          Class_NoParent_Declaration(
+            ClassName(
+             Predmet
+            ) [ClassName]
+            ClassContentDerived2(
+              ClassVarDeclarationsListDerived1(
+                ClassVarDecl(
+                  Type(
+                   int
+                  ) [Type]
+                  ClassVarListDerived2(
+                    Class_Var(
+                     tezina
+                    ) [Class_Var]
+                  ) [ClassVarListDerived2]
+                ) [ClassVarDecl]
+                ClassVarDeclarationsListDerived2(
+                  ClassVarDecl(
+                    Type(
+                     char
+                    ) [Type]
+                    ClassVarListDerived2(
+                      Class_Var(
+                       vrsta
+                      ) [Class_Var]
+                    ) [ClassVarListDerived2]
+                  ) [ClassVarDecl]
+                ) [ClassVarDeclarationsListDerived2]
+              ) [ClassVarDeclarationsListDerived1]
+              ClassMethodsDerived2(
+                MethodListDerived1(
+                  MethodListDerived2(
+                    Method_Decl(
+                      MethodTypeName(
+                        Method_Type(
+                          Type(
+                           int
+                          ) [Type]
+                        ) [Method_Type]
+                       zapremina
+                      ) [MethodTypeName]
+                      NoFormParam(
+                      ) [NoFormParam]
+                      Optional_NoVarDeclarations(
+                      ) [Optional_NoVarDeclarations]
+                      StatementsDerived1(
+                        Statement_List(
+                          NoStmt(
+                          ) [NoStmt]
+                          StatementDerived1(
+                            ReturnExprStmt(
+                              Expr_Pos(
+                                TermList_Term(
+                                  Term_Fact(
+                                    Factor_ConstVal(
+                                      Val_Num(
+                                       0
+                                      ) [Val_Num]
+                                    ) [Factor_ConstVal]
+                                  ) [Term_Fact]
+                                ) [TermList_Term]
+                              ) [Expr_Pos]
+                            ) [ReturnExprStmt]
+                          ) [StatementDerived1]
+                        ) [Statement_List]
+                      ) [StatementsDerived1]
+                    ) [Method_Decl]
+                  ) [MethodListDerived2]
+                  Method_Decl(
+                    MethodTypeName(
+                      Method_Type(
+                        Type(
+                         int
+                        ) [Type]
+                      ) [Method_Type]
+                     Q
+                    ) [MethodTypeName]
+                    NoFormParam(
+                    ) [NoFormParam]
+                    Optional_NoVarDeclarations(
+                    ) [Optional_NoVarDeclarations]
+                    StatementsDerived1(
+                      Statement_List(
+                        NoStmt(
+                        ) [NoStmt]
+                        StatementDerived1(
+                          ReturnExprStmt(
+                            Expr_Pos(
+                              TermList_Term(
+                                Term_MulOp(
+                                  Factor_FunCall(
+                                    Designator(
+                                      Designator_Name(
+                                       zapremina
+                                      ) [Designator_Name]
+                                      DesignatorListDerived1(
+                                      ) [DesignatorListDerived1]
+                                    ) [Designator]
+                                    ActualParsDerived1(
+                                    ) [ActualParsDerived1]
+                                  ) [Factor_FunCall]
+                                  MulOpDerived1(
+                                  ) [MulOpDerived1]
+                                  Term_Fact(
+                                    Factor_Designator(
+                                      Designator(
+                                        Designator_Name(
+                                         tezina
+                                        ) [Designator_Name]
+                                        DesignatorListDerived1(
+                                        ) [DesignatorListDerived1]
+                                      ) [Designator]
+                                    ) [Factor_Designator]
+                                  ) [Term_Fact]
+                                ) [Term_MulOp]
+                              ) [TermList_Term]
+                            ) [Expr_Pos]
+                          ) [ReturnExprStmt]
+                        ) [StatementDerived1]
+                      ) [Statement_List]
+                    ) [StatementsDerived1]
+                  ) [Method_Decl]
+                ) [MethodListDerived1]
+              ) [ClassMethodsDerived2]
+            ) [ClassContentDerived2]
+          ) [Class_NoParent_Declaration]
+        ) [Declarations_ClassDecl]
+      ) [DeclarationsDerived1]
+      Declarations_VarDecl(
+        Var_Declarations(
+          Type(
+           int
+          ) [Type]
+          Var_List(
+            OneVar(
+              Var_(
+               zapreminaK
+              ) [Var_]
+            ) [OneVar]
+            Var_(
+             zapreminaS
+            ) [Var_]
+          ) [Var_List]
+        ) [Var_Declarations]
+      ) [Declarations_VarDecl]
+    ) [DeclarationsDerived1]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        Var_List(
+          OneVar(
+            Var_(
+             tezinaK
+            ) [Var_]
+          ) [OneVar]
+          Var_(
+           tezinaS
+          ) [Var_]
+        ) [Var_List]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_VarDeclarations(
+          Var_Declarations(
+            Type(
+             Predmet
+            ) [Type]
+            OneVar(
+              Var_Array(
+               predmeti
+              ) [Var_Array]
+            ) [OneVar]
+          ) [Var_Declarations]
+          Optional_NoVarDeclarations(
+          ) [Optional_NoVarDeclarations]
+        ) [Optional_VarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              Statement_Designator(
+                Assignment(
+                  Designator(
+                    Designator_Name(
+                     predmeti
+                    ) [Designator_Name]
+                    DesignatorListDerived1(
+                    ) [DesignatorListDerived1]
+                  ) [Designator]
+                  AssignOpDerived1(
+                  ) [AssignOpDerived1]
+                  Assign_Expr(
+                    Expr_Pos(
+                      TermList_Term(
+                        Term_Fact(
+                          Factor_New_Arr(
+                            Type(
+                             Predmet
+                            ) [Type]
+                            Expr_Pos(
+                              TermList_Term(
+                                Term_Fact(
+                                  Factor_ConstVal(
+                                    Val_Num(
+                                     6
+                                    ) [Val_Num]
+                                  ) [Factor_ConstVal]
+                                ) [Term_Fact]
+                              ) [TermList_Term]
+                            ) [Expr_Pos]
+                          ) [Factor_New_Arr]
+                        ) [Term_Fact]
+                      ) [TermList_Term]
+                    ) [Expr_Pos]
+                  ) [Assign_Expr]
+                ) [Assignment]
+              ) [Statement_Designator]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+ERROR 00:35:45,930 - Error: number of parameters on line 12
+INFO  00:35:45,931 - Error happened during parsing!

@@ -1,0 +1,73 @@
+INFO  14:26:14,029 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  14:26:14,464 - #2 program
+INFO  14:26:14,465 - #22 MJProgram
+INFO  14:26:14,465 - #22 int
+INFO  14:26:14,471 - #22 a
+INFO  14:26:14,476 - #14 -
+INFO  14:26:14,476 - #15 ,
+INFO  14:26:14,476 - #19 9
+INFO  14:26:14,476 - #15 ,
+INFO  14:26:14,478 - #22 a
+INFO  14:26:14,479 - #5 ;
+INFO  14:26:14,479 - #3 {
+ERROR 14:26:14,481 - Error: invalid variable declaration at line 2
+INFO  14:26:14,485 - #18 void
+INFO  14:26:14,486 - #22 main
+INFO  14:26:14,489 - #7 (
+INFO  14:26:14,492 - #8 )
+INFO  14:26:14,495 - #3 {
+INFO  14:26:14,500 - #12 return
+INFO  14:26:14,503 - #5 ;
+INFO  14:26:14,505 - #4 }
+INFO  14:26:14,508 - #4 }
+INFO  14:26:14,517 - Program(
+  ProgName(
+   MJProgram
+  ) [ProgName]
+  DeclarationsDerived1(
+    DeclarationsDerived2(
+    ) [DeclarationsDerived2]
+    Declarations_VarDecl(
+      Var_Declarations(
+        Type(
+         int
+        ) [Type]
+        Var_List(
+          VarDerived1(
+          ) [VarDerived1]
+          OneVar(
+            Var_(
+             a
+            ) [Var_]
+          ) [OneVar]
+        ) [Var_List]
+      ) [Var_Declarations]
+    ) [Declarations_VarDecl]
+  ) [DeclarationsDerived1]
+  Global_Methods(
+    MethodListDerived2(
+      Method_Decl(
+        MethodTypeName(
+          VoidType(
+          ) [VoidType]
+         main
+        ) [MethodTypeName]
+        NoFormParam(
+        ) [NoFormParam]
+        Optional_NoVarDeclarations(
+        ) [Optional_NoVarDeclarations]
+        StatementsDerived1(
+          Statement_List(
+            NoStmt(
+            ) [NoStmt]
+            StatementDerived1(
+              ReturnStmt(
+              ) [ReturnStmt]
+            ) [StatementDerived1]
+          ) [Statement_List]
+        ) [StatementsDerived1]
+      ) [Method_Decl]
+    ) [MethodListDerived2]
+  ) [Global_Methods]
+) [Program]
+INFO  14:26:14,568 - Error happened during parsing!
