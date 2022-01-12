@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/0/2022 1:29:58
+// 12/0/2022 13:35:55
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -38,6 +38,7 @@ public interface Visitor {
     public void visit(SuperCall SuperCall);
     public void visit(Declarations Declarations);
     public void visit(Expr Expr);
+    public void visit(ConstVal ConstVal);
     public void visit(ClassDeclaration ClassDeclaration);
     public void visit(VarDeclarationsList VarDeclarationsList);
     public void visit(AddOp AddOp);
@@ -61,16 +62,16 @@ public interface Visitor {
     public void visit(RelOpDerived1 RelOpDerived1);
     public void visit(RelOp_NEQ RelOp_NEQ);
     public void visit(RelOp_EQ RelOp_EQ);
-    public void visit(MulOpDerived3 MulOpDerived3);
-    public void visit(MulOpDerived2 MulOpDerived2);
-    public void visit(MulOpDerived1 MulOpDerived1);
-    public void visit(AddOpDerived2 AddOpDerived2);
-    public void visit(AddOpDerived1 AddOpDerived1);
+    public void visit(Mod Mod);
+    public void visit(Div Div);
+    public void visit(Mul Mul);
+    public void visit(Sub Sub);
+    public void visit(Add Add);
     public void visit(AssignOpDerived1 AssignOpDerived1);
     public void visit(ActualParsDerived1 ActualParsDerived1);
     public void visit(ActualPars_List ActualPars_List);
     public void visit(ActualPars_Expr ActualPars_Expr);
-    public void visit(DesignatorListDerived1 DesignatorListDerived1);
+    public void visit(EmptyDesignatorList EmptyDesignatorList);
     public void visit(DesignatorList_Field DesignatorList_Field);
     public void visit(DesignatorList_Arr DesignatorList_Arr);
     public void visit(DesignatorName_Arr DesignatorName_Arr);
@@ -171,11 +172,15 @@ public interface Visitor {
     public void visit(Var_List Var_List);
     public void visit(Type Type);
     public void visit(VarDerived1 VarDerived1);
-    public void visit(Var_Array Var_Array);
+    public void visit(Var_Arr Var_Arr);
     public void visit(Var_ Var_);
     public void visit(Val_Bool Val_Bool);
     public void visit(Val_Char Val_Char);
     public void visit(Val_Num Val_Num);
+    public void visit(ConstVal_Bool ConstVal_Bool);
+    public void visit(ConstVal_Char ConstVal_Char);
+    public void visit(ConstVal_Num_Neg ConstVal_Num_Neg);
+    public void visit(ConstVal_Num_Pos ConstVal_Num_Pos);
     public void visit(VarDecl_Error VarDecl_Error);
     public void visit(Var_Declarations Var_Declarations);
     public void visit(ConstVarListDerived1 ConstVarListDerived1);

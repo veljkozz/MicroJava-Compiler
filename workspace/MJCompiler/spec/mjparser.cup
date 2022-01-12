@@ -76,7 +76,7 @@ nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, MethodType;
 
-nonterminal rs.ac.bg.etf.pp1.MJParser.SimpleType Val;
+nonterminal rs.ac.bg.etf.pp1.MJParser.SimpleType Val, ConstVal;
 nonterminal Var, VarList, ConstVarList;
 nonterminal StatementList, Statement, Statements, SingleStatement;
 
@@ -90,12 +90,13 @@ nonterminal ActualPars;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Expr, AssignExpr, Term, TermList;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Factor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
-nonterminal MulOp, AddOp, RelOp, AssignOp;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj MulOp, AddOp, RelOp, AssignOp;
 
 nonterminal DO_NT;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MethodTypeName, MethodDecl;
+
 precedence left ELSE;
 
 Program ::= (Program) PROG ProgName:p Declarations LBRACE GlobalMethods RBRACE;
@@ -116,8 +117,8 @@ ConstDeclarations ::= (Const_Declarations) CONST Type ConstVarList SEMI
 	//| error SEMI:l
 	//{:  parser.report_error("Izvrsen oporavak do ; u liniji " + lleft, null); :}
 	;
-ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL Val
-	| (ConstDecl_List) IDENT:varName EQUAL Val COMMA ConstVarList
+ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL ConstVal
+	| (ConstDecl_List) IDENT:varName EQUAL ConstVal COMMA ConstVarList
 	| error:l
 	{:  parser.report_error("Error: invalid constant declaration in line " + lleft, null); :}
 ;
@@ -127,12 +128,19 @@ VarDeclarations ::= (Var_Declarations) Type VarList SEMI
 	{: parser.report_error("Error: invalid declaration" + lleft, null); :}
 	;
 
+ConstVal ::= (ConstVal_Num_Pos) NUMBER
+	| (ConstVal_Num_Neg) MINUS NUMBER
+	| (ConstVal_Char) CHAR
+	| (ConstVal_Bool) BOOL
+	;
+
 Val ::= (Val_Num) NUMBER
 	| (Val_Char) CHAR
 	| (Val_Bool) BOOL
 	;
+
 Var ::= (Var_) IDENT:varName
-	| (Var_Array) IDENT:varName LBRACKET RBRACKET
+	| (Var_Arr) IDENT:varName LBRACKET RBRACKET
 	| error:l
 	{: parser.report_error("Error: invalid variable declaration at line " + lleft, null); :}
 	;
@@ -314,7 +322,7 @@ DesignatorName ::= (Designator_Name) IDENT:name
 
 DesignatorList ::= (DesignatorList_Arr) DesignatorList DOT IDENT:name LBRACKET Expr RBRACKET 
 	| (DesignatorList_Field) DesignatorList DOT IDENT:name 
-	| /*epsilon*/
+	| (EmptyDesignatorList) /*epsilon*/
 	;
 
 
@@ -325,13 +333,13 @@ ActualPars ::= (ActualPars_Expr) Expr
 
 AssignOp ::= EQUAL;
 
-AddOp ::= PLUS
-	| MINUS
+AddOp ::= (Add) PLUS
+	| (Sub) MINUS
 	;
 
-MulOp ::= STAR
-	| SLASH
-	| PERCENT
+MulOp ::= (Mul) STAR
+	| (Div) SLASH
+	| (Mod) PERCENT
 	;
 
 RelOp ::= (RelOp_EQ) EQ:t

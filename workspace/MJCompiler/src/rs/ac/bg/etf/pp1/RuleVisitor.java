@@ -12,5 +12,5 @@ public class RuleVisitor extends VisitorAdaptor{
 
 	
 	public void visit(Var_ var){ globalVarCnt++; }
-	public void visit(Var_Array var_arr) { globalVarCnt++; }
+	public void visit(Var_Arr var_arr) { globalVarCnt++; }
 }

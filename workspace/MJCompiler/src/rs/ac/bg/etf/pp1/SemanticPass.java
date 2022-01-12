@@ -22,7 +22,6 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	Obj currMethod = null;
 	Obj currClassObj = null;
-	ArrayList<Obj> currClassVars = new ArrayList<Obj>();
 	Struct currClassStruct = null;
 	
 	Set<String> classNames = new HashSet<>();
@@ -32,7 +31,10 @@ public class SemanticPass extends VisitorAdaptor {
 	boolean inWhileLoop = false;
 	boolean isEqCond = false;
 	int ClassMethCnt = 0;
+	// Check if return was found in method
 	boolean hasReturn = false;
+	// Check if main was found
+	boolean mainFound = false;
 	boolean inConstructor = false;
 	ArrayList<Struct> currActualParams = new ArrayList<Struct>();
 	
@@ -102,10 +104,11 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	public void visit(Var_ var)
 	{
-		globalVarCnt++;
-		Tab.insert(Obj.Var, var.getVarName(), currVarType);
+		if(ClassMethCnt == 0)globalVarCnt++;
+		Obj obj = Tab.insert(Obj.Var, var.getVarName(), currVarType);
+		obj.setFpPos(-1);;
 	}	
-	public void visit(Var_Array var_arr) 
+	public void visit(Var_Arr var_arr) 
 	{ 
 		globalVarCnt++;
 		Struct s = new Struct(Struct.Array);
@@ -115,7 +118,7 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	
 	// Const Declaration
-	void addConst(Val val, String name) {
+	void addConst(ConstVal val, String name) {
 		// Since all consts are of a simple type(int,char,bool)
 		// there is no need to check for polimorphism
 		if(val.simpletype.s.equals(currVarType))
@@ -136,14 +139,36 @@ public class SemanticPass extends VisitorAdaptor {
 	public void visit(ConstDecl_Single decl)
 	{
 		globalVarCnt++;
-		addConst(decl.getVal(), decl.getVarName());
+		addConst(decl.getConstVal(), decl.getVarName());
 	}
 	
 	public void visit(ConstDecl_List decl)
 	{
 		globalVarCnt++;
-		Val val = decl.getVal();
+		ConstVal val = decl.getConstVal();
 		addConst(val, decl.getVarName());
+	}
+	
+	public void visit(ConstVal_Num_Pos num)
+	{
+		num.simpletype = new MJParser.SimpleType(Tab.intType); 
+		num.simpletype.num = num.getN1();
+	}
+	public void visit(ConstVal_Num_Neg num)
+	{
+		num.simpletype = new MJParser.SimpleType(Tab.intType); 
+		num.simpletype.num = -num.getN1();
+	}
+	public void visit(ConstVal_Char vchar)
+	{
+		vchar.simpletype = new MJParser.SimpleType(Tab.charType); 
+		vchar.simpletype.character = vchar.getC1();
+		vchar.simpletype.num = (int) vchar.getC1().charValue();
+	}
+	public void visit(ConstVal_Bool bool)
+	{
+		bool.simpletype = new MJParser.SimpleType(boolType); 
+		bool.simpletype.num = bool.getB1() ? 1 : 0;
 	}
 	
 	public void visit(Val_Num num)
@@ -155,6 +180,7 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 		vchar.simpletype = new MJParser.SimpleType(Tab.charType); 
 		vchar.simpletype.character = vchar.getC1();
+		vchar.simpletype.num = (int) vchar.getC1().charValue();
 	}
 	public void visit(Val_Bool bool)
 	{
@@ -162,6 +188,7 @@ public class SemanticPass extends VisitorAdaptor {
 		bool.simpletype.num = bool.getB1() ? 1 : 0;
 	}
 	
+	Struct vfptr_struct = Tab.intType;
 	// Class Declaration
 	public void visit(ClassName className)
 	{
@@ -170,21 +197,24 @@ public class SemanticPass extends VisitorAdaptor {
 		className.obj = currClassObj;
 		classNames.add(className.getName());
 		Tab.openScope();
+		// Insert pointer to virtual function table
+		Tab.insert(Obj.Var, "_vfptr", vfptr_struct);
 	}
 	
 	public static void copyMembers(Struct parent, Struct child)
 	{
-		SymbolDataStructure members = child.getMembersTable();
+		//SymbolDataStructure members = child.getMembersTable();
 		for(Obj obj: parent.getMembers())
 		{
-			members.insertKey(obj);
+			//members.insertKey(obj);
+			Tab.insert(obj.getKind(), obj.getName(), obj.getType());
 		}
 	}
 	
 	public void visit(Extends_Parent parent)
 	{
 		// COLLECT PARENT HERE
-		// COPY PARENT MEMBERS
+		// COPY PARENT MEMBERS TO START OF CHILD TO ENABLE SUPSTITUTION
 		if((parent.obj = Tab.find(parent.getParentName())) == Tab.noObj) 
 			report_error("Error: undefined parent class", parent);
 		else if(!classNames.contains(parent.obj.getName()))
@@ -197,14 +227,25 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	public void visit(ClassVarDecl vars)
 	{
-		SymbolDataStructure members = currClassStruct.getMembersTable();
-		Tab.chainLocalSymbols(currClassStruct);
-		for(Obj obj: members.symbols())
+		//SymbolDataStructure members = currClassStruct.getMembersTable();
+		//Tab.chainLocalSymbols(currClassStruct);
+		//for(Obj obj: members.symbols())
 		{
-			currClassStruct.getMembersTable().insertKey(obj);
+			//currClassStruct.getMembersTable().insertKey(obj);
 		}
 	}
 	
+	public void visit(Class_Var var)
+	{
+		Obj obj = Tab.insert(Obj.Fld, var.getVarName(), currVarType);
+	}
+	
+	public void visit(Class_Var_Arr var)
+	{
+		Struct s = new Struct(Struct.Array);
+		s.setElementType(currVarType);
+		Obj obj = Tab.insert(Obj.Fld, var.getVarName(), s);
+	}
 	
 	public void visit(Class_NoParent_Declaration classNoParent)
 	{
@@ -219,7 +260,6 @@ public class SemanticPass extends VisitorAdaptor {
 		Tab.closeScope();
 		currClassObj = null;
 		currClassStruct = null;
-		currClassVars.clear();
 	}
 	
 	public void visit(Class_Parent_Declaration classParent)
@@ -240,22 +280,8 @@ public class SemanticPass extends VisitorAdaptor {
 		
 		currClassObj = null;
 		currClassStruct = null;
-		currClassVars.clear();
 	}
 	
-	public void visit(Class_Var var)
-	{
-		Obj obj = Tab.insert(Obj.Var, var.getVarName(), currVarType);
-		currClassVars.add(obj);
-	}
-	
-	public void visit(Class_Var_Arr var)
-	{
-		Struct s = new Struct(Struct.Array);
-		s.setElementType(currVarType);
-		Obj obj = Tab.insert(Obj.Var, var.getVarName(), s);
-		currClassVars.add(obj);
-	}
 	
 	public void visit(ConstructorName constructorName)
 	{
@@ -336,7 +362,6 @@ public class SemanticPass extends VisitorAdaptor {
 		currMethod.setLevel(currMethod.getLevel() + 1);
 	}
 	
-	// ADD PARAMS
 	public void visit(Method_Decl method)
 	{
 		if(!currMethod.getType().equals(Tab.noType) && !hasReturn)
@@ -406,7 +431,7 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 		Struct type = stmt.getExpr().struct;
 		if(!isSimpleType(type))
-			report_error("Error: invalid argument for read function", stmt);
+			report_error("Error: invalid argument for print function", stmt);
 	}
 	
 	public void visit(IfStmt stmt)
@@ -428,6 +453,11 @@ public class SemanticPass extends VisitorAdaptor {
 		Struct srcType = stmt.getAssignExpr().struct;
 		if(!isCompatible(desType, srcType))
 			report_error("Error: non compatible types", stmt);
+		int destKind = stmt.getDesignator().obj.getKind();
+		if(destKind != Obj.Var && destKind != Obj.Elem && destKind != Obj.Fld)
+		{
+			report_error("Error: assignment to a non var type", stmt);
+		}
 	}
 	
 	public void visit(Assign_Expr expr)
@@ -646,7 +676,7 @@ public class SemanticPass extends VisitorAdaptor {
 		else if(currDesignatorO.getType().getKind() != Struct.Array)
 			report_error("Error: variable " + designatorName.getName() + " is not an array", designatorName);
 		
-		currDesignatorO = new Obj(Obj.Var, currDesignatorO.getName() + "[]" ,currDesignatorO.getType().getElemType());
+		//currDesignatorO = new Obj(Obj.Elem, currDesignatorO.getName(),currDesignatorO.getType().getElemType());
 		designatorName.obj = currDesignatorO;
 		currDesignator.set(0, currDesignatorO);
 	}
@@ -662,7 +692,7 @@ public class SemanticPass extends VisitorAdaptor {
 			currS = currDesignatorO.getType().getElemType();
 			if(!(currDesignatorO.getType().getKind() == Struct.Array))
 				report_error("Error: variable not an array", designatorList);
-			currDesignatorO = new Obj(Obj.Var, currDesignatorO.getName() + "[]" , currDesignatorO.getType().getElemType());
+			currDesignatorO = new Obj(Obj.Elem, currDesignatorO.getName() , currDesignatorO.getType().getElemType());
 			if(!designatorList.getExpr().struct.equals(Tab.intType))
 				report_error("Error: expression must have int type", designatorList);
 			currDesignator.set(0, currDesignatorO);

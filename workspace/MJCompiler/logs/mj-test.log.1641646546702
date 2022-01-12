@@ -1,7 +1,0 @@
-INFO  13:54:31,560 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
-INFO  13:54:31,918 - #2 program
-INFO  13:54:31,918 - #22 MJProgram
-INFO  13:54:31,918 - #19 9
-ERROR 13:54:31,919 - 
-Syntax error na liniji 2
-ERROR 13:54:31,919 - Fatal error, can't continue parsing na liniji 2

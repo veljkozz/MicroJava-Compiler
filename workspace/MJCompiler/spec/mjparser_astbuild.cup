@@ -94,7 +94,7 @@ nonterminal rs.etf.pp1.symboltable.concepts.Obj ClassName, Extends;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, MethodType;
 
-nonterminal rs.ac.bg.etf.pp1.MJParser.SimpleType Val;
+nonterminal rs.ac.bg.etf.pp1.MJParser.SimpleType Val, ConstVal;
 nonterminal Var Var;
 nonterminal VarList VarList;
 nonterminal ConstVarList ConstVarList;
@@ -113,15 +113,13 @@ nonterminal ActualPars ActualPars;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Expr, AssignExpr, Term, TermList;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Factor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
-nonterminal MulOp MulOp;
-nonterminal AddOp AddOp;
-nonterminal RelOp RelOp;
-nonterminal AssignOp AssignOp;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj MulOp, AddOp, RelOp, AssignOp;
 
 nonterminal DO_NT DO_NT;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MethodTypeName, MethodDecl;
+
 precedence left ELSE;
 
 Program ::= (Program) PROG ProgName:p Declarations:D1 LBRACE GlobalMethods:G2 RBRACE {: RESULT=new Program(p, D1, G2); RESULT.setLine(pleft); :};
@@ -142,8 +140,8 @@ ConstDeclarations ::= (Const_Declarations) CONST Type:T1 ConstVarList:C2 SEMI {:
 	//| error SEMI:l
 	//{:  parser.report_error("Izvrsen oporavak do ; u liniji " + lleft, null); :}
 	;
-ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL Val:V1 {: RESULT=new ConstDecl_Single(varName, V1); RESULT.setLine(varNameleft); :}
-	| (ConstDecl_List) IDENT:varName EQUAL Val:V1 COMMA ConstVarList:C2 {: RESULT=new ConstDecl_List(varName, V1, C2); RESULT.setLine(varNameleft); :}
+ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL ConstVal:C1 {: RESULT=new ConstDecl_Single(varName, C1); RESULT.setLine(varNameleft); :}
+	| (ConstDecl_List) IDENT:varName EQUAL ConstVal:C1 COMMA ConstVarList:C2 {: RESULT=new ConstDecl_List(varName, C1, C2); RESULT.setLine(varNameleft); :}
 	| error:l
 	{:  parser.report_error("Error: invalid constant declaration in line " + lleft, null); :} {: RESULT=new ConstVarListDerived1(); :}
 ;
@@ -153,12 +151,19 @@ VarDeclarations ::= (Var_Declarations) Type:T1 VarList:V2 SEMI {: RESULT=new Var
 	{: parser.report_error("Error: invalid declaration" + lleft, null); :} {: RESULT=new VarDecl_Error(); :}
 	;
 
+ConstVal ::= (ConstVal_Num_Pos) NUMBER:N1 {: RESULT=new ConstVal_Num_Pos(N1); RESULT.setLine(N1left); :}
+	| (ConstVal_Num_Neg) MINUS NUMBER:N1 {: RESULT=new ConstVal_Num_Neg(N1); RESULT.setLine(N1left); :}
+	| (ConstVal_Char) CHAR:C1 {: RESULT=new ConstVal_Char(C1); RESULT.setLine(C1left); :}
+	| (ConstVal_Bool) BOOL:B1 {: RESULT=new ConstVal_Bool(B1); RESULT.setLine(B1left); :}
+	;
+
 Val ::= (Val_Num) NUMBER:N1 {: RESULT=new Val_Num(N1); RESULT.setLine(N1left); :}
 	| (Val_Char) CHAR:C1 {: RESULT=new Val_Char(C1); RESULT.setLine(C1left); :}
 	| (Val_Bool) BOOL:B1 {: RESULT=new Val_Bool(B1); RESULT.setLine(B1left); :}
 	;
+
 Var ::= (Var_) IDENT:varName {: RESULT=new Var_(varName); RESULT.setLine(varNameleft); :}
-	| (Var_Array) IDENT:varName LBRACKET RBRACKET {: RESULT=new Var_Array(varName); RESULT.setLine(varNameleft); :}
+	| (Var_Arr) IDENT:varName LBRACKET RBRACKET {: RESULT=new Var_Arr(varName); RESULT.setLine(varNameleft); :}
 	| error:l
 	{: parser.report_error("Error: invalid variable declaration at line " + lleft, null); :} {: RESULT=new VarDerived1(); :}
 	;
@@ -340,7 +345,7 @@ DesignatorName ::= (Designator_Name) IDENT:name {: RESULT=new Designator_Name(na
 
 DesignatorList ::= (DesignatorList_Arr) DesignatorList:D1 DOT IDENT:name LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorList_Arr(D1, name, E2); RESULT.setLine(D1left); :} 
 	| (DesignatorList_Field) DesignatorList:D1 DOT IDENT:name {: RESULT=new DesignatorList_Field(D1, name); RESULT.setLine(D1left); :} 
-	| {: RESULT=new DesignatorListDerived1(); :} /*epsilon*/
+	| (EmptyDesignatorList) {: RESULT=new EmptyDesignatorList(); :} /*epsilon*/
 	;
 
 
@@ -351,13 +356,13 @@ ActualPars ::= (ActualPars_Expr) Expr:E1 {: RESULT=new ActualPars_Expr(E1); RESU
 
 AssignOp ::= EQUAL {: RESULT=new AssignOpDerived1(); :};
 
-AddOp ::= PLUS {: RESULT=new AddOpDerived1(); :}
-	| MINUS {: RESULT=new AddOpDerived2(); :}
+AddOp ::= (Add) PLUS {: RESULT=new Add(); :}
+	| (Sub) MINUS {: RESULT=new Sub(); :}
 	;
 
-MulOp ::= STAR {: RESULT=new MulOpDerived1(); :}
-	| SLASH {: RESULT=new MulOpDerived2(); :}
-	| PERCENT {: RESULT=new MulOpDerived3(); :}
+MulOp ::= (Mul) STAR {: RESULT=new Mul(); :}
+	| (Div) SLASH {: RESULT=new Div(); :}
+	| (Mod) PERCENT {: RESULT=new Mod(); :}
 	;
 
 RelOp ::= (RelOp_EQ) EQ:t {: RESULT=new RelOp_EQ(t); RESULT.setLine(tleft); :}
