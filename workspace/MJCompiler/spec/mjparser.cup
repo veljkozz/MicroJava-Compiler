@@ -269,6 +269,8 @@ DesignatorStatement ::= (Assignment) Designator AssignOp AssignExpr
 					| (Super_Call_Stmt) SUPER SuperCall LPAREN ActualPars RPAREN
 					| (PostIncrement) Designator PLUS PLUS 
 					| (PostDecrement) Designator MINUS MINUS
+					| error:l
+					{: parser.report_error("Error: in statement at line " + lleft, null); :}
 					; 
 
 SuperCall ::= (Super_Call)/*epsilon*/;
@@ -297,7 +299,7 @@ Expr ::= (Expr_Pos) TermList
 	;
 	
 TermList ::= (TermList_Term) Term
-	| (TermList_AddOp) Term AddOp TermList
+	| (TermList_AddOp) TermList AddOp Term 
 	;
 
 Term ::= (Term_MulOp) Factor MulOp Term
@@ -317,10 +319,9 @@ Designator ::= (Designator) DesignatorName:name DesignatorList
 ;
 
 DesignatorName ::= (Designator_Name) IDENT:name
-	| (DesignatorName_Arr) IDENT:name LBRACKET Expr RBRACKET
 	;
 
-DesignatorList ::= (DesignatorList_Arr) DesignatorList DOT IDENT:name LBRACKET Expr RBRACKET 
+DesignatorList ::= (DesignatorList_Arr) DesignatorList LBRACKET Expr RBRACKET 
 	| (DesignatorList_Field) DesignatorList DOT IDENT:name 
 	| (EmptyDesignatorList) /*epsilon*/
 	;
@@ -328,7 +329,7 @@ DesignatorList ::= (DesignatorList_Arr) DesignatorList DOT IDENT:name LBRACKET E
 
 ActualPars ::= (ActualPars_Expr) Expr
 	| (ActualPars_List) ActualPars COMMA Expr
-	| /* epsilon*/
+	| (NoPars) /* epsilon*/
 	;
 
 AssignOp ::= EQUAL;

@@ -292,6 +292,8 @@ DesignatorStatement ::= (Assignment) Designator:D1 AssignOp:A2 AssignExpr:A3 {: 
 					| (Super_Call_Stmt) SUPER SuperCall:S1 LPAREN ActualPars:A2 RPAREN {: RESULT=new Super_Call_Stmt(S1, A2); RESULT.setLine(S1left); :}
 					| (PostIncrement) Designator:D1 PLUS PLUS {: RESULT=new PostIncrement(D1); RESULT.setLine(D1left); :} 
 					| (PostDecrement) Designator:D1 MINUS MINUS {: RESULT=new PostDecrement(D1); RESULT.setLine(D1left); :}
+					| error:l
+					{: parser.report_error("Error: in statement at line " + lleft, null); :} {: RESULT=new DesignatorStatementDerived1(); :}
 					; 
 
 SuperCall ::= (Super_Call) {: RESULT=new Super_Call(); :}/*epsilon*/;
@@ -320,7 +322,7 @@ Expr ::= (Expr_Pos) TermList:T1 {: RESULT=new Expr_Pos(T1); RESULT.setLine(T1lef
 	;
 	
 TermList ::= (TermList_Term) Term:T1 {: RESULT=new TermList_Term(T1); RESULT.setLine(T1left); :}
-	| (TermList_AddOp) Term:T1 AddOp:A2 TermList:T3 {: RESULT=new TermList_AddOp(T1, A2, T3); RESULT.setLine(T1left); :}
+	| (TermList_AddOp) TermList:T1 AddOp:A2 Term:T3 {: RESULT=new TermList_AddOp(T1, A2, T3); RESULT.setLine(T1left); :} 
 	;
 
 Term ::= (Term_MulOp) Factor:F1 MulOp:M2 Term:T3 {: RESULT=new Term_MulOp(F1, M2, T3); RESULT.setLine(F1left); :}
@@ -340,10 +342,9 @@ Designator ::= (Designator) DesignatorName:name DesignatorList:D1 {: RESULT=new 
 ;
 
 DesignatorName ::= (Designator_Name) IDENT:name {: RESULT=new Designator_Name(name); RESULT.setLine(nameleft); :}
-	| (DesignatorName_Arr) IDENT:name LBRACKET Expr:E1 RBRACKET {: RESULT=new DesignatorName_Arr(name, E1); RESULT.setLine(nameleft); :}
 	;
 
-DesignatorList ::= (DesignatorList_Arr) DesignatorList:D1 DOT IDENT:name LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorList_Arr(D1, name, E2); RESULT.setLine(D1left); :} 
+DesignatorList ::= (DesignatorList_Arr) DesignatorList:D1 LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorList_Arr(D1, E2); RESULT.setLine(D1left); :} 
 	| (DesignatorList_Field) DesignatorList:D1 DOT IDENT:name {: RESULT=new DesignatorList_Field(D1, name); RESULT.setLine(D1left); :} 
 	| (EmptyDesignatorList) {: RESULT=new EmptyDesignatorList(); :} /*epsilon*/
 	;
@@ -351,7 +352,7 @@ DesignatorList ::= (DesignatorList_Arr) DesignatorList:D1 DOT IDENT:name LBRACKE
 
 ActualPars ::= (ActualPars_Expr) Expr:E1 {: RESULT=new ActualPars_Expr(E1); RESULT.setLine(E1left); :}
 	| (ActualPars_List) ActualPars:A1 COMMA Expr:E2 {: RESULT=new ActualPars_List(A1, E2); RESULT.setLine(A1left); :}
-	| {: RESULT=new ActualParsDerived1(); :} /* epsilon*/
+	| (NoPars) {: RESULT=new NoPars(); :} /* epsilon*/
 	;
 
 AssignOp ::= EQUAL {: RESULT=new AssignOpDerived1(); :};

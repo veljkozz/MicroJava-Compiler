@@ -1,39 +1,23 @@
 // generated with ast extension for cup
 // version 0.8
-// 12/0/2022 13:35:55
+// 13/0/2022 22:18:15
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class TermList_AddOp extends TermList {
 
-    private Term Term;
-    private AddOp AddOp;
     private TermList TermList;
+    private AddOp AddOp;
+    private Term Term;
 
-    public TermList_AddOp (Term Term, AddOp AddOp, TermList TermList) {
-        this.Term=Term;
-        if(Term!=null) Term.setParent(this);
-        this.AddOp=AddOp;
-        if(AddOp!=null) AddOp.setParent(this);
+    public TermList_AddOp (TermList TermList, AddOp AddOp, Term Term) {
         this.TermList=TermList;
         if(TermList!=null) TermList.setParent(this);
-    }
-
-    public Term getTerm() {
-        return Term;
-    }
-
-    public void setTerm(Term Term) {
-        this.Term=Term;
-    }
-
-    public AddOp getAddOp() {
-        return AddOp;
-    }
-
-    public void setAddOp(AddOp AddOp) {
         this.AddOp=AddOp;
+        if(AddOp!=null) AddOp.setParent(this);
+        this.Term=Term;
+        if(Term!=null) Term.setParent(this);
     }
 
     public TermList getTermList() {
@@ -44,27 +28,43 @@ public class TermList_AddOp extends TermList {
         this.TermList=TermList;
     }
 
+    public AddOp getAddOp() {
+        return AddOp;
+    }
+
+    public void setAddOp(AddOp AddOp) {
+        this.AddOp=AddOp;
+    }
+
+    public Term getTerm() {
+        return Term;
+    }
+
+    public void setTerm(Term Term) {
+        this.Term=Term;
+    }
+
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(Term!=null) Term.accept(visitor);
-        if(AddOp!=null) AddOp.accept(visitor);
         if(TermList!=null) TermList.accept(visitor);
+        if(AddOp!=null) AddOp.accept(visitor);
+        if(Term!=null) Term.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(Term!=null) Term.traverseTopDown(visitor);
-        if(AddOp!=null) AddOp.traverseTopDown(visitor);
         if(TermList!=null) TermList.traverseTopDown(visitor);
+        if(AddOp!=null) AddOp.traverseTopDown(visitor);
+        if(Term!=null) Term.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(Term!=null) Term.traverseBottomUp(visitor);
-        if(AddOp!=null) AddOp.traverseBottomUp(visitor);
         if(TermList!=null) TermList.traverseBottomUp(visitor);
+        if(AddOp!=null) AddOp.traverseBottomUp(visitor);
+        if(Term!=null) Term.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -73,8 +73,8 @@ public class TermList_AddOp extends TermList {
         buffer.append(tab);
         buffer.append("TermList_AddOp(\n");
 
-        if(Term!=null)
-            buffer.append(Term.toString("  "+tab));
+        if(TermList!=null)
+            buffer.append(TermList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
@@ -85,8 +85,8 @@ public class TermList_AddOp extends TermList {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(TermList!=null)
-            buffer.append(TermList.toString("  "+tab));
+        if(Term!=null)
+            buffer.append(Term.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

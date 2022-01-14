@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 12/0/2022 13:35:55
+// 13/0/2022 22:18:15
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -68,13 +68,12 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Sub Sub) { visit(); }
     public void visit(Add Add) { visit(); }
     public void visit(AssignOpDerived1 AssignOpDerived1) { visit(); }
-    public void visit(ActualParsDerived1 ActualParsDerived1) { visit(); }
+    public void visit(NoPars NoPars) { visit(); }
     public void visit(ActualPars_List ActualPars_List) { visit(); }
     public void visit(ActualPars_Expr ActualPars_Expr) { visit(); }
     public void visit(EmptyDesignatorList EmptyDesignatorList) { visit(); }
     public void visit(DesignatorList_Field DesignatorList_Field) { visit(); }
     public void visit(DesignatorList_Arr DesignatorList_Arr) { visit(); }
-    public void visit(DesignatorName_Arr DesignatorName_Arr) { visit(); }
     public void visit(Designator_Name Designator_Name) { visit(); }
     public void visit(Designator Designator) { visit(); }
     public void visit(Factor_ParenExpr Factor_ParenExpr) { visit(); }
@@ -100,6 +99,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Condition_List Condition_List) { visit(); }
     public void visit(Condition_CondTerm Condition_CondTerm) { visit(); }
     public void visit(Super_Call Super_Call) { visit(); }
+    public void visit(DesignatorStatementDerived1 DesignatorStatementDerived1) { visit(); }
     public void visit(PostDecrement PostDecrement) { visit(); }
     public void visit(PostIncrement PostIncrement) { visit(); }
     public void visit(Super_Call_Stmt Super_Call_Stmt) { visit(); }

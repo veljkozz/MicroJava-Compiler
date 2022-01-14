@@ -1,26 +1,68 @@
 program test
- int x;
- class Klasa
+ const int rr = 1;
+ class Osnovna
 {
 	int x;
 	{
+		Osnovna()
+		{
+			print(2);
+		}
+		void a(int r)
+		{ print(r); }
+		void b()
+		{ 
+			this.x = 1; 
+			print(this.x);
+		}
 	}
 }
 
-class Izvedena extends Klasa
+
+class Izvedena extends Osnovna
 {
-	int y;
-	Klasa klasica;
+	int woo;
 	{
-		Izvedena(){}	
+		Izvedena()
+		{
+		
+		super();
+		print(3);
+		
+		}
+		void a(int k)
+		{ 
+			 print(k+1);
+		}
 	}
 }
+
+class Izvedenija extends Izvedena
 {
+	{
+		Izvedenija(){
+		print(1);
+		super();
+		print(4);
+		}
+	}
+}
+
+{
+	void testf(Osnovna o) { print(o.x); }
 	
-	void main() Klasa osn; Izvedena izv; int k, intovi[];
+	void main() Osnovna osnovne[]; Osnovna os; int citaj[]; char c[];
 	{	
-		intovi = new int[3];
-		intovi[1] = 5;
-		print(intovi[0]);
+		//read(citaj);
+		//print(citaj);
+		citaj = new int[5];
+		citaj[0] = -1;
+		print(citaj[0]);
+		c = new char[2];
+		c[1] = 'Z';
+		print(citaj[0], 3);
+		print(c[1], 1);
+		//os = new Izvedenija;
+		//os.b();
 	}
 }

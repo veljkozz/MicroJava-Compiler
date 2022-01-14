@@ -30,6 +30,7 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	boolean inWhileLoop = false;
 	boolean isEqCond = false;
+	// Current method call is class method if ClassMethCnt > 0
 	int ClassMethCnt = 0;
 	// Check if return was found in method
 	boolean hasReturn = false;
@@ -104,13 +105,13 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	public void visit(Var_ var)
 	{
-		if(ClassMethCnt == 0)globalVarCnt++;
+		if(currMethod == null) globalVarCnt++;
 		Obj obj = Tab.insert(Obj.Var, var.getVarName(), currVarType);
-		obj.setFpPos(-1);;
+		obj.setFpPos(-1);
 	}	
 	public void visit(Var_Arr var_arr) 
 	{ 
-		globalVarCnt++;
+		if(currMethod == null) globalVarCnt++;
 		Struct s = new Struct(Struct.Array);
 		s.setElementType(currVarType);
 		Tab.insert(Obj.Var, var_arr.getVarName(), s);
@@ -198,7 +199,7 @@ public class SemanticPass extends VisitorAdaptor {
 		classNames.add(className.getName());
 		Tab.openScope();
 		// Insert pointer to virtual function table
-		Tab.insert(Obj.Var, "_vfptr", vfptr_struct);
+		Tab.insert(Obj.Fld, "_vfptr", vfptr_struct);
 	}
 	
 	public static void copyMembers(Struct parent, Struct child)
@@ -342,6 +343,17 @@ public class SemanticPass extends VisitorAdaptor {
 			currMethod.setLevel(currMethod.getLevel() + 1);
 		}
 		
+		if(currMethod.getName().equals("main"))
+		{
+			if(currMethod.getType().equals(Tab.noType))
+			{
+				mainFound = true;
+			}
+			else
+			{
+				report_error("Error: main not void", methodTypeName);
+			}
+		}
 	}
 	 
 	public void visit(Form_Param formParam)
@@ -351,6 +363,10 @@ public class SemanticPass extends VisitorAdaptor {
 		Obj obj = Tab.insert(Obj.Var, paramName, type);
 		obj.setFpPos(currMethod.getLevel());
 		currMethod.setLevel(currMethod.getLevel() + 1);
+		if(currMethod.getName().equals("main"))
+		{
+			report_error("Error: main does not have arguments", formParam);
+		}
 	}
 	
 	public void visit(Form_Param_Arr formParam)
@@ -428,6 +444,12 @@ public class SemanticPass extends VisitorAdaptor {
 	}
 	
 	public void visit(PrintStmt_ stmt)
+	{
+		Struct type = stmt.getExpr().struct;
+		if(!isSimpleType(type))
+			report_error("Error: invalid argument for print function", stmt);
+	}
+	public void visit(PrintStmt_Num stmt)
 	{
 		Struct type = stmt.getExpr().struct;
 		if(!isSimpleType(type))
@@ -665,6 +687,7 @@ public class SemanticPass extends VisitorAdaptor {
 		}
 	}
 	
+	/*
 	public void visit(DesignatorName_Arr designatorName)
 	{
 		currDesignator.add(0, Tab.find(designatorName.getName()));
@@ -679,26 +702,22 @@ public class SemanticPass extends VisitorAdaptor {
 		//currDesignatorO = new Obj(Obj.Elem, currDesignatorO.getName(),currDesignatorO.getType().getElemType());
 		designatorName.obj = currDesignatorO;
 		currDesignator.set(0, currDesignatorO);
-	}
+	}*/
 	
 	public void visit(DesignatorList_Arr designatorList)
 	{
-		String name = designatorList.getName();
 		Obj currDesignatorO = currDesignator.get(0);
 		
-		Struct currS = currDesignatorO.getType();
-		if(currS.getKind() == Struct.Class && currS.getMembersTable().searchKey(name) != null) {
-			currDesignatorO = currS.getMembersTable().searchKey(name);
-			currS = currDesignatorO.getType().getElemType();
-			if(!(currDesignatorO.getType().getKind() == Struct.Array))
-				report_error("Error: variable not an array", designatorList);
-			currDesignatorO = new Obj(Obj.Elem, currDesignatorO.getName() , currDesignatorO.getType().getElemType());
+		if(currDesignatorO.getType().getKind() == Struct.Array) {
+			currDesignatorO = new Obj(Obj.Elem, currDesignatorO.getName(), 
+					currDesignatorO.getType().getElemType());
 			if(!designatorList.getExpr().struct.equals(Tab.intType))
 				report_error("Error: expression must have int type", designatorList);
 			currDesignator.set(0, currDesignatorO);
+			designatorList.obj = currDesignatorO;
 		}
 		else
-			report_error("Error: cannot find field " + designatorList.getName(), designatorList);
+			report_error("Error: variable not an array", designatorList);
 	}
 	
 	public void visit(DesignatorList_Field designatorList)
@@ -710,9 +729,17 @@ public class SemanticPass extends VisitorAdaptor {
 			currDesignatorO = currS.getMembersTable().searchKey(name);
 			if(currDesignatorO.getKind() == Obj.Meth) ClassMethCnt++;
 			currDesignator.set(0, currDesignatorO);
+			designatorList.obj = currDesignatorO;
+		}
+		else if(currDesignatorO.getName().equals("this") && Tab.find(name) != Tab.noObj)
+		{
+			currDesignatorO = Tab.find(name);
+			if(currDesignatorO.getKind() == Obj.Meth) ClassMethCnt++;
+			currDesignator.set(0, currDesignatorO);
+			designatorList.obj = currDesignatorO;
 		}
 		else
-			report_error("Error: cannot find field " + designatorList.getName(), designatorList);
+			report_error("Error: cannot find member " + designatorList.getName(), designatorList);
 	}
 	
 	
@@ -744,7 +771,7 @@ public class SemanticPass extends VisitorAdaptor {
 					} else numParams--;
 				}
 			}
-			if(numParams != 0 ) report_error("Wtf dude", node);
+			if(numParams != 0 ) report_error("Wtf", node);
 		}
 		currActualParams.clear();
 		if(ClassMethCnt > 0) ClassMethCnt--;
@@ -752,10 +779,13 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	boolean isCompatible(Struct s1, Struct s2)
 	{
-		if(s1.compatibleWith(s2)) return true;
+		if(s1 == s2) return true;
 		else if(s1.getKind() == Struct.Class && s2.getKind() == Struct.Class)
 			return isBase(s1, s2);
-		return false;
+		else if(s1.getKind() == s2.getKind() && s2.getKind() == Struct.Array && s1.getElemType() == s2.getElemType())
+			return true;
+		else 
+			return false;
 	}
 	
 	boolean isBase(Struct base, Struct derived)

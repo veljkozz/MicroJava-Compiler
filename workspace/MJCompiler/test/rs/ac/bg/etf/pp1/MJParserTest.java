@@ -58,9 +58,11 @@ public class MJParserTest {
 				File objFile = new File("test/program.obj");
 				if(objFile.exists()) objFile.delete();
 				
+				Code.dataSize = semPass.globalVarCnt;
 				CodeGenerator codeGenerator = new CodeGenerator();
 				prog.traverseBottomUp(codeGenerator);
-				Code.dataSize = semPass.globalVarCnt;
+				
+				System.out.println("Globa vars: "+ semPass.globalVarCnt);
 				Code.mainPc = codeGenerator.mainPc;
 				Code.write(new FileOutputStream(objFile));
 				
