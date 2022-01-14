@@ -204,11 +204,11 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	public static void copyMembers(Struct parent, Struct child)
 	{
-		//SymbolDataStructure members = child.getMembersTable();
+		SymbolDataStructure members = child.getMembersTable();
 		for(Obj obj: parent.getMembers())
 		{
-			//members.insertKey(obj);
-			Tab.insert(obj.getKind(), obj.getName(), obj.getType());
+			if(obj.getKind() == Obj.Meth) members.insertKey(obj);
+			else Tab.insert(obj.getKind(), obj.getName(), obj.getType());
 		}
 	}
 	
@@ -312,6 +312,7 @@ public class SemanticPass extends VisitorAdaptor {
 	public void visit(RecordName recordName)
 	{
 		currClassStruct = new Struct(Struct.Class);
+		currClassStruct.setElementType(new Struct(Struct.Enum));
 		currClassObj = Tab.insert(Obj.Type, recordName.getName(), currClassStruct);
 		//recordName.obj = currClassObj;
 		Tab.openScope();
@@ -493,6 +494,7 @@ public class SemanticPass extends VisitorAdaptor {
 		callMeth(method, stmt);
 	}
 	
+	boolean superCalled = false;
 	public void visit(Super_Call_Stmt stmt)
 	{
 		if(currClassObj == null)
@@ -509,10 +511,12 @@ public class SemanticPass extends VisitorAdaptor {
 			else if(!inConstructor)
 			{
 				ClassMethCnt++;
+				superCalled = true;
 				callMeth(currMethod, stmt);
 			}
 			
 		}
+		superCalled = false;
 	}
 	
 	public void visit(PostIncrement stmt)
@@ -742,13 +746,19 @@ public class SemanticPass extends VisitorAdaptor {
 			report_error("Error: cannot find member " + designatorList.getName(), designatorList);
 	}
 	
+	public void visit(Super_Call supercall)
+	{
+		superCalled = true;
+	}
 	
 	void callMeth(Obj method, SyntaxNode node)
 	{
 		if(!(method.getKind() == Obj.Meth))
 			report_error("Error: " + method.getName() + " is not a method", node);
 		// Check parameters
-		Iterator<Obj> paramIt = method.getLocalSymbols().iterator();
+		Iterator<Obj> paramIt;
+		if(superCalled) paramIt = Tab.currentScope().getLocals().symbols().iterator();
+		else paramIt = method.getLocalSymbols().iterator();
 		int numParams = method.getLevel();
 		if(ClassMethCnt > 0)
 		{

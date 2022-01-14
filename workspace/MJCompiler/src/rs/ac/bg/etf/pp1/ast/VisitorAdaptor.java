@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 13/0/2022 22:18:15
+// 14/0/2022 16:46:17
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,11 +8,13 @@ package rs.ac.bg.etf.pp1.ast;
 public abstract class VisitorAdaptor implements Visitor { 
 
     public void visit(MethodDecl MethodDecl) { }
+    public void visit(If If) { }
     public void visit(TermList TermList) { }
     public void visit(GlobalMethods GlobalMethods) { }
     public void visit(MethodType MethodType) { }
     public void visit(PrintStmt PrintStmt) { }
     public void visit(Var Var) { }
+    public void visit(Else Else) { }
     public void visit(StatementList StatementList) { }
     public void visit(Extends Extends) { }
     public void visit(Val Val) { }
@@ -23,7 +25,6 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(OptionalVarDeclarations OptionalVarDeclarations) { }
     public void visit(Term Term) { }
     public void visit(Condition Condition) { }
-    public void visit(Statements Statements) { }
     public void visit(MulOp MulOp) { }
     public void visit(AssignExpr AssignExpr) { }
     public void visit(ClassVar ClassVar) { }
@@ -56,10 +57,10 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(SingleStatement SingleStatement) { }
     public void visit(ClassMethods ClassMethods) { }
     public void visit(FormParam FormParam) { }
-    public void visit(RelOpDerived4 RelOpDerived4) { visit(); }
-    public void visit(RelOpDerived3 RelOpDerived3) { visit(); }
-    public void visit(RelOpDerived2 RelOpDerived2) { visit(); }
-    public void visit(RelOpDerived1 RelOpDerived1) { visit(); }
+    public void visit(RelOp_LSSE RelOp_LSSE) { visit(); }
+    public void visit(RelOp_LSS RelOp_LSS) { visit(); }
+    public void visit(RelOp_GRE RelOp_GRE) { visit(); }
+    public void visit(RelOp_GRT RelOp_GRT) { visit(); }
     public void visit(RelOp_NEQ RelOp_NEQ) { visit(); }
     public void visit(RelOp_EQ RelOp_EQ) { visit(); }
     public void visit(Mod Mod) { visit(); }
@@ -93,8 +94,10 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Assign_Expr Assign_Expr) { visit(); }
     public void visit(CondFact_Relop CondFact_Relop) { visit(); }
     public void visit(CondFact_Expr CondFact_Expr) { visit(); }
+    public void visit(And And) { visit(); }
     public void visit(CondTerm_List CondTerm_List) { visit(); }
     public void visit(CondTerm_CondFact CondTerm_CondFact) { visit(); }
+    public void visit(Or Or) { visit(); }
     public void visit(ConditionDerived1 ConditionDerived1) { visit(); }
     public void visit(Condition_List Condition_List) { visit(); }
     public void visit(Condition_CondTerm Condition_CondTerm) { visit(); }
@@ -107,6 +110,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Assignment Assignment) { visit(); }
     public void visit(PrintStmt_Num PrintStmt_Num) { visit(); }
     public void visit(PrintStmt_ PrintStmt_) { visit(); }
+    public void visit(Else_ Else_) { visit(); }
+    public void visit(If_ If_) { visit(); }
     public void visit(DO_NT DO_NT) { visit(); }
     public void visit(Print_Stmt Print_Stmt) { visit(); }
     public void visit(ReadStmt ReadStmt) { visit(); }
@@ -118,7 +123,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(IfElseStmt IfElseStmt) { visit(); }
     public void visit(IfStmt IfStmt) { visit(); }
     public void visit(Statement_Designator Statement_Designator) { visit(); }
-    public void visit(StatementsDerived1 StatementsDerived1) { visit(); }
+    public void visit(Statements Statements) { visit(); }
     public void visit(StatementDerived2 StatementDerived2) { visit(); }
     public void visit(StatementDerived1 StatementDerived1) { visit(); }
     public void visit(NoStmt NoStmt) { visit(); }

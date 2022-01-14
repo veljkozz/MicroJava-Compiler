@@ -1,24 +1,31 @@
 // generated with ast extension for cup
 // version 0.8
-// 13/0/2022 22:18:15
+// 14/0/2022 16:46:17
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class RelOpDerived3 extends RelOp {
+public class Or implements SyntaxNode {
 
-    private String t;
-
-    public RelOpDerived3 (String t) {
-        this.t=t;
+    private SyntaxNode parent;
+    private int line;
+    public Or () {
     }
 
-    public String getT() {
-        return t;
+    public SyntaxNode getParent() {
+        return parent;
     }
 
-    public void setT(String t) {
-        this.t=t;
+    public void setParent(SyntaxNode parent) {
+        this.parent=parent;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line=line;
     }
 
     public void accept(Visitor visitor) {
@@ -39,13 +46,10 @@ public class RelOpDerived3 extends RelOp {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("RelOpDerived3(\n");
-
-        buffer.append(" "+tab+t);
-        buffer.append("\n");
+        buffer.append("Or(\n");
 
         buffer.append(tab);
-        buffer.append(") [RelOpDerived3]");
+        buffer.append(") [Or]");
         return buffer.toString();
     }
 }

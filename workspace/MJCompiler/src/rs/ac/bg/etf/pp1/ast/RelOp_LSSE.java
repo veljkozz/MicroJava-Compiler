@@ -1,0 +1,51 @@
+// generated with ast extension for cup
+// version 0.8
+// 14/0/2022 16:46:17
+
+
+package rs.ac.bg.etf.pp1.ast;
+
+public class RelOp_LSSE extends RelOp {
+
+    private String t;
+
+    public RelOp_LSSE (String t) {
+        this.t=t;
+    }
+
+    public String getT() {
+        return t;
+    }
+
+    public void setT(String t) {
+        this.t=t;
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void childrenAccept(Visitor visitor) {
+    }
+
+    public void traverseTopDown(Visitor visitor) {
+        accept(visitor);
+    }
+
+    public void traverseBottomUp(Visitor visitor) {
+        accept(visitor);
+    }
+
+    public String toString(String tab) {
+        StringBuffer buffer=new StringBuffer();
+        buffer.append(tab);
+        buffer.append("RelOp_LSSE(\n");
+
+        buffer.append(" "+tab+t);
+        buffer.append("\n");
+
+        buffer.append(tab);
+        buffer.append(") [RelOp_LSSE]");
+        return buffer.toString();
+    }
+}

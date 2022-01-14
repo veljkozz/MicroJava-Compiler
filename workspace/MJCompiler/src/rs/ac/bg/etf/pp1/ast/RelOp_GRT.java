@@ -1,15 +1,15 @@
 // generated with ast extension for cup
 // version 0.8
-// 13/0/2022 22:18:15
+// 14/0/2022 16:46:17
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class RelOpDerived4 extends RelOp {
+public class RelOp_GRT extends RelOp {
 
     private String t;
 
-    public RelOpDerived4 (String t) {
+    public RelOp_GRT (String t) {
         this.t=t;
     }
 
@@ -39,13 +39,13 @@ public class RelOpDerived4 extends RelOp {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("RelOpDerived4(\n");
+        buffer.append("RelOp_GRT(\n");
 
         buffer.append(" "+tab+t);
         buffer.append("\n");
 
         buffer.append(tab);
-        buffer.append(") [RelOpDerived4]");
+        buffer.append(") [RelOp_GRT]");
         return buffer.toString();
     }
 }

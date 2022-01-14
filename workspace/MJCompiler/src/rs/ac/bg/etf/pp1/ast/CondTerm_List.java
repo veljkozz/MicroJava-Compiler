@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 13/0/2022 22:18:15
+// 14/0/2022 16:46:17
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,11 +8,14 @@ package rs.ac.bg.etf.pp1.ast;
 public class CondTerm_List extends CondTerm {
 
     private CondTerm CondTerm;
+    private And And;
     private CondFact CondFact;
 
-    public CondTerm_List (CondTerm CondTerm, CondFact CondFact) {
+    public CondTerm_List (CondTerm CondTerm, And And, CondFact CondFact) {
         this.CondTerm=CondTerm;
         if(CondTerm!=null) CondTerm.setParent(this);
+        this.And=And;
+        if(And!=null) And.setParent(this);
         this.CondFact=CondFact;
         if(CondFact!=null) CondFact.setParent(this);
     }
@@ -23,6 +26,14 @@ public class CondTerm_List extends CondTerm {
 
     public void setCondTerm(CondTerm CondTerm) {
         this.CondTerm=CondTerm;
+    }
+
+    public And getAnd() {
+        return And;
+    }
+
+    public void setAnd(And And) {
+        this.And=And;
     }
 
     public CondFact getCondFact() {
@@ -39,17 +50,20 @@ public class CondTerm_List extends CondTerm {
 
     public void childrenAccept(Visitor visitor) {
         if(CondTerm!=null) CondTerm.accept(visitor);
+        if(And!=null) And.accept(visitor);
         if(CondFact!=null) CondFact.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(CondTerm!=null) CondTerm.traverseTopDown(visitor);
+        if(And!=null) And.traverseTopDown(visitor);
         if(CondFact!=null) CondFact.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(CondTerm!=null) CondTerm.traverseBottomUp(visitor);
+        if(And!=null) And.traverseBottomUp(visitor);
         if(CondFact!=null) CondFact.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -61,6 +75,12 @@ public class CondTerm_List extends CondTerm {
 
         if(CondTerm!=null)
             buffer.append(CondTerm.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        if(And!=null)
+            buffer.append(And.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

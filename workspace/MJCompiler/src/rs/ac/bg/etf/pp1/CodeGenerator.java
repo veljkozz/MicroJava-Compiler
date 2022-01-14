@@ -24,6 +24,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	Obj currElem = null;
 	
 	boolean inClass = false;
+	boolean superCall = false;
 	static class VMT
 	{
 		Obj classObj;
@@ -185,15 +186,22 @@ public class CodeGenerator extends VisitorAdaptor {
 			// super constructor call
 			fpcounter = 0;
 			name = baseClassObj.getName();
+			
+			// for vfptr + "this"
+			Code.put(Code.dup);
+			Code.put(Code.dup);
+			vfptr = currClass.getType().getMembersTable().searchKey("_vfptr");
+			Code.load(vfptr);
 		}
 		else {
 			name = currMeth.getName();
+			//Code.put(Code.load_n + 0);
+			VMT baseClassVmt = vmtMap.get(baseClassObj.getName());
+			Code.loadConst(baseClassVmt.vmt_addr);
 		}
 		
-		Code.put(Code.dup);
-		Code.put(Code.dup);
-		vfptr = currClass.getType().getMembersTable().searchKey("_vfptr");
-		Code.load(vfptr);
+		
+		
 		Code.put(Code.invokevirtual);
 		for(int i=0; i<name.length(); i++)
 		{
@@ -202,6 +210,10 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		Code.put4(-1);
 		
+	}
+	public void visi(Super_Call supercall)
+	{
+		superCall = true;
 	}
 	
 	public void visit(MethodTypeName mtypeName)
@@ -321,7 +333,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(Designator_Name designator) { 
 		currDesignatorName = designator.obj;
-		if(designator.obj.getKind() != Obj.Meth) currDes = designator.obj;
+		//if(designator.obj.getKind() currDes = designator.obj;
 		if(currDesignatorName.getKind() == Obj.Fld && currClass != null)
 		{
 			// this kada se pristupa sopstvenom polju unutar klase
@@ -343,9 +355,11 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		
 		
+		
 		if(desField.obj.getKind() == Obj.Meth) 
 		{
 				ClassMethCnt++;
+				currDes = currDesignatorName;
 				// Dup for putting "this"
 				//Code.put(Code.dup);
 		}
@@ -476,35 +490,45 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(Factor_New fnew)
 	{
+		
 		Struct classType = fnew.struct;
 		String className = fnew.getType().getTypeName();
 		
-		Code.put(Code.new_);
-		Code.put2(classType.getNumberOfFields()*4);
-		// load vfptr val
-		Code.put(Code.dup);
-		Code.loadConst(vmtMap.get(className).vmt_addr);
-		Code.put(Code.putfield); 
-		Code.put2(0);
-		
-		Obj constructor;
-		if((constructor = classType.getMembersTable().searchKey(className)) != null)
+		if(classType.getElemType().getKind() == Struct.Enum) //RECORD
 		{
-			// Class has constructor
-			Obj vfptr = classType.getMembersTable().searchKey("_vfptr");
-			
-			//Code.load(assign.getDesignator().obj);
-			Code.put(Code.dup); Code.put(Code.dup);
-			Code.put(Code.getfield); 
-			Code.put2(0);
-			Code.put(Code.invokevirtual);
-			for(int i=0; i<className.length(); i++)
-			{
-				int val = className.charAt(i);
-				Code.put4(val);
-			}
-			Code.put4(-1);
+			Code.put(Code.new_);
+			Code.put2(classType.getNumberOfFields()*4);
 		}
+		else {
+			// CLASS
+			Code.put(Code.new_);
+			Code.put2(classType.getNumberOfFields()*4);
+			// load vfptr val
+			Code.put(Code.dup);
+			Code.loadConst(vmtMap.get(className).vmt_addr);
+			Code.put(Code.putfield); 
+			Code.put2(0);
+			
+			Obj constructor;
+			if((constructor = classType.getMembersTable().searchKey(className)) != null)
+			{
+				// Class has constructor
+				Obj vfptr = classType.getMembersTable().searchKey("_vfptr");
+				
+				//Code.load(assign.getDesignator().obj);
+				Code.put(Code.dup); Code.put(Code.dup);
+				Code.put(Code.getfield); 
+				Code.put2(0);
+				Code.put(Code.invokevirtual);
+				for(int i=0; i<className.length(); i++)
+				{
+					int val = className.charAt(i);
+					Code.put4(val);
+				}
+				Code.put4(-1);
+			}
+		}
+		
 	}
 	public void visit(Factor_New_Arr fnewArr)
 	{
@@ -556,20 +580,36 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(TermList_AddOp addOp) { Code.put(addOp.getAddOp().obj.getAdr()); }
 	public void visit(Term_MulOp mulOp){ Code.put(mulOp.getMulOp().obj.getAdr());}
-	
-	// ADDING "THIS" ARG
-	public void visit(NoPars nopars)
+	public void visit(PostIncrement postInc)
 	{
-		if(currDes != null && currMeth != null)
-		{
-			// add "this" as first parameter
-			//Code.load(currClass);
-			Code.put(Code.dup);
-		}
+		Code.put(Code.inc);
+		Code.put(postInc.getDesignator().obj.getAdr());
+		Code.put(1);
+	}
+	public void visit(PostDecrement postDec)
+	{
+		Code.put(Code.inc);
+		Code.put(postDec.getDesignator().obj.getAdr());
+		Code.put(-1);
 	}
 	
-	public void visit(ActualPars_Expr parsExpr)
-	{
+	// ADDING "THIS" ARG
+	void addThis(SyntaxNode parent) {
+		while(true)
+		{
+			if(parent.getClass() == Factor_FunCall.class || parent.getClass() == FuncCall.class)
+				break;
+			else {
+				if(parent.getClass() == Super_Call_Stmt.class)
+				{
+					//System.out.println("ook");
+					Code.put(Code.load_n + 0);
+					Code.put(Code.dup_x1);
+					Code.put(Code.pop);	
+					return;
+				}
+			}
+		}
 		if(currDes != null && currMeth != null)
 		{
 			// add "this" as first parameter
@@ -580,6 +620,19 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.put(Code.dup_x1);
 		}
 	}
+	
+	public void visit(NoPars noPars)
+	{
+		SyntaxNode parent = noPars.getParent();
+		addThis(parent);
+	}
+	
+	public void visit(ActualPars_Expr parsExpr)
+	{
+		SyntaxNode parent = parsExpr.getParent();
+		
+		addThis(parent);
+	}
 	public void visit(ActualPars_List actPars)
 	{
 		if(currDes != null)
@@ -589,4 +642,202 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		
 	}
+	
+	
+	// SKOKOVI I USLOVNE STRUKTURE
+	boolean inWhile = false;
+	boolean inIf = false;
+	ArrayList<Integer> whileStart = new ArrayList<Integer>();
+	ArrayList<ArrayList<Integer>> ifPatches = new ArrayList<ArrayList<Integer>>();
+	
+	ArrayList<Integer> enterPatches = new ArrayList<Integer>();
+	ArrayList<ArrayList<Integer>> trueJumps = new ArrayList<ArrayList<Integer>>();
+	ArrayList<ArrayList<Integer>> falseJumps = new ArrayList<ArrayList<Integer>>();
+	
+	ArrayList<Boolean> isOrCond = new ArrayList<Boolean>();
+	
+	public void visit(DO_NT startWhile)
+	{
+		whileStart.add(Code.pc, 0);
+		inWhile = true;
+		inIf = false;
+	}
+	public void visit(If_ startIf)
+	{
+		if(trueJumps.isEmpty()) {
+			ifPatches.add(new ArrayList<Integer>());
+			trueJumps.add(new ArrayList<Integer>());
+			falseJumps.add(new ArrayList<Integer>());
+		}
+		else {
+			ifPatches.add(0, new ArrayList<Integer>());
+			trueJumps.add(0, new ArrayList<Integer>());
+			falseJumps.add(0, new ArrayList<Integer>());
+		}
+		//ifPatches.get(0).add(Code.pc, 0);
+		inIf = true;
+		inWhile = false;
+	}
+	public void visit(DoWhileStmt loop)
+	{
+		//int op = loop.getCondition().struct.getKind();
+		
+	}
+	
+	void backPatch()
+	{
+		if(!trueJumps.isEmpty())
+		{
+			ArrayList<Integer> trueJmps = trueJumps.remove(0);
+			for(Integer addr: trueJmps)
+			{
+				Code.fixup(addr);
+			}
+		}
+		if(!falseJumps.isEmpty())
+		{
+			ArrayList<Integer> falseJmps = falseJumps.remove(0);
+			for(Integer addr: falseJmps)
+			{
+				Code.fixup(addr);
+			}
+		}
+	
+		if(!ifPatches.isEmpty())
+		{
+			ArrayList<Integer> addrs = ifPatches.remove(0);
+			for(Integer addr: addrs)
+			{
+				//Code.fixup(addr);
+			}
+		}
+	}
+	public void visit(IfStmt statements)
+	{
+		backPatch();
+	}
+	
+	public void visit(Else_ Else)
+	{
+		backPatch();
+	}
+	
+	ArrayList<Integer> toRemove = new ArrayList<Integer>();
+	int Op = -1;
+	boolean OrCondition = false;
+	// fixing previous true jumps
+	public void visit(Condition_CondTerm condition)
+	{
+		for(int i=0;i< trueJumps.get(0).size(); i++)
+		{
+			Code.fixup(trueJumps.get(0).get(i));
+			if(condition.getParent().getClass() != Condition_List.class)
+				toRemove.add(trueJumps.get(0).get(i));
+		}
+		for(Integer i: toRemove)
+		{
+			trueJumps.get(0).remove(i);
+		}
+		toRemove.clear();
+	}
+	
+	
+	
+	// Fixup true jumps in AND and remove them
+	public void visit(And andCondition)
+	{
+		for(int i=0;i<trueJumps.get(0).size(); i++)
+		{
+			Code.fixup(trueJumps.get(0).get(i));
+			toRemove.add(trueJumps.get(0).get(i));
+		}
+		for(Integer i: toRemove)
+		{
+			trueJumps.get(0).remove(i);
+		}
+		toRemove.clear();
+	}
+	
+	
+	// Fixup and remove patches for previous false jumps
+	public void visit(Or orCondition)
+	{
+		for(int i=0;i<falseJumps.get(0).size(); i++)
+		{
+			Code.fixup(falseJumps.get(0).get(i));
+			toRemove.add(falseJumps.get(0).get(i));
+		}
+		for(Integer i: toRemove)
+		{
+			falseJumps.get(0).remove(i);
+		}
+		toRemove.clear();
+		
+		for(Integer addr: trueJumps.get(0))
+		{
+			//enterPatches.add(trueJumps.get(0).remove(0));
+		}
+	}
+	// Fix and remove patches for previous true jumps
+	public void visit(Condition_List condition)
+	{
+		OrCondition = true;
+		for(int i=0;i<trueJumps.get(0).size(); i++)
+		{
+			Code.fixup(trueJumps.get(0).get(i));
+			toRemove.add(trueJumps.get(0).get(i));
+		}
+		
+		for(Integer i: toRemove)
+		{
+			trueJumps.get(0).remove(i);
+		}
+		toRemove.clear();
+	}
+	
+	// a AND b
+	// fixup false jump
+	public void visit(CondTerm_List cndTerm)
+	{
+		Obj opobj = cndTerm.getCondFact().struct.getMembersTable().searchKey("op" + (names-1));
+		int op = Op; //opobj.getKind();
+		{
+			// true jump samo nastavlja
+			Code.putFalseJump(Code.inverse[op], 0);
+			trueJumps.get(0).add(Code.pc-2);
+			Code.putFalseJump(op, 0);
+			falseJumps.get(0).add(Code.pc-2);
+		}
+	}
+	public void visit(CondTerm_CondFact cndTerm)
+	{
+		Obj opobj = cndTerm.getCondFact().struct.getMembersTable().searchKey("op"+(names-1));
+		int op = Op; //opobj.getKind();
+		{
+			Code.putFalseJump(Code.inverse[op], 0);
+			trueJumps.get(0).add(Code.pc-2);
+			Code.putFalseJump(op, 0);
+			falseJumps.get(0).add(Code.pc-2);
+		}
+	}
+	int names = 0;
+	public void visit(CondFact_Relop relOp)
+	{
+		Code.put(Code.dup2);
+		Op = relOp.getRelOp().obj.getKind();
+	}
+	
+	public void visit(CondFact_Expr boolExpr)
+	{
+		Code.loadConst(1);
+		Code.put(Code.dup2);
+		Op = Code.eq;
+	}
+	
+	public void visit(RelOp_EQ op) { op.obj = new Obj(Code.eq, "eq", Tab.noType); }
+	public void visit(RelOp_NEQ op) { op.obj = new Obj(Code.ne, "eq", Tab.noType); }
+	public void visit(RelOp_GRT op) { op.obj = new Obj(Code.gt, "eq", Tab.noType); }
+	public void visit(RelOp_GRE op) { op.obj = new Obj(Code.ge, "eq", Tab.noType); }
+	public void visit(RelOp_LSS op) { op.obj = new Obj(Code.lt, "eq", Tab.noType); }
+	public void visit(RelOp_LSSE op) { op.obj = new Obj(Code.le, "eq", Tab.noType); }
 }
