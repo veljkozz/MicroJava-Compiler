@@ -5,9 +5,9 @@
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class AssignExprDerived1 extends AssignExpr {
+public class While_ extends While {
 
-    public AssignExprDerived1 () {
+    public While_ () {
     }
 
     public void accept(Visitor visitor) {
@@ -28,10 +28,10 @@ public class AssignExprDerived1 extends AssignExpr {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("AssignExprDerived1(\n");
+        buffer.append("While_(\n");
 
         buffer.append(tab);
-        buffer.append(") [AssignExprDerived1]");
+        buffer.append(") [While_]");
         return buffer.toString();
     }
 }

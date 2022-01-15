@@ -5,7 +5,7 @@
 
 package rs.ac.bg.etf.pp1.ast;
 
-public abstract class ClassVarDeclarations implements SyntaxNode {
+public abstract class While implements SyntaxNode {
 
     private SyntaxNode parent;
 

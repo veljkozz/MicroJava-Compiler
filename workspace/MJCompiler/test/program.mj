@@ -6,17 +6,22 @@ program test
 		do
 		{
 			if(konst <= 2){
-				if(konst >= 2)
+				if(konst > 2)
 				{
 					print('a');
+					
 				}
 				else
 				{
 					print('b');
+					konst = konst - 2;
+					continue;
 				}
 			}
 				
 			konst--;
 		}while(konst > 0);
+		
+		print('c');
 	}
 }

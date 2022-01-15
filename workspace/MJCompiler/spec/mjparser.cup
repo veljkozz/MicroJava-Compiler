@@ -93,7 +93,7 @@ nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MulOp, AddOp, RelOp, AssignOp;
 
 nonterminal DO_NT;
-nonterminal If, Else, Or, And;
+nonterminal If, Else, Or, And, While;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj MethodTypeName, MethodDecl;
@@ -251,7 +251,7 @@ Statements ::= (Statements) LBRACE StatementList RBRACE;
 SingleStatement ::= (Statement_Designator) DesignatorStatement SEMI
 			| (IfStmt) If LPAREN Condition RPAREN Statement
 			| (IfElseStmt) If LPAREN Condition RPAREN Statement Else Statement
-			| (DoWhileStmt) DO_NT Statements WHILE LPAREN Condition RPAREN SEMI
+			| (DoWhileStmt) DO_NT Statements While LPAREN Condition RPAREN SEMI
 			| (BreakStmt) BREAK SEMI
 			| (ContinueStmt) CONTINUE SEMI
 			| (ReturnStmt) RETURN SEMI
@@ -262,6 +262,7 @@ SingleStatement ::= (Statement_Designator) DesignatorStatement SEMI
 DO_NT ::= (DO_NT) DO; 
 If ::= (If_) IF;
 Else ::= (Else_) ELSE;
+While ::= (While_) WHILE;
 
 PrintStmt ::= (PrintStmt_) PRINT LPAREN Expr RPAREN
 	| (PrintStmt_Num) PRINT LPAREN Expr COMMA NUMBER RPAREN

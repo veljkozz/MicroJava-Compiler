@@ -651,6 +651,9 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	ArrayList<Integer> ifElsePatches = new ArrayList<Integer>();
 	
+	ArrayList<ArrayList<Integer>> breakPatches = new ArrayList<ArrayList<Integer>>();
+	ArrayList<ArrayList<Integer>> continuePatches = new ArrayList<ArrayList<Integer>>();
+	
 	ArrayList<Integer> enterPatches = new ArrayList<Integer>();
 	ArrayList<ArrayList<Integer>> trueJumps = new ArrayList<ArrayList<Integer>>();
 	ArrayList<ArrayList<Integer>> falseJumps = new ArrayList<ArrayList<Integer>>();
@@ -674,6 +677,15 @@ public class CodeGenerator extends VisitorAdaptor {
 		
 		if(inWhile.isEmpty()) inWhile.add(true);
 		else inWhile.add(0, true);
+		
+		//if(ifElsePatches.isEmpty()) ifElsePatches.add(new ArrayList<Integer>());
+		//else ifElsePatches.add(0, new ArrayList<Integer>());
+		
+		if(breakPatches.isEmpty()) breakPatches.add(new ArrayList<Integer>());
+		else breakPatches.add(0, new ArrayList<Integer>());
+		
+		if(continuePatches.isEmpty()) continuePatches.add(new ArrayList<Integer>());
+		else continuePatches.add(0, new ArrayList<Integer>());
 	}
 	public void visit(If_ startIf)
 	{
@@ -693,9 +705,14 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	public void visit(DoWhileStmt loop)
 	{
-		//int op = loop.getCondition().struct.getKind();
 		Code.putJump(whileStart.remove(0));
 		backPatch();
+		// backpatch break stmts
+		ArrayList<Integer> breakPatch = breakPatches.remove(0);
+		for(Integer addr: breakPatch)
+		{
+			Code.fixup(addr);
+		}
 	}
 	
 	void backPatch()
@@ -872,4 +889,25 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(RelOp_GRE op) { op.obj = new Obj(Code.ge, "eq", Tab.noType); }
 	public void visit(RelOp_LSS op) { op.obj = new Obj(Code.lt, "eq", Tab.noType); }
 	public void visit(RelOp_LSSE op) { op.obj = new Obj(Code.le, "eq", Tab.noType); }
+	
+	public void visit(BreakStmt breakstmt)
+	{
+		Code.putJump(0);
+		breakPatches.get(0).add(Code.pc-2);
+	}
+	
+	public void visit(ContinueStmt continuestmt)
+	{
+		Code.putJump(0);
+		continuePatches.get(0).add(Code.pc-2);
+	}
+	
+	
+	public void visit(While_ whileCondBegin)
+	{
+		// backpatch continue statements
+		ArrayList<Integer> continuePatch = continuePatches.remove(0);
+		for(Integer addr: continuePatch)
+			Code.fixup(addr);
+	}
 }
