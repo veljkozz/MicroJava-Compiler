@@ -1,38 +1,68 @@
-INFO  17:40:16,028 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
-INFO  17:40:16,152 - #2 program
-INFO  17:40:16,152 - #22 test
-INFO  17:40:16,152 - #3 {
-INFO  17:40:16,154 - #18 void
-INFO  17:40:16,154 - #22 main
-INFO  17:40:16,156 - #7 (
-INFO  17:40:16,158 - #8 )
-INFO  17:40:16,159 - #22 int
-INFO  17:40:16,159 - #22 konst
-INFO  17:40:16,160 - #5 ;
-INFO  17:40:16,160 - #22 bool
-INFO  17:40:16,161 - #22 b
-INFO  17:40:16,161 - #5 ;
-INFO  17:40:16,161 - #3 {
-INFO  17:40:16,162 - #22 b
-INFO  17:40:16,163 - #11 =
-INFO  17:40:16,166 - #20 false
-INFO  17:40:16,168 - #5 ;
-INFO  17:40:16,168 - #22 konst
-INFO  17:40:16,169 - #11 =
-INFO  17:40:16,169 - #19 1
-INFO  17:40:16,180 - #5 ;
-INFO  17:40:16,180 - #22 konst
-INFO  17:40:16,180 - #13 +
-INFO  17:40:16,180 - #13 +
-INFO  17:40:16,180 - #5 ;
-INFO  17:40:16,180 - #17 print
-INFO  17:40:16,180 - #7 (
-INFO  17:40:16,180 - #22 konst
-INFO  17:40:16,181 - #8 )
-INFO  17:40:16,181 - #5 ;
-INFO  17:40:16,181 - #4 }
-INFO  17:40:16,181 - #4 }
-INFO  17:40:16,184 - Program(
+INFO  01:12:42,798 - Compiling source file: C:\Users\Veljko\Desktop\PP Projekat\MicroJava-Compiler\workspace\MJCompiler\test\program.mj
+INFO  01:12:43,416 - #2 program
+INFO  01:12:43,416 - #22 test
+INFO  01:12:43,417 - #3 {
+INFO  01:12:43,423 - #18 void
+INFO  01:12:43,424 - #22 main
+INFO  01:12:43,427 - #7 (
+INFO  01:12:43,431 - #8 )
+INFO  01:12:43,433 - #22 int
+INFO  01:12:43,433 - #22 konst
+INFO  01:12:43,436 - #5 ;
+INFO  01:12:43,436 - #22 bool
+INFO  01:12:43,437 - #22 b
+INFO  01:12:43,437 - #5 ;
+INFO  01:12:43,437 - #3 {
+INFO  01:12:43,440 - #22 konst
+INFO  01:12:43,442 - #11 =
+INFO  01:12:43,448 - #19 3
+INFO  01:12:43,453 - #5 ;
+INFO  01:12:43,455 - #37 do
+INFO  01:12:43,455 - #3 {
+INFO  01:12:43,458 - #23 if
+INFO  01:12:43,469 - #7 (
+INFO  01:12:43,476 - #22 konst
+INFO  01:12:43,476 - #32 <=
+INFO  01:12:43,477 - #19 2
+INFO  01:12:43,477 - #8 )
+INFO  01:12:43,479 - #3 {
+INFO  01:12:43,479 - #23 if
+INFO  01:12:43,480 - #7 (
+INFO  01:12:43,480 - #22 konst
+INFO  01:12:43,480 - #30 >=
+INFO  01:12:43,481 - #19 2
+INFO  01:12:43,481 - #8 )
+INFO  01:12:43,481 - #3 {
+INFO  01:12:43,482 - #17 print
+INFO  01:12:43,482 - #7 (
+INFO  01:12:43,483 - #21 a
+INFO  01:12:43,483 - #8 )
+INFO  01:12:43,484 - #5 ;
+INFO  01:12:43,484 - #4 }
+INFO  01:12:43,485 - #24 else
+INFO  01:12:43,488 - #3 {
+INFO  01:12:43,493 - #17 print
+INFO  01:12:43,494 - #7 (
+INFO  01:12:43,494 - #21 b
+INFO  01:12:43,494 - #8 )
+INFO  01:12:43,495 - #5 ;
+INFO  01:12:43,496 - #4 }
+INFO  01:12:43,496 - #4 }
+INFO  01:12:43,497 - #22 konst
+INFO  01:12:43,499 - #14 -
+INFO  01:12:43,499 - #14 -
+INFO  01:12:43,500 - #5 ;
+INFO  01:12:43,500 - #4 }
+INFO  01:12:43,501 - #38 while
+INFO  01:12:43,502 - #7 (
+INFO  01:12:43,502 - #22 konst
+INFO  01:12:43,502 - #29 >
+INFO  01:12:43,503 - #19 0
+INFO  01:12:43,503 - #8 )
+INFO  01:12:43,503 - #5 ;
+INFO  01:12:43,504 - #4 }
+INFO  01:12:43,511 - #4 }
+INFO  01:12:43,538 - Program(
   ProgName(
    test
   ) [ProgName]
@@ -77,71 +107,11 @@ INFO  17:40:16,184 - Program(
         Statements(
           Statement_List(
             Statement_List(
-              Statement_List(
-                Statement_List(
-                  NoStmt(
-                  ) [NoStmt]
-                  StatementDerived1(
-                    Statement_Designator(
-                      Assignment(
-                        Designator(
-                          Designator_Name(
-                           b
-                          ) [Designator_Name]
-                          EmptyDesignatorList(
-                          ) [EmptyDesignatorList]
-                        ) [Designator]
-                        AssignOpDerived1(
-                        ) [AssignOpDerived1]
-                        Assign_Expr(
-                          Expr_Pos(
-                            TermList_Term(
-                              Term_Fact(
-                                Factor_ConstVal(
-                                  Val_Bool(
-                                   false
-                                  ) [Val_Bool]
-                                ) [Factor_ConstVal]
-                              ) [Term_Fact]
-                            ) [TermList_Term]
-                          ) [Expr_Pos]
-                        ) [Assign_Expr]
-                      ) [Assignment]
-                    ) [Statement_Designator]
-                  ) [StatementDerived1]
-                ) [Statement_List]
-                StatementDerived1(
-                  Statement_Designator(
-                    Assignment(
-                      Designator(
-                        Designator_Name(
-                         konst
-                        ) [Designator_Name]
-                        EmptyDesignatorList(
-                        ) [EmptyDesignatorList]
-                      ) [Designator]
-                      AssignOpDerived1(
-                      ) [AssignOpDerived1]
-                      Assign_Expr(
-                        Expr_Pos(
-                          TermList_Term(
-                            Term_Fact(
-                              Factor_ConstVal(
-                                Val_Num(
-                                 1
-                                ) [Val_Num]
-                              ) [Factor_ConstVal]
-                            ) [Term_Fact]
-                          ) [TermList_Term]
-                        ) [Expr_Pos]
-                      ) [Assign_Expr]
-                    ) [Assignment]
-                  ) [Statement_Designator]
-                ) [StatementDerived1]
-              ) [Statement_List]
+              NoStmt(
+              ) [NoStmt]
               StatementDerived1(
                 Statement_Designator(
-                  PostIncrement(
+                  Assignment(
                     Designator(
                       Designator_Name(
                        konst
@@ -149,17 +119,180 @@ INFO  17:40:16,184 - Program(
                       EmptyDesignatorList(
                       ) [EmptyDesignatorList]
                     ) [Designator]
-                  ) [PostIncrement]
+                    AssignOpDerived1(
+                    ) [AssignOpDerived1]
+                    Assign_Expr(
+                      Expr_Pos(
+                        TermList_Term(
+                          Term_Fact(
+                            Factor_ConstVal(
+                              Val_Num(
+                               3
+                              ) [Val_Num]
+                            ) [Factor_ConstVal]
+                          ) [Term_Fact]
+                        ) [TermList_Term]
+                      ) [Expr_Pos]
+                    ) [Assign_Expr]
+                  ) [Assignment]
                 ) [Statement_Designator]
               ) [StatementDerived1]
             ) [Statement_List]
             StatementDerived1(
-              Print_Stmt(
-                PrintStmt_(
-                  Expr_Pos(
-                    TermList_Term(
-                      Term_Fact(
-                        Factor_Designator(
+              DoWhileStmt(
+                DO_NT(
+                ) [DO_NT]
+                Statements(
+                  Statement_List(
+                    Statement_List(
+                      NoStmt(
+                      ) [NoStmt]
+                      StatementDerived1(
+                        IfStmt(
+                          If_(
+                          ) [If_]
+                          Condition_CondTerm(
+                            CondTerm_CondFact(
+                              CondFact_Relop(
+                                Expr_Pos(
+                                  TermList_Term(
+                                    Term_Fact(
+                                      Factor_Designator(
+                                        Designator(
+                                          Designator_Name(
+                                           konst
+                                          ) [Designator_Name]
+                                          EmptyDesignatorList(
+                                          ) [EmptyDesignatorList]
+                                        ) [Designator]
+                                      ) [Factor_Designator]
+                                    ) [Term_Fact]
+                                  ) [TermList_Term]
+                                ) [Expr_Pos]
+                                RelOp_LSSE(
+                                 <=
+                                ) [RelOp_LSSE]
+                                Expr_Pos(
+                                  TermList_Term(
+                                    Term_Fact(
+                                      Factor_ConstVal(
+                                        Val_Num(
+                                         2
+                                        ) [Val_Num]
+                                      ) [Factor_ConstVal]
+                                    ) [Term_Fact]
+                                  ) [TermList_Term]
+                                ) [Expr_Pos]
+                              ) [CondFact_Relop]
+                            ) [CondTerm_CondFact]
+                          ) [Condition_CondTerm]
+                          StatementDerived2(
+                            Statements(
+                              Statement_List(
+                                NoStmt(
+                                ) [NoStmt]
+                                StatementDerived1(
+                                  IfElseStmt(
+                                    If_(
+                                    ) [If_]
+                                    Condition_CondTerm(
+                                      CondTerm_CondFact(
+                                        CondFact_Relop(
+                                          Expr_Pos(
+                                            TermList_Term(
+                                              Term_Fact(
+                                                Factor_Designator(
+                                                  Designator(
+                                                    Designator_Name(
+                                                     konst
+                                                    ) [Designator_Name]
+                                                    EmptyDesignatorList(
+                                                    ) [EmptyDesignatorList]
+                                                  ) [Designator]
+                                                ) [Factor_Designator]
+                                              ) [Term_Fact]
+                                            ) [TermList_Term]
+                                          ) [Expr_Pos]
+                                          RelOp_GRE(
+                                           >=
+                                          ) [RelOp_GRE]
+                                          Expr_Pos(
+                                            TermList_Term(
+                                              Term_Fact(
+                                                Factor_ConstVal(
+                                                  Val_Num(
+                                                   2
+                                                  ) [Val_Num]
+                                                ) [Factor_ConstVal]
+                                              ) [Term_Fact]
+                                            ) [TermList_Term]
+                                          ) [Expr_Pos]
+                                        ) [CondFact_Relop]
+                                      ) [CondTerm_CondFact]
+                                    ) [Condition_CondTerm]
+                                    StatementDerived2(
+                                      Statements(
+                                        Statement_List(
+                                          NoStmt(
+                                          ) [NoStmt]
+                                          StatementDerived1(
+                                            Print_Stmt(
+                                              PrintStmt_(
+                                                Expr_Pos(
+                                                  TermList_Term(
+                                                    Term_Fact(
+                                                      Factor_ConstVal(
+                                                        Val_Char(
+                                                         a
+                                                        ) [Val_Char]
+                                                      ) [Factor_ConstVal]
+                                                    ) [Term_Fact]
+                                                  ) [TermList_Term]
+                                                ) [Expr_Pos]
+                                              ) [PrintStmt_]
+                                            ) [Print_Stmt]
+                                          ) [StatementDerived1]
+                                        ) [Statement_List]
+                                      ) [Statements]
+                                    ) [StatementDerived2]
+                                    Else_(
+                                    ) [Else_]
+                                    StatementDerived2(
+                                      Statements(
+                                        Statement_List(
+                                          NoStmt(
+                                          ) [NoStmt]
+                                          StatementDerived1(
+                                            Print_Stmt(
+                                              PrintStmt_(
+                                                Expr_Pos(
+                                                  TermList_Term(
+                                                    Term_Fact(
+                                                      Factor_ConstVal(
+                                                        Val_Char(
+                                                         b
+                                                        ) [Val_Char]
+                                                      ) [Factor_ConstVal]
+                                                    ) [Term_Fact]
+                                                  ) [TermList_Term]
+                                                ) [Expr_Pos]
+                                              ) [PrintStmt_]
+                                            ) [Print_Stmt]
+                                          ) [StatementDerived1]
+                                        ) [Statement_List]
+                                      ) [Statements]
+                                    ) [StatementDerived2]
+                                  ) [IfElseStmt]
+                                ) [StatementDerived1]
+                              ) [Statement_List]
+                            ) [Statements]
+                          ) [StatementDerived2]
+                        ) [IfStmt]
+                      ) [StatementDerived1]
+                    ) [Statement_List]
+                    StatementDerived1(
+                      Statement_Designator(
+                        PostDecrement(
                           Designator(
                             Designator_Name(
                              konst
@@ -167,12 +300,47 @@ INFO  17:40:16,184 - Program(
                             EmptyDesignatorList(
                             ) [EmptyDesignatorList]
                           ) [Designator]
-                        ) [Factor_Designator]
-                      ) [Term_Fact]
-                    ) [TermList_Term]
-                  ) [Expr_Pos]
-                ) [PrintStmt_]
-              ) [Print_Stmt]
+                        ) [PostDecrement]
+                      ) [Statement_Designator]
+                    ) [StatementDerived1]
+                  ) [Statement_List]
+                ) [Statements]
+                Condition_CondTerm(
+                  CondTerm_CondFact(
+                    CondFact_Relop(
+                      Expr_Pos(
+                        TermList_Term(
+                          Term_Fact(
+                            Factor_Designator(
+                              Designator(
+                                Designator_Name(
+                                 konst
+                                ) [Designator_Name]
+                                EmptyDesignatorList(
+                                ) [EmptyDesignatorList]
+                              ) [Designator]
+                            ) [Factor_Designator]
+                          ) [Term_Fact]
+                        ) [TermList_Term]
+                      ) [Expr_Pos]
+                      RelOp_GRT(
+                       >
+                      ) [RelOp_GRT]
+                      Expr_Pos(
+                        TermList_Term(
+                          Term_Fact(
+                            Factor_ConstVal(
+                              Val_Num(
+                               0
+                              ) [Val_Num]
+                            ) [Factor_ConstVal]
+                          ) [Term_Fact]
+                        ) [TermList_Term]
+                      ) [Expr_Pos]
+                    ) [CondFact_Relop]
+                  ) [CondTerm_CondFact]
+                ) [Condition_CondTerm]
+              ) [DoWhileStmt]
             ) [StatementDerived1]
           ) [Statement_List]
         ) [Statements]

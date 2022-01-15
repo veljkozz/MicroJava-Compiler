@@ -2,11 +2,21 @@ program test
 {
 	void main() int konst; bool b;
 	{	
-		b = false;
-		konst = 1;
-		konst++;
-		
-		
-		print(konst);
+		konst = 3;
+		do
+		{
+			if(konst <= 2){
+				if(konst >= 2)
+				{
+					print('a');
+				}
+				else
+				{
+					print('b');
+				}
+			}
+				
+			konst--;
+		}while(konst > 0);
 	}
 }

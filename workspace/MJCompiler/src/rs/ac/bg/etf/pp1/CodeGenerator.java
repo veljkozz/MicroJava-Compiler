@@ -645,10 +645,11 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	
 	// SKOKOVI I USLOVNE STRUKTURE
-	boolean inWhile = false;
-	boolean inIf = false;
+	ArrayList<Boolean> inWhile = new ArrayList<Boolean>();
 	ArrayList<Integer> whileStart = new ArrayList<Integer>();
 	ArrayList<ArrayList<Integer>> ifPatches = new ArrayList<ArrayList<Integer>>();
+	
+	ArrayList<Integer> ifElsePatches = new ArrayList<Integer>();
 	
 	ArrayList<Integer> enterPatches = new ArrayList<Integer>();
 	ArrayList<ArrayList<Integer>> trueJumps = new ArrayList<ArrayList<Integer>>();
@@ -658,30 +659,43 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(DO_NT startWhile)
 	{
-		whileStart.add(Code.pc, 0);
-		inWhile = true;
-		inIf = false;
+		if(whileStart.isEmpty()) whileStart.add(Code.pc);
+		else whileStart.add(0, Code.pc);
+			
+		if(trueJumps.isEmpty())
+			trueJumps.add(new ArrayList<Integer>());
+		else
+			trueJumps.add(0, new ArrayList<Integer>());
+		
+		if(falseJumps.isEmpty())		
+			falseJumps.add(new ArrayList<Integer>());
+		else 
+			falseJumps.add(0, new ArrayList<Integer>());
+		
+		if(inWhile.isEmpty()) inWhile.add(true);
+		else inWhile.add(0, true);
 	}
 	public void visit(If_ startIf)
 	{
-		if(trueJumps.isEmpty()) {
-			ifPatches.add(new ArrayList<Integer>());
+		if(trueJumps.isEmpty())
 			trueJumps.add(new ArrayList<Integer>());
-			falseJumps.add(new ArrayList<Integer>());
-		}
-		else {
-			ifPatches.add(0, new ArrayList<Integer>());
+		else
 			trueJumps.add(0, new ArrayList<Integer>());
+		
+		if(falseJumps.isEmpty())		
+			falseJumps.add(new ArrayList<Integer>());
+		else 
 			falseJumps.add(0, new ArrayList<Integer>());
-		}
 		//ifPatches.get(0).add(Code.pc, 0);
-		inIf = true;
-		inWhile = false;
+
+		if(inWhile.isEmpty()) inWhile.add(false);
+		else inWhile.add(0, false);
 	}
 	public void visit(DoWhileStmt loop)
 	{
 		//int op = loop.getCondition().struct.getKind();
-		
+		Code.putJump(whileStart.remove(0));
+		backPatch();
 	}
 	
 	void backPatch()
@@ -692,6 +706,9 @@ public class CodeGenerator extends VisitorAdaptor {
 			for(Integer addr: trueJmps)
 			{
 				Code.fixup(addr);
+				Code.put(Code.pop);
+				Code.put(Code.pop);
+				
 			}
 		}
 		if(!falseJumps.isEmpty())
@@ -711,26 +728,41 @@ public class CodeGenerator extends VisitorAdaptor {
 				//Code.fixup(addr);
 			}
 		}
+		
+		inWhile.remove(0);
 	}
 	public void visit(IfStmt statements)
 	{
 		backPatch();
 	}
 	
+	public void visit(IfElseStmt statements)
+	{
+		Code.fixup(ifElsePatches.remove(0));
+	}
+	
 	public void visit(Else_ Else)
 	{
+		Code.putJump(0);
+		if(ifElsePatches.isEmpty()) ifElsePatches.add(Code.pc-2);
+		else ifElsePatches.add(0, Code.pc-2);
+		//backpatch only falseJumps
 		backPatch();
+		
 	}
 	
 	ArrayList<Integer> toRemove = new ArrayList<Integer>();
 	int Op = -1;
-	boolean OrCondition = false;
+	
 	// fixing previous true jumps
 	public void visit(Condition_CondTerm condition)
 	{
 		for(int i=0;i< trueJumps.get(0).size(); i++)
 		{
+			
 			Code.fixup(trueJumps.get(0).get(i));
+			Code.put(Code.pop); Code.put(Code.pop);
+			
 			if(condition.getParent().getClass() != Condition_List.class)
 				toRemove.add(trueJumps.get(0).get(i));
 		}
@@ -749,6 +781,8 @@ public class CodeGenerator extends VisitorAdaptor {
 		for(int i=0;i<trueJumps.get(0).size(); i++)
 		{
 			Code.fixup(trueJumps.get(0).get(i));
+			Code.put(Code.pop); Code.put(Code.pop);
+			
 			toRemove.add(trueJumps.get(0).get(i));
 		}
 		for(Integer i: toRemove)
@@ -773,18 +807,16 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		toRemove.clear();
 		
-		for(Integer addr: trueJumps.get(0))
-		{
-			//enterPatches.add(trueJumps.get(0).remove(0));
-		}
 	}
 	// Fix and remove patches for previous true jumps
+	// Condition OR CondTerm
 	public void visit(Condition_List condition)
 	{
-		OrCondition = true;
 		for(int i=0;i<trueJumps.get(0).size(); i++)
 		{
 			Code.fixup(trueJumps.get(0).get(i));
+			Code.put(Code.pop); Code.put(Code.pop);
+			
 			toRemove.add(trueJumps.get(0).get(i));
 		}
 		
@@ -830,7 +862,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(CondFact_Expr boolExpr)
 	{
 		Code.loadConst(1);
-		Code.put(Code.dup2);
+		if(!inWhile.get(0)) Code.put(Code.dup2);
 		Op = Code.eq;
 	}
 	
