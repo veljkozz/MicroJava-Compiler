@@ -226,12 +226,12 @@ RecordDeclaration ::= (RecordDeclaration) RECORD RecordName:R1 LBRACE RecordCont
 
 RecordName ::= (RecordName) IDENT:name {: RESULT=new RecordName(name); RESULT.setLine(nameleft); :};
 
-RecordContent ::= RecordContent:R1 VarDeclarations:V2 {: RESULT=new RecordContentDerived1(R1, V2); RESULT.setLine(R1left); :}
+RecordContent ::= RecordContent:R1 ClassVarDeclarations:C2 {: RESULT=new RecordContentDerived1(R1, C2); RESULT.setLine(R1left); :}
 	| {: RESULT=new RecordContentDerived2(); :} /*epsilon*/
 	;
 
 GlobalMethods ::= (Global_Methods) MethodList:M1 {: RESULT=new Global_Methods(M1); RESULT.setLine(M1left); :}
-	| {: RESULT=new GlobalMethodsDerived1(); :} /*epsilon*/
+	| (NoGlobal_Methods) {: RESULT=new NoGlobal_Methods(); :} /*epsilon*/
 	;
 
 MethodList ::= MethodList:M1 MethodDecl:M2 {: RESULT=new MethodListDerived1(M1, M2); RESULT.setLine(M1left); :}

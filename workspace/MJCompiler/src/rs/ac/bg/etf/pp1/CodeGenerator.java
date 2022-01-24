@@ -14,9 +14,10 @@ import rs.etf.pp1.symboltable.concepts.Struct;
 public class CodeGenerator extends VisitorAdaptor {
 	public int mainPc;
 	
-	Obj currDesignatorName = null;
+	ArrayList<Obj> currDesignatorName = new ArrayList<Obj>();
 	Obj currClass = null;
 	Obj currMeth = null;
+	Obj currMethCall = null;
 	int ClassMethCnt = 0;
 	
 	Obj currDes = null;
@@ -46,11 +47,15 @@ public class CodeGenerator extends VisitorAdaptor {
 		// Create a virtual function table for this class
 		vmtMap.put(className.getName(), new VMT(className.obj));
 		
+		vmtMap.get(className.getName()).vmt_addr = nextVmt;
+		
+		if(vmtMap.isEmpty()) nextVmt = Code.dataSize;
+		
 		Struct parent = currClass.getType().getElemType();
 		if(parent != null && parent != Tab.noType)
 		{
 			// Copy VMT from parent
-			vmtMap.put(currClass.getName(), new VMT(currClass));
+			//vmtMap.put(currClass.getName(), new VMT(currClass));
 			VMT vmt = vmtMap.get(currClass.getName());
 			for(Obj obj: parent.getMembers())
 			{
@@ -65,6 +70,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	int nextVmt = Code.dataSize; 
 	
+	// This is called in main
 	void createVMT()
 	{
 		// Create VMTs in static memory
@@ -91,6 +97,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.dataSize = nextVmt+1;
 	}
 	
+	// This is called after class is declared
 	void fillVMTMap()
 	{
 		if(vmtMap.isEmpty()) nextVmt = Code.dataSize;
@@ -188,8 +195,8 @@ public class CodeGenerator extends VisitorAdaptor {
 			name = baseClassObj.getName();
 			
 			// for vfptr + "this"
-			Code.put(Code.dup);
-			Code.put(Code.dup);
+			//Code.put(Code.dup);
+			//Code.put(Code.dup);
 			vfptr = currClass.getType().getMembersTable().searchKey("_vfptr");
 			Code.load(vfptr);
 		}
@@ -266,7 +273,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
 		}
-		else if(stmt.getExpr().struct.equals(SemanticPass.boolType))
+		else if(stmt.getExpr().struct.equals(SemanticAnalyzer.boolType))
 		{
 			Code.loadConst(1);
 			Code.put(Code.print);
@@ -290,7 +297,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
 		}
-		else if(stmt.getExpr().struct.equals(SemanticPass.boolType))
+		else if(stmt.getExpr().struct.equals(SemanticAnalyzer.boolType))
 		{
 			Code.loadConst(1);
 			Code.put(Code.print);
@@ -301,21 +308,24 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		currDes = null;
 	}
+	
 	public void visit(ReadStmt readstmt) { 
 		// NOT IMPLEMENTED YET
-		if(currDes.getType().equals(Tab.charType)) {
+		if(readstmt.getDesignator().obj.getType().equals(Tab.charType)) {
 			Code.put(Code.bread);
 		}
 		else Code.put(Code.read);
-		Code.store(currDes);
+		Code.store(readstmt.getDesignator().obj);
 		currDes = null; 
-		}
+	}
 	
 	public void visit(Assignment assignment)
 	{
 		Obj obj = assignment.getDesignator().obj;
 		//System.out.println("ASSIGNMENT TO " + obj.getName() + " of kind " + obj.getKind() + " and addr " + obj.getAdr());
 		Code.store(obj);
+		
+		currDes = null;
 	}
 	
 	
@@ -327,43 +337,58 @@ public class CodeGenerator extends VisitorAdaptor {
 		// If should be loaded to expr stack
 		if(parentClass.equals(Factor_Designator.class))
 			Code.load(designator.obj);	
-		currDesignatorName = null;
-		if(designator.obj.getKind() == Obj.Meth) currMeth = designator.obj;
+		currDesignatorName.remove(0);
+		if(designator.obj.getKind() == Obj.Meth) currMethCall = designator.obj;
+		
+		//currDes = null;
 	}
 	
 	public void visit(Designator_Name designator) { 
-		currDesignatorName = designator.obj;
+		currDesignatorName.add(0, designator.obj);
 		//if(designator.obj.getKind() currDes = designator.obj;
-		if(currDesignatorName.getKind() == Obj.Fld && currClass != null)
+		if(currDesignatorName.get(0).getKind() == Obj.Fld && currClass != null)
 		{
-			// this kada se pristupa sopstvenom polju unutar klase
+			// load this kada se pristupa sopstvenom polju unutar klase
 			Code.load(currMeth.getLocalSymbols().iterator().next());
 		}
-		else if(designator.obj.getType().getKind() == Struct.Array)
+		
+		if(designator.obj.getType().getKind() == Struct.Array)
 			currArr = designator.obj;
+		
+		if(designator.obj.getKind() == Obj.Var && designator.obj.getType().isRefType())
+			if(!(((Designator)designator.getParent()).getDesignatorList().getClass() == EmptyDesignatorList.class))
+			{
+				Code.load(designator.obj);
+			}
+				
 	}
 	
 	public void visit(DesignatorList_Field desField)
 	{
 		if(!desField.getDesignatorList().getClass().equals(EmptyDesignatorList.class))
 		{
-			Code.load(desField.getDesignatorList().obj);
-			currDesignatorName = desField.getDesignatorList().obj;
+			//Code.load(desField.getDesignatorList().obj);
+			currDesignatorName.set(0, desField.getDesignatorList().obj);
 		}
 		else {
-			Code.load(currDesignatorName);
+			//Code.load(currDesignatorName.get(0));
 		}
-		
 		
 		
 		if(desField.obj.getKind() == Obj.Meth) 
 		{
 				ClassMethCnt++;
-				currDes = currDesignatorName;
+				currDes = currDesignatorName.get(0);
 				// Dup for putting "this"
 				//Code.put(Code.dup);
 		}
 		else {
+			if(desField.getParent().getClass() != Designator.class)
+			{
+				Code.load(desField.obj);
+			}
+				
+			
 			currDes = desField.obj;
 			if(currDes.getType().getKind() == Struct.Array)
 				currArr = currDes;
@@ -376,17 +401,17 @@ public class CodeGenerator extends VisitorAdaptor {
 	{
 		if(!desField.getDesignatorList().getClass().equals(EmptyDesignatorList.class))
 		{
-			Code.load(desField.getDesignatorList().obj);
+			//Code.load(desField.getDesignatorList().obj);
 		}
 		else {
-			Code.load(currDesignatorName);
+			//Code.load(currDesignatorName.get(0));
 		}
-
-		// HACKY WITH DUP_X1 
-		// Reverse order of index and adr of arr
-		Code.put(Code.dup_x1);
-		Code.put(Code.pop);		
-		// Get current elem and its index
+		
+		if(desField.getParent().getClass() != Designator.class)
+		{
+			Code.load(desField.obj);
+		}
+		
 		currElem = desField.obj;
 		currDes = desField.obj;
 	}
@@ -400,10 +425,26 @@ public class CodeGenerator extends VisitorAdaptor {
 		
 	}
 	
+	boolean isClassMeth(Obj meth, Obj classObj)
+	{
+		if(classObj == null) return false;
+		if(classObj.getType().getMembersTable().searchKey(meth.getName()) != null)
+			return true;
+		else return false;
+	}
+	
+	boolean currClassMethod(Obj meth)
+	{
+		if(currClass == null) return false;
+		if(currClass.getType().getMembersTable().searchKey(meth.getName()) != null)
+			return true;
+		else return false;
+	}
+	
 	public void visit(FuncCall fcall) {
 		Obj fobj = fcall.getDesignator().obj;
 		String name = fobj.getName();
-		if(currDes != null) 
+		if(isClassMeth(fobj, currDes)) 
 		{
 			Obj vfptr = currDes.getType().getMembersTable().searchKey("_vfptr");
 			
@@ -416,16 +457,13 @@ public class CodeGenerator extends VisitorAdaptor {
 			}
 			Code.put4(-1);
 			
-			currMeth = null;
+			currMethCall = null;
 			currDes = null;
 		}
-		else if(currClass != null)
+		else if(currClassMethod(fobj))
 		{
 			Obj vfptr = currClass.getType().getMembersTable().searchKey("_vfptr");
 			
-			Obj fakethis = new Obj(Obj.Var, "this", currClass.getType(), 0, 1);
-			Code.load(fakethis); 
-			Code.put(Code.dup_x1);
 			Code.load(vfptr);
 			Code.put(Code.invokevirtual);
 			for(int i=0; i<name.length(); i++)
@@ -435,7 +473,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			}
 			Code.put4(-1);
 			
-			currMeth = null;
+			currMethCall = null;
 			currDes = null;
 		}
 		else {
@@ -446,17 +484,22 @@ public class CodeGenerator extends VisitorAdaptor {
 		{
 			Code.put(Code.pop);
 		}
+		currDes = null;
 	}
+	
+	
 	
 	// Factor
 	public void visit(Factor_FunCall fcall)
 	{
 		Obj fobj = fcall.getDesignator().obj;
+		String name = fobj.getName();
 		
 		if(currDes != null) 
 		{
-			String name = fobj.getName();
 			Obj vfptr = currDes.getType().getMembersTable().searchKey("_vfptr");
+			
+			fcall.getDesignator();
 			
 			Code.load(vfptr);
 			Code.put(Code.invokevirtual);
@@ -467,10 +510,26 @@ public class CodeGenerator extends VisitorAdaptor {
 			}
 			Code.put4(-1);
 			
-			currMeth = null;
+			
+		}
+		else if(currClassMethod(fobj))
+		{
+			Obj vfptr = currClass.getType().getMembersTable().searchKey("_vfptr");
+			
+			Code.load(vfptr);
+			Code.put(Code.invokevirtual);
+			for(int i=0; i<name.length(); i++)
+			{
+				int val = name.charAt(i);
+				Code.put4(val);
+			}
+			Code.put4(-1);
+			
+			
 		}
 		else call_fun(fobj);
-		
+		currMethCall = null;
+		currDes = null;
 	}
 	
 	public void visit(Expr_Neg negExpr)
@@ -494,8 +553,9 @@ public class CodeGenerator extends VisitorAdaptor {
 		Struct classType = fnew.struct;
 		String className = fnew.getType().getTypeName();
 		
-		if(classType.getElemType().getKind() == Struct.Enum) //RECORD
+		if(classType.getElemType() != null && classType.getElemType().getKind() == Struct.Enum) 
 		{
+			//RECORD
 			Code.put(Code.new_);
 			Code.put2(classType.getNumberOfFields()*4);
 		}
@@ -508,7 +568,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.loadConst(vmtMap.get(className).vmt_addr);
 			Code.put(Code.putfield); 
 			Code.put2(0);
-			
+			//Code.put(Code.pop);
 			Obj constructor;
 			if((constructor = classType.getMembersTable().searchKey(className)) != null)
 			{
@@ -582,60 +642,101 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(Term_MulOp mulOp){ Code.put(mulOp.getMulOp().obj.getAdr());}
 	public void visit(PostIncrement postInc)
 	{
-		Code.put(Code.inc);
-		Code.put(postInc.getDesignator().obj.getAdr());
-		Code.put(1);
+		Obj obj = postInc.getDesignator().obj;
+		
+		if(obj.getType().isRefType() || obj.getKind() == Obj.Elem|| obj.getKind() == Obj.Fld)
+			Code.put(Code.dup);
+		Code.load(obj);
+		Code.loadConst(1);
+		Code.put(Code.add);
+		Code.store(obj);
 	}
 	public void visit(PostDecrement postDec)
 	{
-		Code.put(Code.inc);
-		Code.put(postDec.getDesignator().obj.getAdr());
-		Code.put(-1);
+		Obj obj = postDec.getDesignator().obj;
+		
+		if(obj.getType().isRefType() || obj.getKind() == Obj.Elem|| obj.getKind() == Obj.Fld)
+			Code.put(Code.dup);
+		Code.load(obj);
+		Code.loadConst(1);
+		Code.put(Code.sub);
+		Code.store(obj);
 	}
 	
 	// ADDING "THIS" ARG
-	void addThis(SyntaxNode parent) {
-		while(true)
-		{
-			if(parent.getClass() == Factor_FunCall.class || parent.getClass() == FuncCall.class)
-				break;
-			else {
-				if(parent.getClass() == Super_Call_Stmt.class)
-				{
-					//System.out.println("ook");
-					Code.put(Code.load_n + 0);
-					Code.put(Code.dup_x1);
-					Code.put(Code.pop);	
-					return;
-				}
-			}
-		}
-		if(currDes != null && currMeth != null)
+	void addThis(SyntaxNode parent, SyntaxNode thisNode) {
+		if(currClassMethod(currMeth))
 		{
 			// add "this" as first parameter
-			
-			//Code.load(currClass);
-			Code.put(Code.dup_x1);
-			Code.put(Code.pop);	
-			Code.put(Code.dup_x1);
+			Code.put(Code.load_n + 0);	
+			if(thisNode.getClass() == ActualPars_Expr.class)
+			{
+				Code.put(Code.dup_x1);
+			}
+			else
+				Code.put(Code.dup);
+		}
+		else
+		{
+			// Ok ovde je poziv funkcije
+			if(thisNode.getClass() == ActualPars_Expr.class)
+			{
+				Code.put(Code.dup_x1);
+				Code.put(Code.pop);
+				Code.put(Code.dup_x1);
+			} else  // ovo je poziv bez arg
+				Code.put(Code.dup);
+				
+		}
+		
+	}
+	
+	void getCurrDes(SyntaxNode parent)
+	{
+		Designator d;
+		while(parent.getClass() != Factor_FunCall.class && parent.getClass() != FuncCall.class)
+			parent = parent.getParent();
+		if(parent.getClass() == Factor_FunCall.class) {
+			Factor_FunCall fcall = (Factor_FunCall)(parent);
+			d = fcall.getDesignator();
+		}
+		else {
+			FuncCall fcall = (FuncCall)parent;
+			d = fcall.getDesignator();
+		}
+		
+		if(d.getDesignatorList().getClass() == EmptyDesignatorList.class)
+		{
+			//nista currDes = null?
+		}
+		else {
+			// This is function obj
+			DesignatorList_Field desList = (DesignatorList_Field) d.getDesignatorList();
+			if(desList.getDesignatorList().getClass() == EmptyDesignatorList.class)
+				currDes = d.getDesignatorName().obj;
+			else currDes = desList.getDesignatorList().obj;
 		}
 	}
 	
 	public void visit(NoPars noPars)
 	{
 		SyntaxNode parent = noPars.getParent();
-		addThis(parent);
+		if(currClassMethod(currMeth)|| isClassMeth(currMethCall, currDes))
+				addThis(parent, noPars);
 	}
 	
 	public void visit(ActualPars_Expr parsExpr)
 	{
-		SyntaxNode parent = parsExpr.getParent();
+		SyntaxNode parent =  parsExpr.getParent();
 		
-		addThis(parent);
+		getCurrDes(parent);
+		
+		if(currClassMethod(currMeth)|| isClassMeth(currMethCall, currDes))
+			addThis(parent, parsExpr);
 	}
 	public void visit(ActualPars_List actPars)
 	{
-		if(currDes != null)
+		if(currClassMethod(currMeth)|| isClassMeth(currMethCall, currDes))
 		{
 			Code.put(Code.dup_x1);
 			Code.put(Code.pop);
@@ -848,7 +949,6 @@ public class CodeGenerator extends VisitorAdaptor {
 	// fixup false jump
 	public void visit(CondTerm_List cndTerm)
 	{
-		Obj opobj = cndTerm.getCondFact().struct.getMembersTable().searchKey("op" + (names-1));
 		int op = Op; //opobj.getKind();
 		{
 			// true jump samo nastavlja
@@ -860,7 +960,6 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	public void visit(CondTerm_CondFact cndTerm)
 	{
-		Obj opobj = cndTerm.getCondFact().struct.getMembersTable().searchKey("op"+(names-1));
 		int op = Op; //opobj.getKind();
 		{
 			Code.putFalseJump(Code.inverse[op], 0);
@@ -909,5 +1008,22 @@ public class CodeGenerator extends VisitorAdaptor {
 		ArrayList<Integer> continuePatch = continuePatches.remove(0);
 		for(Integer addr: continuePatch)
 			Code.fixup(addr);
+	}
+	
+	void addOrdAndChr()
+	{
+		Tab.find("ord").setAdr(Code.pc);
+		Tab.find("chr").setAdr(Code.pc);
+		Code.put(Code.enter);
+		Code.put(1);
+		Code.put(1);
+		Code.put(Code.load_n+0);
+		Code.put(Code.exit);
+		Code.put(Code.return_);
+	}
+	// Add definitions for ord and chr
+	public void visit(ProgName progName)
+	{
+		addOrdAndChr();
 	}
 }

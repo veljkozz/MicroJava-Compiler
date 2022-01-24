@@ -1,13 +1,13 @@
 // generated with ast extension for cup
 // version 0.8
-// 15/0/2022 2:5:44
+// 19/0/2022 1:30:41
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class GlobalMethodsDerived1 extends GlobalMethods {
+public class NoGlobal_Methods extends GlobalMethods {
 
-    public GlobalMethodsDerived1 () {
+    public NoGlobal_Methods () {
     }
 
     public void accept(Visitor visitor) {
@@ -28,10 +28,10 @@ public class GlobalMethodsDerived1 extends GlobalMethods {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("GlobalMethodsDerived1(\n");
+        buffer.append("NoGlobal_Methods(\n");
 
         buffer.append(tab);
-        buffer.append(") [GlobalMethodsDerived1]");
+        buffer.append(") [NoGlobal_Methods]");
         return buffer.toString();
     }
 }

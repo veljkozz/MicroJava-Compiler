@@ -199,12 +199,12 @@ RecordDeclaration ::= (RecordDeclaration) RECORD RecordName LBRACE RecordContent
 
 RecordName ::= (RecordName) IDENT:name;
 
-RecordContent ::= RecordContent VarDeclarations
+RecordContent ::= RecordContent ClassVarDeclarations
 	| /*epsilon*/
 	;
 
 GlobalMethods ::= (Global_Methods) MethodList
-	| /*epsilon*/
+	| (NoGlobal_Methods) /*epsilon*/
 	;
 
 MethodList ::= MethodList MethodDecl

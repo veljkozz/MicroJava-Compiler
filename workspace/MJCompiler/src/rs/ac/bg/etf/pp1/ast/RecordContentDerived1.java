@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 15/0/2022 2:5:44
+// 19/0/2022 1:30:41
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,13 +8,13 @@ package rs.ac.bg.etf.pp1.ast;
 public class RecordContentDerived1 extends RecordContent {
 
     private RecordContent RecordContent;
-    private VarDeclarations VarDeclarations;
+    private ClassVarDeclarations ClassVarDeclarations;
 
-    public RecordContentDerived1 (RecordContent RecordContent, VarDeclarations VarDeclarations) {
+    public RecordContentDerived1 (RecordContent RecordContent, ClassVarDeclarations ClassVarDeclarations) {
         this.RecordContent=RecordContent;
         if(RecordContent!=null) RecordContent.setParent(this);
-        this.VarDeclarations=VarDeclarations;
-        if(VarDeclarations!=null) VarDeclarations.setParent(this);
+        this.ClassVarDeclarations=ClassVarDeclarations;
+        if(ClassVarDeclarations!=null) ClassVarDeclarations.setParent(this);
     }
 
     public RecordContent getRecordContent() {
@@ -25,12 +25,12 @@ public class RecordContentDerived1 extends RecordContent {
         this.RecordContent=RecordContent;
     }
 
-    public VarDeclarations getVarDeclarations() {
-        return VarDeclarations;
+    public ClassVarDeclarations getClassVarDeclarations() {
+        return ClassVarDeclarations;
     }
 
-    public void setVarDeclarations(VarDeclarations VarDeclarations) {
-        this.VarDeclarations=VarDeclarations;
+    public void setClassVarDeclarations(ClassVarDeclarations ClassVarDeclarations) {
+        this.ClassVarDeclarations=ClassVarDeclarations;
     }
 
     public void accept(Visitor visitor) {
@@ -39,18 +39,18 @@ public class RecordContentDerived1 extends RecordContent {
 
     public void childrenAccept(Visitor visitor) {
         if(RecordContent!=null) RecordContent.accept(visitor);
-        if(VarDeclarations!=null) VarDeclarations.accept(visitor);
+        if(ClassVarDeclarations!=null) ClassVarDeclarations.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(RecordContent!=null) RecordContent.traverseTopDown(visitor);
-        if(VarDeclarations!=null) VarDeclarations.traverseTopDown(visitor);
+        if(ClassVarDeclarations!=null) ClassVarDeclarations.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(RecordContent!=null) RecordContent.traverseBottomUp(visitor);
-        if(VarDeclarations!=null) VarDeclarations.traverseBottomUp(visitor);
+        if(ClassVarDeclarations!=null) ClassVarDeclarations.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -65,8 +65,8 @@ public class RecordContentDerived1 extends RecordContent {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(VarDeclarations!=null)
-            buffer.append(VarDeclarations.toString("  "+tab));
+        if(ClassVarDeclarations!=null)
+            buffer.append(ClassVarDeclarations.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

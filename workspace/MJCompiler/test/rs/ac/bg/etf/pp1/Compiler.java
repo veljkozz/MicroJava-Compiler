@@ -18,7 +18,7 @@ import rs.ac.bg.etf.pp1.util.Log4JUtils;
 import rs.etf.pp1.mj.runtime.Code;
 import rs.etf.pp1.symboltable.Tab;
 
-public class MJParserTest {
+public class Compiler {
 
 	static {
 		DOMConfigurator.configure(Log4JUtils.instance().findLoggerConfigFile());
@@ -27,12 +27,12 @@ public class MJParserTest {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Logger log = Logger.getLogger(MJParserTest.class);
+		Logger log = Logger.getLogger(Compiler.class);
 		
 		Reader br = null;
 		try {
 			File sourceCode = new File("test/program.mj");
-			log.info("Compiling source file: " + sourceCode.getAbsolutePath());
+			//log.info("Compiling source file: " + sourceCode.getAbsolutePath());
 			
 			br = new BufferedReader(new FileReader(sourceCode));
 			Yylex lexer = new Yylex(br);
@@ -42,26 +42,29 @@ public class MJParserTest {
 	        
 	        Program prog = (Program)(s.value); 
 			// ispis sintaksnog stabla
-			log.info(prog.toString(""));
+			//log.info(prog.toString(""));
 
 			// ispis prepoznatih programskih konstrukcija
 			//RuleVisitor v = new RuleVisitor();  
 			Tab.init();
-			SemanticPass semPass = new SemanticPass();
+			SemanticAnalyzer semPass = new SemanticAnalyzer();
 			//prog.traverseBottomUp(v); 
 			prog.traverseBottomUp(semPass);
-			Tab.dump();
-			//log.info("Global variable count: " + v.globalVarCnt);
+			//Tab.dump();
+			
 			if(semPass.errorDetected || p.errorDetected)
 				log.info("Error happened during parsing!");
 			else {
 				File objFile = new File("test/program.obj");
 				if(objFile.exists()) objFile.delete();
 				
+				
+				//log.info("Global variable count: " + semPass.globalVarCnt);
+				
 				Code.dataSize = semPass.globalVarCnt;
 				CodeGenerator codeGenerator = new CodeGenerator();
 				prog.traverseBottomUp(codeGenerator);
-				
+				log.info("Main pc: " + codeGenerator.mainPc);
 				System.out.println("Globa vars: "+ semPass.globalVarCnt);
 				Code.mainPc = codeGenerator.mainPc;
 				Code.write(new FileOutputStream(objFile));

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 15/0/2022 2:5:44
+// 19/0/2022 1:30:41
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -145,7 +145,7 @@ public interface Visitor {
     public void visit(Method_Decl Method_Decl);
     public void visit(MethodListDerived2 MethodListDerived2);
     public void visit(MethodListDerived1 MethodListDerived1);
-    public void visit(GlobalMethodsDerived1 GlobalMethodsDerived1);
+    public void visit(NoGlobal_Methods NoGlobal_Methods);
     public void visit(Global_Methods Global_Methods);
     public void visit(RecordContentDerived2 RecordContentDerived2);
     public void visit(RecordContentDerived1 RecordContentDerived1);

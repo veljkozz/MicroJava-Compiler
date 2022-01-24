@@ -1,27 +1,42 @@
-program test
-{
-	void main() int konst; bool b;
-	{	
-		konst = 3;
-		do
+program Pera
+	class A{int x[],y[];}
+	const int pi = 3, e = 2;
+	class B extends A {
+		int i; 
 		{
-			if(konst <= 2){
-				if(konst > 2)
-				{
-					print('a');
-					
-				}
-				else
-				{
-					print('b');
-					konst = konst - 2;
-					continue;
-				}
-			}
-				
-			konst--;
-		}while(konst > 0);
-		
-		print('c');
+			int getValue(int a) int b; bool c; { return this.i + this.x[0] + a; }
+			void m(){}
+		}
 	}
+	class C extends B {
+	
+	A theA; 
+	int a;
+		{
+			C noviC() C nekiC; { nekiC = new C; return nekiC; }
+		}
+	}
+
+{
+	void main() A a; C c; C c2; int i; int x[]; char ch; { 
+		c = new C;
+		c2 = c.noviC();
+		c2.a = 1;
+		print(c2.a);
+		
+		a = new A;
+		a.x = new int[5]; a.y = new int[5];
+      	c = new C;
+     	c.theA = a; c.x = new int[5];
+      	x = new int[3];
+      	//read(c.i);
+      	i = 0;
+      	do {
+            i++;
+      	}while(i<5);
+      	print(c.getValue(c.theA.x[0]));
+      	c.m();
+      	
+	}
+
 }

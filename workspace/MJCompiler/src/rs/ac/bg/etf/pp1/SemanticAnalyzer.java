@@ -14,9 +14,10 @@ import rs.etf.pp1.symboltable.Tab;
 import rs.etf.pp1.symboltable.concepts.*;
 import rs.etf.pp1.symboltable.structure.SymbolDataStructure;
 
-public class SemanticPass extends VisitorAdaptor {
+public class SemanticAnalyzer extends VisitorAdaptor {
 
 	boolean errorDetected = false;
+	boolean reporting = true;
 	int globalVarCnt = 0;
 	Struct currVarType = null;
 	
@@ -24,6 +25,7 @@ public class SemanticPass extends VisitorAdaptor {
 	Obj currClassObj = null;
 	Struct currClassStruct = null;
 	
+	boolean nowThis = false;
 	Set<String> classNames = new HashSet<>();
 	
 	ArrayList<Obj> currDesignator = new ArrayList<Obj>();
@@ -44,7 +46,7 @@ public class SemanticPass extends VisitorAdaptor {
 	// Static types
 	public static final Struct boolType = new Struct(Struct.Bool);
 	
-	public SemanticPass()
+	public SemanticAnalyzer()
 	{
 		Tab.insert(Obj.Type, "bool",  boolType);
 	}
@@ -59,12 +61,70 @@ public class SemanticPass extends VisitorAdaptor {
     }
 	
 	public void report_info(String message, SyntaxNode info) {
+		if(!reporting) return; 
     	StringBuilder msg = new StringBuilder(message); 
     	int line = (info == null) ? 0 : info.getLine();
     	if (line != 0)
             msg.append (" on line ").append(line);
         log.info(msg.toString());
     }
+	
+	String ObjToStr(Obj obj)
+	{
+		StringBuilder output = new StringBuilder();
+		switch (obj.getKind()) {
+		case Obj.Con:  output.append("Con "); break;
+		case Obj.Var:  output.append("Var "); break;
+		case Obj.Type: output.append("Type "); break;
+		case Obj.Meth: output.append("Meth "); break;
+		case Obj.Fld:  output.append("Fld "); break;
+		case Obj.Prog: output.append("Prog "); break;
+		}
+		output.append(obj.getName());
+		output.append(": ");
+		
+		switch (obj.getType().getKind()) {
+			case Struct.None:
+				output.append("notype");
+				break;
+			case Struct.Int:
+				output.append("int");
+				break;
+			case Struct.Char:
+				output.append("char");
+				break;
+			case Struct.Bool:
+				output.append("bool");
+				break;
+			case Struct.Array:
+				output.append("Arr of ");
+				
+				switch (obj.getType().getElemType().getKind()) {
+				case Struct.None:
+					output.append("notype");
+					break;
+				case Struct.Int:
+					output.append("int");
+					break;
+				case Struct.Char:
+					output.append("char");
+					break;
+				case Struct.Class:
+					output.append("Class");
+					break;
+				}
+				break;
+			case Struct.Class:
+				output.append("Class");
+				break;
+		}
+		
+		output.append(", ");
+		output.append(obj.getAdr());
+		output.append(", ");
+		output.append(obj.getLevel());
+		return output.toString();
+	}
 	
 	public void visit(ProgName progName)
 	{
@@ -108,18 +168,20 @@ public class SemanticPass extends VisitorAdaptor {
 		if(currMethod == null) globalVarCnt++;
 		Obj obj = Tab.insert(Obj.Var, var.getVarName(), currVarType);
 		obj.setFpPos(-1);
+		report_info("Found decl " + ObjToStr(obj), var);
 	}	
 	public void visit(Var_Arr var_arr) 
 	{ 
 		if(currMethod == null) globalVarCnt++;
 		Struct s = new Struct(Struct.Array);
 		s.setElementType(currVarType);
-		Tab.insert(Obj.Var, var_arr.getVarName(), s);
+		Obj obj = Tab.insert(Obj.Var, var_arr.getVarName(), s);
+		report_info("Found decl " + ObjToStr(obj), var_arr);
 	}
 	
 	
 	// Const Declaration
-	void addConst(ConstVal val, String name) {
+	Obj addConst(ConstVal val, String name) {
 		// Since all consts are of a simple type(int,char,bool)
 		// there is no need to check for polimorphism
 		if(val.simpletype.s.equals(currVarType))
@@ -131,23 +193,27 @@ public class SemanticPass extends VisitorAdaptor {
 				case Struct.Char: obj.setAdr(val.simpletype.character); break;
 				case Struct.Bool: obj.setAdr(val.simpletype.num); break;
 			}
+			return obj;
 		}
 		else
 		{
 			report_error("Error: incompatible data types"  , val);
+			return null;
 		}
 	}
 	public void visit(ConstDecl_Single decl)
 	{
 		globalVarCnt++;
-		addConst(decl.getConstVal(), decl.getVarName());
+		Obj obj = addConst(decl.getConstVal(), decl.getVarName());
+		report_info("Found const decl " + ObjToStr(obj), decl);
 	}
 	
 	public void visit(ConstDecl_List decl)
 	{
 		globalVarCnt++;
 		ConstVal val = decl.getConstVal();
-		addConst(val, decl.getVarName());
+		Obj obj = addConst(val, decl.getVarName());
+		report_info("Found const decl " + ObjToStr(obj), decl);
 	}
 	
 	public void visit(ConstVal_Num_Pos num)
@@ -230,15 +296,16 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 		//SymbolDataStructure members = currClassStruct.getMembersTable();
 		//Tab.chainLocalSymbols(currClassStruct);
-		//for(Obj obj: members.symbols())
+		for(Obj obj: Tab.currentScope.getLocals().symbols())
 		{
-			//currClassStruct.getMembersTable().insertKey(obj);
+			currClassStruct.getMembersTable().insertKey(obj);
 		}
 	}
 	
 	public void visit(Class_Var var)
 	{
 		Obj obj = Tab.insert(Obj.Fld, var.getVarName(), currVarType);
+		report_info("Found class field " + ObjToStr(obj), var);
 	}
 	
 	public void visit(Class_Var_Arr var)
@@ -246,6 +313,7 @@ public class SemanticPass extends VisitorAdaptor {
 		Struct s = new Struct(Struct.Array);
 		s.setElementType(currVarType);
 		Obj obj = Tab.insert(Obj.Fld, var.getVarName(), s);
+		report_info("Found class field " + ObjToStr(obj), var);
 	}
 	
 	public void visit(Class_NoParent_Declaration classNoParent)
@@ -259,6 +327,7 @@ public class SemanticPass extends VisitorAdaptor {
 		}
 		
 		Tab.closeScope();
+		report_info("Found class " + ObjToStr(currClassObj), classNoParent);
 		currClassObj = null;
 		currClassStruct = null;
 	}
@@ -278,7 +347,7 @@ public class SemanticPass extends VisitorAdaptor {
 		}
 		
 		Tab.closeScope();
-		
+		report_info("Found class " + ObjToStr(currClassObj) , classParent);
 		currClassObj = null;
 		currClassStruct = null;
 	}
@@ -290,7 +359,10 @@ public class SemanticPass extends VisitorAdaptor {
 				report_error("Error: constructor name different than class name", constructorName);
 		else {
 			currMethod = Tab.insert(Obj.Meth, constructorName.getName(), Tab.noType);
+			currMethod.setLevel(1);
 			Tab.openScope();
+			Obj obj = Tab.insert(Obj.Var, "this", currClassStruct);
+			obj.setFpPos(1);
 			inConstructor = true;
 		}
 	}
@@ -299,6 +371,7 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 		Tab.chainLocalSymbols(currMethod);
 		Tab.closeScope();
+		report_info("Found constructor " + ObjToStr(currMethod), constructor);
 		inConstructor = false;
 		currMethod = null;
 	}
@@ -308,9 +381,13 @@ public class SemanticPass extends VisitorAdaptor {
 	{
 		Tab.chainLocalSymbols(currClassStruct);
 		Tab.closeScope();
+		report_info("Found record " + ObjToStr(currClassObj) , record);
+		currMethod = null;
+		currClassObj = null;
 	}
 	public void visit(RecordName recordName)
 	{
+		currMethod = new Obj(0, "Aaarrrrr", Tab.noType);
 		currClassStruct = new Struct(Struct.Class);
 		currClassStruct.setElementType(new Struct(Struct.Enum));
 		currClassObj = Tab.insert(Obj.Type, recordName.getName(), currClassStruct);
@@ -385,6 +462,9 @@ public class SemanticPass extends VisitorAdaptor {
 			report_error("Error: function without return statement", method);
 		Tab.chainLocalSymbols(currMethod);
 		Tab.closeScope();
+		
+		report_info("Found method " + ObjToStr(currMethod), method);
+		
 		hasReturn = false;
 		currMethod = null;
 	}
@@ -491,6 +571,7 @@ public class SemanticPass extends VisitorAdaptor {
 	public void visit(FuncCall stmt)
 	{
 		Obj method = stmt.getDesignator().obj;
+		report_info("Found func call " + ObjToStr(method) , stmt);
 		callMeth(method, stmt);
 	}
 	
@@ -510,6 +591,7 @@ public class SemanticPass extends VisitorAdaptor {
 			}
 			else if(!inConstructor)
 			{
+				report_info("Found super call " + ObjToStr(currMethod) , stmt);
 				ClassMethCnt++;
 				superCalled = true;
 				callMeth(currMethod, stmt);
@@ -691,22 +773,6 @@ public class SemanticPass extends VisitorAdaptor {
 		}
 	}
 	
-	/*
-	public void visit(DesignatorName_Arr designatorName)
-	{
-		currDesignator.add(0, Tab.find(designatorName.getName()));
-		Obj currDesignatorO = currDesignator.get(0);
-		if(currDesignatorO == Tab.noObj)
-		{
-			report_error("Error: no variable with name " + designatorName.getName() + " defined", designatorName);
-		}
-		else if(currDesignatorO.getType().getKind() != Struct.Array)
-			report_error("Error: variable " + designatorName.getName() + " is not an array", designatorName);
-		
-		//currDesignatorO = new Obj(Obj.Elem, currDesignatorO.getName(),currDesignatorO.getType().getElemType());
-		designatorName.obj = currDesignatorO;
-		currDesignator.set(0, currDesignatorO);
-	}*/
 	
 	public void visit(DesignatorList_Arr designatorList)
 	{
@@ -731,14 +797,17 @@ public class SemanticPass extends VisitorAdaptor {
 		Struct currS = currDesignatorO.getType();
 		if(currS.getKind() == Struct.Class && currS.getMembersTable().searchKey(name) != null) {
 			currDesignatorO = currS.getMembersTable().searchKey(name);
-			if(currDesignatorO.getKind() == Obj.Meth) ClassMethCnt++;
+			if(currDesignatorO.getKind() == Obj.Meth) 
+				ClassMethCnt++;
 			currDesignator.set(0, currDesignatorO);
 			designatorList.obj = currDesignatorO;
 		}
 		else if(currDesignatorO.getName().equals("this") && Tab.find(name) != Tab.noObj)
 		{
-			currDesignatorO = Tab.find(name);
-			if(currDesignatorO.getKind() == Obj.Meth) ClassMethCnt++;
+			currDesignatorO = currClassStruct.getMembersTable().searchKey(name);
+			//currDesignatorO = Tab.find(name);
+			if(currDesignatorO.getKind() == Obj.Meth) 
+				ClassMethCnt++;
 			currDesignator.set(0, currDesignatorO);
 			designatorList.obj = currDesignatorO;
 		}
