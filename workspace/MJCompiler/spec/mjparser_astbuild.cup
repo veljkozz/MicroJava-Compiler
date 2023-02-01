@@ -153,7 +153,7 @@ ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL ConstVal:C1 {: RESULT=ne
 
 VarDeclarations ::= (Var_Declarations) Type:T1 VarList:V2 SEMI {: RESULT=new Var_Declarations(T1, V2); RESULT.setLine(T1left); :}
 	| (VarDecl_Error) error SEMI:l
-	{: parser.report_error("Error: invalid declaration" + lleft, null); :} {: RESULT=new VarDecl_Error(); :}
+	{: parser.report_error("Syntax Error: invalid declaration" + lleft, null); :} {: RESULT=new VarDecl_Error(); :}
 	;
 
 ConstVal ::= (ConstVal_Num_Pos) NUMBER:N1 {: RESULT=new ConstVal_Num_Pos(N1); RESULT.setLine(N1left); :}
@@ -170,7 +170,7 @@ Val ::= (Val_Num) NUMBER:N1 {: RESULT=new Val_Num(N1); RESULT.setLine(N1left); :
 Var ::= (Var_) IDENT:varName {: RESULT=new Var_(varName); RESULT.setLine(varNameleft); :}
 	| (Var_Arr) IDENT:varName LBRACKET RBRACKET {: RESULT=new Var_Arr(varName); RESULT.setLine(varNameleft); :}
 	| error:l
-	{: parser.report_error("Error: invalid variable declaration at line " + lleft, null); :} {: RESULT=new VarDerived1(); :}
+	{: parser.report_error("Syntax Error: invalid variable declaration at line " + lleft, null); :} {: RESULT=new VarDerived1(); :}
 	;
 Type ::= (Type) IDENT:typeName {: RESULT=new Type(typeName); RESULT.setLine(typeNameleft); :};
 
@@ -187,7 +187,7 @@ ClassDeclaration ::= (Class_NoParent_Declaration) CLASS ClassName:C1 LBRACE Clas
 
 Extends ::= (Extends_Parent) EXTENDS IDENT:parentName {: RESULT=new Extends_Parent(parentName); RESULT.setLine(parentNameleft); :}
 	| error:l
-	{: parser.report_error("Error: invalid extends declaration at line " + lleft, null); :} {: RESULT=new ExtendsDerived1(); :}
+	{: parser.report_error("Syntax Error: invalid extends declaration at line " + lleft, null); :} {: RESULT=new ExtendsDerived1(); :}
 	;
 
 ClassContent ::= ClassMethods:C1 {: RESULT=new ClassContentDerived1(C1); RESULT.setLine(C1left); :}
@@ -199,7 +199,7 @@ ClassContent ::= ClassMethods:C1 {: RESULT=new ClassContentDerived1(C1); RESULT.
 ClassVarDeclarationsList ::= ClassVarDeclarations:C1 ClassVarDeclarationsList:C2 {: RESULT=new ClassVarDeclarationsListDerived1(C1, C2); RESULT.setLine(C1left); :}
 	| ClassVarDeclarations:C1 {: RESULT=new ClassVarDeclarationsListDerived2(C1); RESULT.setLine(C1left); :}
 	| error:l
-	{: parser.report_error("Error: invalid class attribute declarations at line " + lleft, null); :} {: RESULT=new ClassVarDeclarationsListDerived3(); :}
+	{: parser.report_error("Syntax Error: invalid class attribute declarations at line " + lleft, null); :} {: RESULT=new ClassVarDeclarationsListDerived3(); :}
 	;
 
 ClassVarDeclarations ::= (ClassVarDecl) Type:T1 ClassVarList:C2 SEMI {: RESULT=new ClassVarDecl(T1, C2); RESULT.setLine(T1left); :};
@@ -207,7 +207,7 @@ ClassVarDeclarations ::= (ClassVarDecl) Type:T1 ClassVarList:C2 SEMI {: RESULT=n
 ClassVarList ::= ClassVar:C1 COMMA ClassVarList:C2 {: RESULT=new ClassVarListDerived1(C1, C2); RESULT.setLine(C1left); :}
 		| ClassVar:C1 {: RESULT=new ClassVarListDerived2(C1); RESULT.setLine(C1left); :}
 		| error:l
-		{: parser.report_error("Error: invalid class attribute declaration at line " + lleft, null); :} {: RESULT=new ClassVarListDerived3(); :}
+		{: parser.report_error("Syntax Error: invalid class attribute declaration at line " + lleft, null); :} {: RESULT=new ClassVarListDerived3(); :}
 		;
 ClassVar ::= (Class_Var) IDENT:varName {: RESULT=new Class_Var(varName); RESULT.setLine(varNameleft); :}
 	| (Class_Var_Arr) IDENT:varName LBRACKET RBRACKET {: RESULT=new Class_Var_Arr(varName); RESULT.setLine(varNameleft); :}
@@ -261,7 +261,7 @@ FormParamList ::= (FormParam_List) FormParamList:F1 COMMA FormParam:F2 {: RESULT
 FormParam ::= (Form_Param) Type:typename IDENT:varname {: RESULT=new Form_Param(typename, varname); RESULT.setLine(typenameleft); :}
 	| (Form_Param_Arr) Type:typename IDENT:varname LBRACKET RBRACKET {: RESULT=new Form_Param_Arr(typename, varname); RESULT.setLine(typenameleft); :}
 	| error:l
-	{: parser.report_error("Error: invalid parameter at line " + lleft, null); :} {: RESULT=new FormParamDerived1(); :}
+	{: parser.report_error("Syntax Error: invalid parameter at line " + lleft, null); :} {: RESULT=new FormParamDerived1(); :}
 	;
 
 StatementList ::= (Statement_List) StatementList:S1 Statement:S2 {: RESULT=new Statement_List(S1, S2); RESULT.setLine(S1left); :}
@@ -301,7 +301,7 @@ DesignatorStatement ::= (Assignment) Designator:D1 AssignOp:A2 AssignExpr:A3 {: 
 					| (PostIncrement) Designator:D1 PLUS PLUS {: RESULT=new PostIncrement(D1); RESULT.setLine(D1left); :} 
 					| (PostDecrement) Designator:D1 MINUS MINUS {: RESULT=new PostDecrement(D1); RESULT.setLine(D1left); :}
 					| error:l
-					{: parser.report_error("Error: in statement at line " + lleft, null); :} {: RESULT=new DesignatorStatementDerived1(); :}
+					{: parser.report_error("Syntax Error: in statement at line " + lleft, null); :} {: RESULT=new DesignatorStatementDerived1(); :}
 					; 
 
 SuperCall ::= (Super_Call) SUPER {: RESULT=new Super_Call(); :};
@@ -309,7 +309,7 @@ SuperCall ::= (Super_Call) SUPER {: RESULT=new Super_Call(); :};
 Condition ::= (Condition_CondTerm) CondTerm:C1 {: RESULT=new Condition_CondTerm(C1); RESULT.setLine(C1left); :}
 	|(Condition_List) Condition:C1 Or:O2 CondTerm:C3 {: RESULT=new Condition_List(C1, O2, C3); RESULT.setLine(C1left); :}
 	| error:l
-	{: parser.report_error("Error: invalid condition at line " + lleft, null); :} {: RESULT=new ConditionDerived1(); :}
+	{: parser.report_error("Syntax Error: invalid condition at line " + lleft, null); :} {: RESULT=new ConditionDerived1(); :}
 	;
 
 Or ::= (Or) OR {: RESULT=new Or(); :};	
@@ -326,7 +326,7 @@ CondFact ::= (CondFact_Expr) Expr:E1 {: RESULT=new CondFact_Expr(E1); RESULT.set
 
 AssignExpr ::= (Assign_Expr) Expr:E1 {: RESULT=new Assign_Expr(E1); RESULT.setLine(E1left); :}
 	| error:l
-	{: parser.report_error("Error: invalid assignment at line " + lleft, null); :} {: RESULT=new AssignExprDerived1(); :}
+	{: parser.report_error("Syntax Error: invalid assignment at line " + lleft, null); :} {: RESULT=new AssignExprDerived1(); :}
 	;
 
 Expr ::= (Expr_Pos) TermList:T1 {: RESULT=new Expr_Pos(T1); RESULT.setLine(T1left); :}

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Reader;
 
 import java_cup.runtime.Symbol;
@@ -17,6 +18,15 @@ import rs.ac.bg.etf.pp1.ast.Program;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
 import rs.etf.pp1.mj.runtime.Code;
 import rs.etf.pp1.symboltable.Tab;
+
+/*
+ * KOMANDE ZA POKRETANJE IZ CMD
+ * 
+ * 
+ java -cp bin;lib\* rs.ac.bg.etf.pp1.Compiler test\program.mj test\program.obj > test\program.out 2> test\program.err
+ java -cp bin;lib\* rs.etf.pp1.mj.runtime.Run test\program.obj
+ * 
+ */
 
 public class Compiler {
 
@@ -31,7 +41,16 @@ public class Compiler {
 		
 		Reader br = null;
 		try {
-			File sourceCode = new File("test/program.mj");
+			// Za setovanje out i err 
+			//PrintStream out = new PrintStream("test/testout.out");
+			//PrintStream err = new PrintStream("test/testout.err");
+			//System.setOut(out);
+			//System.setErr(err);
+			
+			// CHANGE INPUT FILE NAME HERE
+			//String inFile = "test/program.mj"; 
+			String inFile = args[0]; 
+			File sourceCode = new File(inFile);
 			//log.info("Compiling source file: " + sourceCode.getAbsolutePath());
 			
 			br = new BufferedReader(new FileReader(sourceCode));
@@ -45,16 +64,16 @@ public class Compiler {
 			//log.info(prog.toString(""));
 
 			// ispis prepoznatih programskih konstrukcija
-			//RuleVisitor v = new RuleVisitor();  
 			Tab.init();
 			SemanticAnalyzer semPass = new SemanticAnalyzer();
 			//prog.traverseBottomUp(v); 
 			prog.traverseBottomUp(semPass);
-			//Tab.dump();
+			Tab.dump();
 			
 			if(semPass.errorDetected || p.errorDetected)
 				log.info("Error happened during parsing!");
 			else {
+				
 				File objFile = new File("test/program.obj");
 				if(objFile.exists()) objFile.delete();
 				

@@ -1,0 +1,29 @@
+program SuperTest
+	class A{
+		{
+			A(){ print('A'); }
+		}
+	}
+	class B extends A{
+		{
+			B() { super(); print('B'); }
+		}
+	}
+	class C extends B{
+		{
+			C() { super(); print('C'); }
+		}
+	}
+
+{
+	void main() A a, a_c; B b; C c;{ 
+		c = new C;
+		print(eol);
+		b = new B;
+		print(eol);
+		a = new A;
+		print(eol);
+      	a_c = new C;
+	}
+
+}

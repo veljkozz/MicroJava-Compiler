@@ -1,0 +1,23 @@
+program SuperTest
+	class A{
+		{
+			void ispis() { print('A'); }
+		}
+	}
+	class B extends A{
+		{
+			void ispis() { print('B'); super(); }
+		}
+	}
+
+{
+	void main() A a, a_b; B b;{ 
+		a = new A;
+		a.ispis();
+		print(eol);
+		
+		a_b = new B;
+		a_b.ispis();
+	}
+
+}

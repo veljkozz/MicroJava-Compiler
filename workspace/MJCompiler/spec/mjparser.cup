@@ -126,7 +126,7 @@ ConstVarList ::= (ConstDecl_Single) IDENT:varName EQUAL ConstVal
 
 VarDeclarations ::= (Var_Declarations) Type VarList SEMI
 	| (VarDecl_Error) error SEMI:l
-	{: parser.report_error("Error: invalid declaration" + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid declaration" + lleft, null); :}
 	;
 
 ConstVal ::= (ConstVal_Num_Pos) NUMBER
@@ -143,7 +143,7 @@ Val ::= (Val_Num) NUMBER
 Var ::= (Var_) IDENT:varName
 	| (Var_Arr) IDENT:varName LBRACKET RBRACKET
 	| error:l
-	{: parser.report_error("Error: invalid variable declaration at line " + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid variable declaration at line " + lleft, null); :}
 	;
 Type ::= (Type) IDENT:typeName;
 
@@ -160,7 +160,7 @@ ClassDeclaration ::= (Class_NoParent_Declaration) CLASS ClassName LBRACE ClassCo
 
 Extends ::= (Extends_Parent) EXTENDS IDENT:parentName
 	| error:l
-	{: parser.report_error("Error: invalid extends declaration at line " + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid extends declaration at line " + lleft, null); :}
 	;
 
 ClassContent ::= ClassMethods
@@ -172,7 +172,7 @@ ClassContent ::= ClassMethods
 ClassVarDeclarationsList ::= ClassVarDeclarations ClassVarDeclarationsList
 	| ClassVarDeclarations
 	| error:l
-	{: parser.report_error("Error: invalid class attribute declarations at line " + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid class attribute declarations at line " + lleft, null); :}
 	;
 
 ClassVarDeclarations ::= (ClassVarDecl) Type ClassVarList SEMI;
@@ -180,7 +180,7 @@ ClassVarDeclarations ::= (ClassVarDecl) Type ClassVarList SEMI;
 ClassVarList ::= ClassVar COMMA ClassVarList
 		| ClassVar
 		| error:l
-		{: parser.report_error("Error: invalid class attribute declaration at line " + lleft, null); :}
+		{: parser.report_error("Syntax Error: invalid class attribute declaration at line " + lleft, null); :}
 		;
 ClassVar ::= (Class_Var) IDENT:varName
 	| (Class_Var_Arr) IDENT:varName LBRACKET RBRACKET
@@ -234,7 +234,7 @@ FormParamList ::= (FormParam_List) FormParamList COMMA FormParam
 FormParam ::= (Form_Param) Type:typename IDENT:varname
 	| (Form_Param_Arr) Type:typename IDENT:varname LBRACKET RBRACKET
 	| error:l
-	{: parser.report_error("Error: invalid parameter at line " + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid parameter at line " + lleft, null); :}
 	;
 
 StatementList ::= (Statement_List) StatementList Statement
@@ -274,7 +274,7 @@ DesignatorStatement ::= (Assignment) Designator AssignOp AssignExpr
 					| (PostIncrement) Designator PLUS PLUS 
 					| (PostDecrement) Designator MINUS MINUS
 					| error:l
-					{: parser.report_error("Error: in statement at line " + lleft, null); :}
+					{: parser.report_error("Syntax Error: in statement at line " + lleft, null); :}
 					; 
 
 SuperCall ::= (Super_Call) SUPER;
@@ -282,7 +282,7 @@ SuperCall ::= (Super_Call) SUPER;
 Condition ::= (Condition_CondTerm) CondTerm
 	|(Condition_List) Condition Or CondTerm
 	| error:l
-	{: parser.report_error("Error: invalid condition at line " + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid condition at line " + lleft, null); :}
 	;
 
 Or ::= (Or) OR;	
@@ -299,7 +299,7 @@ CondFact ::= (CondFact_Expr) Expr
 
 AssignExpr ::= (Assign_Expr) Expr
 	| error:l
-	{: parser.report_error("Error: invalid assignment at line " + lleft, null); :}
+	{: parser.report_error("Syntax Error: invalid assignment at line " + lleft, null); :}
 	;
 
 Expr ::= (Expr_Pos) TermList
